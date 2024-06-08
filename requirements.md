@@ -8,7 +8,7 @@ information modeling approaches.
 ## Essential Content 
 The core purpose of an IM is to define information equivalence. This allows the essential content
 of data values to be compared for equality regardless of format, and enables hub-and-spoke
-translation across formats. 
+lossless translation across formats. 
 * An abstract schema is the formal definition of essential content 
 * An information value is the internal representation of essential content, defined by behavior,
 independent of both data format and programming techniques 
