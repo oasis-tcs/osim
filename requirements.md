@@ -34,16 +34,18 @@ version tracking, and processing it using language-specific tools and ecosystems
 
 ## Definitions 
 **Abstract schema**: a definition of the essential content to be communicated or stored
-to serve a particular purpose 
+to serve a particular purpose
 
-**Data format (encoding rules)**: an identified mechanism for converting logical values
-to and from data values 
+**Data format (encoding rules, serialization rules)**: an identified mechanism for converting logical values
+to and from data values
 
 **Data value (lexical value, document, message)**: a sequence of text characters or octets (bytes)
-that represents a logical value in a data format 
+that represents a logical value in a data format
+
+**Information definition language**: a domain-specific representation of abstract schema logical values 
 
 **Information model**: an abstract schema for a particular application plus a set of
-application-independent encoding rules 
+application-independent encoding rules
 
 **Logical type**: an identified definition of a unit of essential content 
 
