@@ -27,9 +27,10 @@ e.g., fields represented as elements or attributes in XML, or object or array me
 
 ## Metaschema 
 An abstract schema is itself an information value, enabling it to be validated against
-a metaschema and losslessly translated across data formats. This enables bundling
-an IM with the messages it defines for dynamic version tracking, and processing
-an IM using language-specific tools and ecosystems.
+a metaschema, losslessly translated across data formats, as well as defined without
+serialization using domain-specific language grammars and tools.
+Serializing a schema allows it to be bundled with the messages it defines for dynamic
+version tracking, and processing it using language-specific tools and ecosystems.
 
 ## Definitions 
 **Abstract schema**: a definition of the essential content to be communicated or stored
