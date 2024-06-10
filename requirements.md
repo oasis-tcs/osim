@@ -30,7 +30,7 @@ An abstract schema is itself an information value, enabling it to be validated a
 a metaschema, losslessly translated across data formats, as well as defined without
 serialization using domain-specific language grammars and tools.
 Serializing a schema allows it to be bundled with the messages it defines for dynamic
-version tracking, and processing it using language-specific tools and ecosystems.
+version tracking, and processed using language-specific tools and ecosystems.
 
 ## Definitions 
 **Abstract schema**: a definition of the essential content to be communicated or stored
