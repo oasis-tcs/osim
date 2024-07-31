@@ -18,7 +18,7 @@ Permission was asked to record meeting and there were no objections.
 
 | Given Name | Family Name | Affiliation | Role |
 |:-----------|:------------|:------------------------------------------------------------|:----------------------------|
-| *Voting Members* | | | |
+| **Voting Members** | | | |
 | Isaac | Hepworth | Google | Voting Member, Chair |
 | Jay | White | Microsoft | Voting Member,  Chair |
 | Duncan | Sparrell | sFractal | Voting Member, Convener, Secretary |
@@ -32,11 +32,11 @@ Permission was asked to record meeting and there were no objections.
 | Patrick | Maroney | AT&T | Voting Member |
 | Robert | Martin | MITRE | Voting Member |
 | Stefan | Hagen | Individual | Voting Member |
-| *OASIS Staff* | | | |
+| **OASIS Staff** | | | |
 | Carol | Geyer | OASIS | OASIS Staff |
 | Holly | Petersen | OASIS | OASIS Staff |
 | Kelly | Cullinane | OASIS | OASIS Staff |
-| *Observers| | | |
+| **Observers** | | | |
 | Christoph | Plutte | Ericsson | Observer |
 
 Note: Observers of this committee that are ready to become Members should follow the specific instructions displayed 0n the OASIS Open Notices tab.
@@ -78,7 +78,7 @@ Note: Observers of this committee that are ready to become Members should follow
 - Everyone to consider FAQs - especially about relationships with other work going on
 - Action Item: Everyone to reread TC Charter
    * https://groups.oasis-open.org/higherlogic/ws/groups/0e391e7b-bc88-4983-8020-018f11106d27/documents/charter3676/document?document_id=71883
-   * Action Item: Everyone to think about problem space and where to focus
+* Action Item: Everyone to think about problem space and where to focus
 
 ## Adjourn
 
