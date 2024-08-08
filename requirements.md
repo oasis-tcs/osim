@@ -5,7 +5,8 @@ of work:
 * Identify value propositions and use cases for applying information modeling to existing
 supply chain activities.
 * Develop information models for data used in these activities to promote harmonization and re-use.
-The IM work products of the TC should address these goals:
+
+The IM work products of the TC should address the following goals:
 
 *An **Information Model (IM)** defines the essential content of messages used in computing,
 independently of how those messages are represented (i.e., serialized) for communication or storage.*
