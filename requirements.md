@@ -1,9 +1,14 @@
-# Information Modeling Requirements
+# Information Modeling Goals
+The OASIS Open Supplychain Information Modeling (OSIM) TC aims to standardize and
+promote information models about all aspects of supply chains. This involves two kinds
+of work:
+* Identify value propositions and use cases for applying information modeling to existing
+supply chain activities.
+* Develop information models for data used in these activities to promote harmonization and re-use.
+The IM work products of the TC should address these goals:
+
 *An **Information Model (IM)** defines the essential content of messages used in computing,
 independently of how those messages are represented (i.e., serialized) for communication or storage.*
-
-The OSIM TC should establish assessment criteria for evaluating candidate
-information modeling approaches.
 
 ## Essential Content 
 The core purpose of an IM is to define information equivalence. This allows the essential content
@@ -32,7 +37,9 @@ serialization using domain-specific language grammars and tools.
 Serializing a schema allows it to be bundled with the messages it defines for dynamic
 version tracking, and processed using language-specific tools and ecosystems.
 
-## Definitions 
+## IM Definitions
+Parenthesized terms are usable interchangeably in the context of information modeling.
+
 **Abstract schema**: a definition of the essential content to be communicated or stored
 to serve a particular purpose
 
