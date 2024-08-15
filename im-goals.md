@@ -8,18 +8,22 @@ supply chain activities.
 
 The IM work products of the TC should address the following goals:
 
-*An **Information Model (IM)** defines the essential content of messages used in computing,
-independently of how those messages are represented (i.e., serialized) for communication or storage.*
+*An **Information Model (IM)** defines the essential content of data artifacts used in computing,
+independently of how they are represented for communication or storage.*
 
 ## Essential Content 
-The core purpose of an IM is to define information equivalence. This allows the essential content
-of data values to be compared for equality regardless of data format, and enables hub-and-spoke
-lossless translation across formats. 
+The core purpose of an IM is to define logical equivalence of data artifacts. An artifact is
+"an immutable blob of data" (**), which includes software as well as typed data such as primitives,
+structures, messages, and documents.
+An IM allows the essential content of typed data to be validated and compared for equality
+regardless of format, and enables hub-and-spoke lossless translation across formats. 
 * An abstract schema is the formal definition of essential content 
 * An information value is the internal representation of essential content, defined by application
 behavior, independent of both data format and programming techniques 
 * When reading messages into information values, essential content is validated and insignificant
 data is discarded. 
+
+** [Supply chain Levels for Software Artifacts](https://slsa.dev/spec/v1.0/terminology)
 
 ## Format Independent 
 An information model includes encoding rules that define how information values are parsed from
@@ -47,7 +51,7 @@ to serve a particular purpose
 **Data format (encoding rules, serialization rules)**: an identified mechanism for converting logical values
 to and from data values
 
-**Data value (lexical value, document, message)**: a sequence of text characters or octets (bytes)
+**Data value (artifact, document, lexical value, message)**: a sequence of text characters or octets (bytes)
 that represents a logical value in a data format
 
 **Information definition language**: a domain-specific representation of abstract schema logical values 
