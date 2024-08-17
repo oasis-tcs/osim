@@ -13,15 +13,17 @@ independently of how they are represented for communication or storage.*
 
 ## Essential Content 
 The core purpose of an IM is to define logical equivalence of data artifacts. An artifact is
-"an immutable blob of data" (**), which includes software as well as typed data such as primitives,
-structures, messages, and documents.
-An IM allows the essential content of typed data to be validated and compared for equality
-regardless of format, and enables hub-and-spoke lossless translation across formats. 
+"an immutable blob of data" (**). Immutability means that artifacts are identified only by their value,
+and all instances of the same value are considered equivalent.
+
+An information model defines the logical value of typed data such as primitives, structures, messages,
+and documents, allows logical values to be validated and compared for equality regardless of format,
+and enables hub-and-spoke lossless translation of data instances across formats. 
 * An abstract schema is the formal definition of essential content 
-* An information value is the internal representation of essential content, defined by application
+* A logical value is the internal representation of essential content, defined by application
 behavior, independent of both data format and programming techniques 
-* When reading messages into information values, essential content is validated and insignificant
-data is discarded. 
+* When reading data instances into information values, essential content is validated and insignificant
+data is discarded
 
 ** [Supply chain Levels for Software Artifacts](https://slsa.dev/spec/v1.0/terminology)
 
