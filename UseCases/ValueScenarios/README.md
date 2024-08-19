@@ -7,4 +7,4 @@ our work products.
 They tend to be high level.
 
 For the details of how to acheive the value, 
-see [Value Scenarios](../ValueScenarios/README.md).
+see [Practioner Playbooks](../PractionerPlaybooks/README.md).
