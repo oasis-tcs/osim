@@ -10,7 +10,7 @@ For more information see [Information Modeling with JADN](https://github.com/oas
 the [Specification for JSON Abstract Data Notation (JADN)](https://docs.oasis-open.org/openc2/jadn/v1.0/jadn-v1.0.html)
 
 JADN is a syntax-independent schema language 
-and is designed to work with common Internet data formats (e.g. JSON, XML, CBOR, Protobuf), 
+and is designed to work with common Internet data formats (e.g. JSON, XML, CBOR, Protobuf, SBE), 
 providing a schema to support them. 
 JADN is also graph-oriented to align with the web and database design practices, with options to identify primary and foreign keys, including web URLs.
 
