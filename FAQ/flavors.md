@@ -20,3 +20,9 @@ the first-level components to be provided.
 Yet supplier may require that certain vulnerability attributes must also be supplied.
 
 The [SBOM Information Model](tbd)
+is a declarative specification of the possible attributes,
+defining the essential content of what information could be exchanged/derived,
+but does not specify what must be exchanged.
+What must/should be exchanged, and what formats to use, is left to the individual parties in the supply chain
+based on their needs.
+
