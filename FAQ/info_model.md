@@ -14,4 +14,3 @@ This allows IMs to model any kind of data, from simple structures such as value 
 to protocol messages, to complete documents, without needing to address programming languages and techniques. 
 An IM is a declarative specification that defines desired outcomes (data item validity and equivalence) without describing control flow. 
 
-
