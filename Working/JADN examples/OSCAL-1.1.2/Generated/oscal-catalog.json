@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Catalog": {
+      "title": "Catalog",
+      "type": "object",
+      "description": "A structured, organized collection of control information.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given catalog instance."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "params": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter",
+            "description": ""
+          }
+        },
+        "controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Control",
+            "description": ""
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Group",
+            "description": ""
+          }
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Control": {
+      "title": "Control",
+      "type": "object",
+      "description": "A structured object representing a requirement or guideline, which when implemented will reduce an aspect of risk related to an information system and its information.",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identifies a control such that it can be referenced in the defining catalog and other OSCAL instances (e.g., profiles)."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a sub-type or characterization of the control."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name given to the control, which may be used by a tool for display and navigation.",
+          "maxLength": 1000
+        },
+        "params": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Part",
+            "description": ""
+          }
+        },
+        "controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Control",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Group": {
+      "title": "Group",
+      "type": "object",
+      "description": "A group of controls, or of groups of controls.",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identifies the group for the purpose of cross-linking within the defining instance or from other instances that reference the catalog."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a sub-type or characterization of the group."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name given to the group, which may be used by a tool for display and navigation.",
+          "maxLength": 1000
+        },
+        "params": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Part",
+            "description": ""
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Group",
+            "description": ""
+          }
+        },
+        "controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Control",
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Property": {},
+      "Link": {}
+    },
+    "cc": {
+      "Parameter": {},
+      "Part": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "TokenDatatype": {}
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "info": {
+    "package": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common",
+    "roots": ["Include-all", "Parameter"],
+    "namespaces": [
+      ["c", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common"],
+      ["m", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata"]
+    ],
+    "config": {
+      "$MaxString": 1000,
+      "$Sys": ".",
+      "$TypeName": "^[$A-Z][-.$A-Za-z0-9]{0,96}$",
+      "$FieldName": "^[$a-z][-_$A-Za-z0-9]{0,63}$"
+    }
+  },
+
+  "types": [
+    ["Include-all", "Record", [], "Include all controls from the imported catalog or profile resources.", []],
+
+    ["Parameter", "Record", [], "Parameters provide a mechanism for the dynamic assignment of value(s) in a control.", [
+      [1, "id", "c:TokenDatatype", [], "A unique identifier for the parameter."],
+      [2, "class", "c:TokenDatatype", ["[0"], "A textual label that provides a characterization of the type, purpose, use or scope of the parameter."],
+      [3, "depends-on", "c:TokenDatatype", ["[0"], "(deprecated) Another parameter invoking this one. This construct has been deprecated and should not be used."],
+      [4, "props", "m:Property", ["[0", "]0"], ""],
+      [5, "links", "m:Link", ["[0", "]0"], ""],
+      [6, "label", "String", ["[0"], "A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned."],
+      [7, "usage", "String", ["[0"], "Describes the purpose and use of a parameter."],
+      [8, "constraints", "Parameter-constraint", ["[0", "]0"], ""],
+      [9, "guidelines", "Parameter-guideline", ["[0", "]0"], ""],
+      [10, "values", "Parameter-value", ["[0", "]0"], ""],
+      [11, "select", "Parameter-selection", ["[0"], ""],
+      [12, "remarks", "m:Remarks", ["[0"], ""]
+    ]],
+
+    ["Parameter-constraint", "Record", [], "A formal or informal expression of a constraint or test.", [
+      [1, "description", "String", ["[0"], "A textual summary of the constraint to be applied."],
+      [2, "tests", "Parameter-constraint.tests", ["[0", "]0"], ""]
+    ]],
+
+    ["Parameter-constraint.tests", "Record", [], "A test expression which is expected to be evaluated by a tool.", [
+      [1, "expression", "c:StringDatatype", [], "A formal (executable) expression of a constraint."],
+      [2, "remarks", "m:Remarks", ["[0"], ""]
+    ]],
+
+    ["Parameter-guideline", "Record", [], "A prose statement that provides a recommendation for the use of a parameter.", [
+      [1, "prose", "String", [], "Prose permits multiple paragraphs, lists, tables etc."]
+    ]],
+
+    ["Parameter-value", "Choice", ["CA"], "A parameter value or set of values.", [
+      [1, "alias", "c:StringDatatype", [], ""]
+    ]],
+
+    ["Parameter-selection", "Record", [], "Presenting a choice among alternatives.", [
+      [1, "how-many", "Parameter-selection.how-many", ["[0"], "Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted."],
+      [2, "choice", "Parameter-selection.choice", ["[0", "]0"], ""]
+    ]],
+
+    ["Parameter-selection.how-many", "Choice", ["CA"], "Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.", [
+      [1, "c1", "c:TokenDatatype", [], ""],
+      [2, "c2", "Parameter-selection.how-many.2", [], ""]
+    ]],
+
+    ["Parameter-selection.how-many.2", "Enumerated", [], "", [
+      [1, "one", ""],
+      [2, "one-or-more", ""]
+    ]],
+
+    ["Parameter-selection.choice", "ArrayOf", ["{1", "*String"], "", []]
+  ]
+}

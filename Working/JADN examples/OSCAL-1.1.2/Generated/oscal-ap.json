@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-ap",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Assessment-plan": {
+      "title": "Assessment plan",
+      "type": "object",
+      "description": "An assessment plan, such as those provided by a FedRAMP assessor.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata",
+        "import-ssp",
+        "reviewed-controls"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment plan in this or other OSCAL instances. The locally defined UUID of the assessment plan can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "import-ssp": {
+          "$ref": "#/imports/ac/Import-ssp",
+          "description": ""
+        },
+        "local-definitions": {
+          "$ref": "#/definitions/Assessment-plan.local-definitions",
+          "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP."
+        },
+        "terms-and-conditions": {
+          "$ref": "#/definitions/Assessment-plan.terms-and-conditions",
+          "description": "Used to define various terms and conditions under which an assessment, described by the plan, can be performed. Each child part defines a different type of term or condition."
+        },
+        "reviewed-controls": {
+          "$ref": "#/imports/ac/Reviewed-controls",
+          "description": ""
+        },
+        "assessment-subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Assessment-subject",
+            "description": ""
+          }
+        },
+        "assessment-assets": {
+          "$ref": "#/imports/ac/Assessment-assets",
+          "description": ""
+        },
+        "tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Task",
+            "description": ""
+          }
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-plan.local-definitions": {
+      "title": "Assessment plan.local definitions",
+      "type": "object",
+      "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-component",
+            "description": ""
+          }
+        },
+        "inventory-items": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Inventory-item",
+            "description": ""
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-user",
+            "description": ""
+          }
+        },
+        "objectives-and-methods": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Local-objective",
+            "description": ""
+          }
+        },
+        "activities": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Activity",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-plan.terms-and-conditions": {
+      "title": "Assessment plan.terms and conditions",
+      "type": "object",
+      "description": "Used to define various terms and conditions under which an assessment, described by the plan, can be performed. Each child part defines a different type of term or condition.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Assessment-part",
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Remarks": {}
+    },
+    "cc": {},
+    "ic": {
+      "System-component": {},
+      "Inventory-item": {},
+      "System-user": {}
+    },
+    "ac": {
+      "Import-ssp": {},
+      "Reviewed-controls": {},
+      "Assessment-subject": {},
+      "Assessment-assets": {},
+      "Task": {},
+      "Local-objective": {},
+      "Activity": {},
+      "Assessment-part": {}
+    },
+    "c": {
+      "UUIDDatatype": {}
+    }
+  }
+}

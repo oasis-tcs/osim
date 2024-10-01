@@ -1,0 +1,500 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-component-definition",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Component-definition": {
+      "title": "Component definition",
+      "type": "object",
+      "description": "A collection of component descriptions, which may optionally be grouped by capability.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given component definition instance."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "import-component-definitions": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Import-component-definition",
+            "description": ""
+          }
+        },
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Defined-component",
+            "description": ""
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Capability",
+            "description": ""
+          }
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Import-component-definition": {
+      "title": "Import component definition",
+      "type": "object",
+      "description": "Loads a component definition from another resource.",
+      "additionalProperties": false,
+      "required": [
+        "href"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A link to a resource that defines a set of components and/or capabilities to import into this collection."
+        }
+      }
+    },
+    "Defined-component": {
+      "title": "Defined component",
+      "type": "object",
+      "description": "A defined component that can be part of an implemented system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "type",
+        "title",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given component."
+        },
+        "type": {
+          "$ref": "#/definitions/Defined-component.type",
+          "description": "A category describing the purpose of the component."
+        },
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the component.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the component, including information about its function.",
+          "maxLength": 1000
+        },
+        "purpose": {
+          "type": "string",
+          "description": "A summary of the technological or business purpose of the component.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Protocol",
+            "description": ""
+          }
+        },
+        "control-implementations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Control-implementation",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Defined-component.type": {
+      "title": "Defined component.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Defined-component.type.2"
+        }
+      ]
+    },
+    "Defined-component.type.2": {
+      "title": "Defined component.type.2",
+      "type": "string",
+      "enum": [
+        "interconnection",
+        "software",
+        "hardware",
+        "service",
+        "policy",
+        "physical",
+        "process-procedure",
+        "plan",
+        "guidance",
+        "standard",
+        "validation"
+      ]
+    },
+    "Control-implementation": {
+      "title": "Control implementation",
+      "type": "object",
+      "description": "Defines how the component or capability supports a set of controls.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "source",
+        "description",
+        "implemented-requirements"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a means to identify a set of control implementations that are supported by a given component or capability."
+        },
+        "source": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A reference to an OSCAL catalog or profile providing the referenced control or subcontrol definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of how the specified set of controls are implemented for the containing component or capability.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Set-parameter",
+            "description": ""
+          }
+        },
+        "implemented-requirements": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Implemented-requirement",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Implemented-requirement": {
+      "title": "Implemented requirement",
+      "type": "object",
+      "description": "Describes how the containing component or capability implements an individual control.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "control-id",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given control implementation by a component."
+        },
+        "control-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."
+        },
+        "description": {
+          "type": "string",
+          "description": "A suggestion from the supplier (e.g., component vendor or author) for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Set-parameter",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "statements": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Statement",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Statement": {
+      "title": "Statement",
+      "type": "object",
+      "description": "Identifies which statements within a control are addressed.",
+      "additionalProperties": false,
+      "required": [
+        "statement-id",
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "statement-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A human-oriented identifier reference to a control statement."
+        },
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this control statement elsewhere in this or other OSCAL instances. The UUID of the control statement in the source OSCAL instance is sufficient to reference the data item locally or globally (e.g., in an imported OSCAL instance)."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of how the containing control statement is implemented by the component or capability.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Capability": {
+      "title": "Capability",
+      "type": "object",
+      "description": "A grouping of other components and/or capabilities.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "name",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given capability."
+        },
+        "name": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "The capability's human-readable name."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the capability.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "incorporates-components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Incorporates-component",
+            "description": ""
+          }
+        },
+        "control-implementations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Control-implementation",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Incorporates-component": {
+      "title": "Incorporates component",
+      "type": "object",
+      "description": "The collection of components comprising this capability.",
+      "additionalProperties": false,
+      "required": [
+        "component-uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "component-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a component."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the component, including information about its function.",
+          "maxLength": 1000
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Property": {},
+      "Link": {},
+      "Responsible-role": {},
+      "Remarks": {}
+    },
+    "cc": {},
+    "ic": {
+      "Protocol": {},
+      "Set-parameter": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "URIReferenceDatatype": {},
+      "StringDatatype": {},
+      "TokenDatatype": {}
+    }
+  }
+}

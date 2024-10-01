@@ -1,0 +1,1326 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://spdx.org/spdx-v2.3",
+  "title": "SPDX v2.3 Information Model",
+  "license": "CC0-1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "document": {
+      "$ref": "#/definitions/Document"
+    },
+    "tagmap$": {
+      "$ref": "#/definitions/TagMap$"
+    }
+  },
+  "definitions": {
+    "Document": {
+      "title": "Document",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdxVersion",
+        "dataLicense",
+        "SPDXID",
+        "name",
+        "documentNamespace",
+        "creator",
+        "created"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "spdxVersion": {
+          "$ref": "#/definitions/SpdxVersion",
+          "description": "6.1 SPDX-M.N where M and N are major and minor version number"
+        },
+        "dataLicense": {
+          "$ref": "#/definitions/SPDX-METADATA-LICENSE",
+          "description": ""
+        },
+        "SPDXID": {
+          "$ref": "#/definitions/SPDXREF-DOCUMENT",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": "6.4 Name of this document as designated by creator",
+          "maxLength": 255
+        },
+        "documentNamespace": {
+          "$ref": "#/definitions/URI",
+          "description": "6.5 Absolute URI (no #fragment)"
+        },
+        "externalDocumentRefs": {
+          "type": "array",
+          "description": "6.6",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ExternalDocumentRef",
+            "description": "6.6"
+          }
+        },
+        "licenseListVersion": {
+          "type": "string",
+          "description": "6.7",
+          "maxLength": 255
+        },
+        "creator": {
+          "type": "array",
+          "description": "6.8 Person / Organization / Tool",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Creator",
+            "description": "6.8 Person / Organization / Tool"
+          }
+        },
+        "created": {
+          "$ref": "#/definitions/Timestamp",
+          "description": "6.9 RFC-3339 string YYYY-MM-DDThh:mm:ssZ"
+        },
+        "creatorComment": {
+          "type": "string",
+          "description": "6.10 Comments about creation of the SPDX document",
+          "maxLength": 255
+        },
+        "documentComment": {
+          "type": "string",
+          "description": "6.11 Comments to consumers of the SPDX document",
+          "maxLength": 255
+        },
+        "packages": {
+          "type": "array",
+          "description": "Section 7 Package Information",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PackageInfo",
+            "description": "Section 7 Package Information"
+          }
+        },
+        "files": {
+          "type": "array",
+          "description": "Section 8 File Information",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FileInfo",
+            "description": "Section 8 File Information"
+          }
+        },
+        "snippets": {
+          "type": "array",
+          "description": "Section 9 Snippet Information",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/SnippetInfo",
+            "description": "Section 9 Snippet Information"
+          }
+        },
+        "extractedLicensingInfos": {
+          "type": "array",
+          "description": "Section 10 Other Licensing Information",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ExtraLicensingInfo",
+            "description": "Section 10 Other Licensing Information"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "description": "Section 11 Relationships",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Relationship",
+            "description": "Section 11 Relationships"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Section 12 Annotations",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Annotation",
+            "description": "Section 12 Annotations"
+          }
+        },
+        "reviews": {
+          "type": "array",
+          "description": "Section 13 Review Information (deprecated)",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Review",
+            "description": "Section 13 Review Information (deprecated)"
+          }
+        }
+      }
+    },
+    "TagMap$": {
+      "title": "TagMap$",
+      "type": "string",
+      "description": "Alias list: map of paths to tags",
+      "enum": [
+        "spdxVersion:SPDXVersion",
+        "dataLicense:DataLicense",
+        "SPDXID:SPDXID",
+        "name:DocumentName",
+        "documentNamespace:DocumentNamespace",
+        "externalDocumentRefs/*:ExternalDocumentRef",
+        "creationInfo/licenseListVersion:LicenseListVersion",
+        "creationInfo/creators/*:Creator",
+        "creationInfo/created:Created",
+        "creationInfo/comment:CreatorComment",
+        "comment:DocumentComment",
+        "packages/*:",
+        "files/*:",
+        "snippets/*:",
+        "hasExtractedLicensingInfos/*:",
+        "relationships/*:",
+        "annotations/*:",
+        "documentDescribes:DocumentDescribes"
+      ]
+    },
+    "ExternalDocumentRef": {
+      "title": "ExternalDocumentRef",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "externalDocumentId",
+        "spdxDocument",
+        "checksum"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "externalDocumentId": {
+          "$ref": "#/definitions/DocumentRef",
+          "description": ""
+        },
+        "spdxDocument": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "checksum": {
+          "$ref": "#/definitions/Checksum",
+          "description": ""
+        }
+      }
+    },
+    "CreationInfo": {
+      "title": "CreationInfo",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "creators",
+        "created",
+        "comment"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "licenseListVersion": {
+          "$ref": "#/definitions/MajorMinorVersion",
+          "description": ""
+        },
+        "creators": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Entity",
+            "description": ""
+          }
+        },
+        "created": {
+          "$ref": "#/definitions/Timestamp",
+          "description": ""
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "PackageInfo": {
+      "title": "PackageInfo",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "SPDXID",
+        "downloadLocation",
+        "licenseDeclared"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "SPDXID": {
+          "$ref": "#/definitions/SpdxRef",
+          "description": ""
+        },
+        "versionInfo": {
+          "$ref": "#/definitions/VersionInfo",
+          "description": ""
+        },
+        "packageFileName": {
+          "$ref": "#/definitions/PackageFileName",
+          "description": ""
+        },
+        "supplier": {
+          "$ref": "#/definitions/PackageSupplier",
+          "description": ""
+        },
+        "originator": {
+          "$ref": "#/definitions/Entity",
+          "description": "Person or Org, not Tool"
+        },
+        "downloadLocation": {
+          "$ref": "#/definitions/DownloadLocation",
+          "description": "mandatory"
+        },
+        "filesAnalyzed": {
+          "type": "boolean",
+          "description": "Default True.   7.8.1"
+        },
+        "packageVerificationCode": {
+          "$ref": "#/definitions/PackageVerificationCode",
+          "description": "optional if filesAnalyzed is True, prohibited if False"
+        },
+        "checksums": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Checksum",
+            "description": ""
+          }
+        },
+        "homepage": {
+          "$ref": "#/definitions/URI",
+          "description": "URI, NONE, NOASSERTION"
+        },
+        "sourceInfo": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "licenseConcluded": {
+          "$ref": "#/definitions/LicenseExpression",
+          "description": "3.13.3 says mandatory"
+        },
+        "licenseInfoFromFiles": {
+          "type": "array",
+          "description": "optional if filesAnalyzed is True, prohibited if False",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/LicenseIdentifier",
+            "description": "optional if filesAnalyzed is True, prohibited if False"
+          }
+        },
+        "licenseDeclared": {
+          "$ref": "#/definitions/LicenseExpression",
+          "description": ""
+        },
+        "licenseComments": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "copyrightText": {
+          "type": "string",
+          "description": "3.17.3 says mandatory",
+          "maxLength": 255
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "externalRefs": {
+          "type": "array",
+          "description": "ExternalRef includes category/type/locator/comment.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ExternalRef",
+            "description": "ExternalRef includes category/type/locator/comment."
+          }
+        },
+        "attributionTexts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "maxLength": 255
+          }
+        }
+      }
+    },
+    "FileInfo": {
+      "title": "FileInfo",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fileName",
+        "SPDXID"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "SPDXID": {
+          "$ref": "#/definitions/SpdxRef",
+          "description": ""
+        },
+        "versionInfo": {
+          "$ref": "#/definitions/VersionInfo",
+          "description": "not in spec"
+        },
+        "fileTypes": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FileType",
+            "description": ""
+          }
+        },
+        "checksums": {
+          "type": "array",
+          "description": "4.4.3 says mandatory",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Checksum",
+            "description": "4.4.3 says mandatory"
+          }
+        },
+        "licenseConcluded": {
+          "$ref": "#/definitions/LicenseExpression",
+          "description": "4.5.3 says mandatory"
+        },
+        "licenseInfoInFiles": {
+          "type": "array",
+          "description": "4.6.3 says mandatory",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/LicenseExpression",
+            "description": "4.6.3 says mandatory"
+          }
+        },
+        "licenseDeclared": {
+          "type": "string",
+          "description": "not in spec",
+          "maxLength": 255
+        },
+        "licenseComments": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "copyrightText": {
+          "type": "string",
+          "description": "4.8.3 says mandatory",
+          "maxLength": 255
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "noticeText": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "fileContributors": {
+          "type": "array",
+          "description": "4.14.3 says [0..*] (array of strings)",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FileContributor",
+            "description": "4.14.3 says [0..*] (array of strings)"
+          }
+        },
+        "externalRefs": {
+          "type": "array",
+          "description": "not in spec",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ExternalRef",
+            "description": "not in spec"
+          }
+        },
+        "attributionText": {
+          "type": "array",
+          "description": "just attributions?",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "just attributions?",
+            "maxLength": 255
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Annotation",
+            "description": "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet"
+          }
+        },
+        "artifactOf": {
+          "type": "array",
+          "description": "deprecated - delete before new version",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Artifact",
+            "description": "deprecated - delete before new version"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "deprecated - delete before new version",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "deprecated - delete before new version",
+            "maxLength": 255
+          }
+        }
+      }
+    },
+    "SnippetInfo": {
+      "title": "SnippetInfo",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "SPDXID",
+        "snippetFromFile",
+        "ranges",
+        "licenseConcluded",
+        "copyrightText"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "SPDXID": {
+          "$ref": "#/definitions/SpdxRef",
+          "description": ""
+        },
+        "snippetFromFile": {
+          "$ref": "#/definitions/SpdxRef",
+          "description": ""
+        },
+        "ranges": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Range",
+            "description": ""
+          }
+        },
+        "licenseConcluded": {
+          "$ref": "#/definitions/LicenseExpression",
+          "description": ""
+        },
+        "licenseInfoInSnippets": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/LicenseExpression",
+            "description": ""
+          }
+        },
+        "licenseComments": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "copyrightText": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "attributionText": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Annotation",
+            "description": "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet"
+          }
+        }
+      }
+    },
+    "Relationship": {
+      "title": "Relationship",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdxElementId",
+        "relationshipType",
+        "relatedSpdxElement"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "spdxElementId": {
+          "$ref": "#/definitions/Key",
+          "description": ""
+        },
+        "relationshipType": {
+          "$ref": "#/definitions/RelationshipType",
+          "description": ""
+        },
+        "relatedSpdxElement": {
+          "$ref": "#/definitions/SpdxQualifiedRef",
+          "description": "Overloaded multiple targets, consider RelatedElement"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "Annotation": {
+      "title": "Annotation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "annotator",
+        "annotationDate",
+        "annotationType",
+        "comment"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "annotator": {
+          "$ref": "#/definitions/Entity",
+          "description": ""
+        },
+        "annotationDate": {
+          "$ref": "#/definitions/Timestamp",
+          "description": ""
+        },
+        "annotationType": {
+          "$ref": "#/definitions/AnnotationType",
+          "description": ""
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "Review": {
+      "title": "Review",
+      "type": "object",
+      "description": "Deprecated since v2.0",
+      "additionalProperties": false,
+      "required": [
+        "comment"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "reviewer": {
+          "$ref": "#/definitions/Creator",
+          "description": "Person / Organization / Tool"
+        },
+        "reviewDate": {
+          "$ref": "#/definitions/Timestamp",
+          "description": "mandatory if reviewer present"
+        },
+        "comment": {
+          "type": "string",
+          "description": "review comment",
+          "maxLength": 255
+        }
+      }
+    },
+    "SpdxVersion": {
+      "title": "SpdxVersion",
+      "type": "string",
+      "description": "Limit digits to below the absurd, or enumerate valid versions",
+      "maxLength": 255,
+      "pattern": "^SPDX-\\d{1,2}\\.\\d{1,4}$"
+    },
+    "SpdxLicense": {
+      "title": "SpdxLicense",
+      "type": "string",
+      "description": "Import ll:License",
+      "maxLength": 255
+    },
+    "SPDXREF-DOCUMENT": {
+      "title": "SPDXREF DOCUMENT",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^SPDXRef-DOCUMENT$"
+    },
+    "SpdxRef": {
+      "title": "SpdxRef",
+      "type": "string",
+      "description": "3.2.4: SPDXRef-[idstring] - no underscore",
+      "maxLength": 255,
+      "pattern": "^SPDXRef-[-+\\.a-zA-Z0-9]{1,64}$"
+    },
+    "DocumentRef": {
+      "title": "DocumentRef",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^DocumentRef-[-+\\.a-zA-Z0-9]{1,64}$"
+    },
+    "SpdxQualifiedRef": {
+      "title": "SpdxQualifiedRef",
+      "type": "string",
+      "description": "[DocumentRef-xxx:]SpdxRef",
+      "maxLength": 255
+    },
+    "LicenseRef": {
+      "title": "LicenseRef",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^LicenseRef-[-+\\.a-zA-Z0-9]{1,64}$"
+    },
+    "MajorMinorVersion": {
+      "title": "MajorMinorVersion",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^\\d{1,2}\\.\\d{1,4}$"
+    },
+    "VersionInfo": {
+      "title": "VersionInfo",
+      "type": "string",
+      "description": "use versioning scheme?",
+      "maxLength": 255
+    },
+    "PackageFileName": {
+      "title": "PackageFileName",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Timestamp": {
+      "title": "Timestamp",
+      "type": "string",
+      "description": "Define an ISO 8601 (or RFC 3339?) text representation format for Integer time",
+      "maxLength": 255
+    },
+    "URI": {
+      "title": "URI",
+      "type": "string",
+      "format": "uri",
+      "maxLength": 255
+    },
+    "DownloadLocation": {
+      "title": "DownloadLocation",
+      "type": "string",
+      "description": "URI or SPDX-specific VCS schemes",
+      "maxLength": 255
+    },
+    "Entity": {
+      "title": "Entity",
+      "type": "string",
+      "description": "Should be a Map instead of strings.  Spec doesn't require comma-separated tag-values",
+      "maxLength": 255
+    },
+    "FileContributor": {
+      "title": "FileContributor",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Entity-Alternate": {
+      "title": "Entity Alternate",
+      "type": "object",
+      "description": "at least one must be present",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1000,
+      "properties": {
+        "person": {
+          "type": "string",
+          "description": "validate person name with optional (email)",
+          "maxLength": 255
+        },
+        "organization": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "tool": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "PackageSupplier": {
+      "title": "PackageSupplier",
+      "type": "string",
+      "maxLength": 255
+    },
+    "PackageVerificationCode": {
+      "title": "PackageVerificationCode",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageVerificationCodeValue",
+        "packageVerificationCodeExcludedFiles"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "packageVerificationCodeValue": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "packageVerificationCodeExcludedFiles": {
+          "$ref": "#/definitions/PackageFileName",
+          "description": ""
+        }
+      }
+    },
+    "Checksum": {
+      "title": "Checksum",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "checksumValue"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/definitions/HashAlgorithm",
+          "description": ""
+        },
+        "checksumValue": {
+          "type": "string",
+          "description": "just value?",
+          "contentEncoding": "base16"
+        }
+      }
+    },
+    "Checksum-Alternate": {
+      "title": "Checksum Alternate",
+      "type": "object",
+      "description": "md algorithms not recommended, better algorithms (blake, ripemd, ...) not listed",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1000,
+      "properties": {
+        "sha1": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "sha224": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "sha256": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "sha384": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "sha512": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "md2": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "md4": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "md5": {
+          "type": "string",
+          "contentEncoding": "base16"
+        },
+        "md6": {
+          "type": "string",
+          "description": "Variable-length SHA-3 candidate, need e.g., md6-256 or md6-384",
+          "contentEncoding": "base16"
+        }
+      }
+    },
+    "ExternalRef": {
+      "title": "ExternalRef",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "referenceCategory",
+        "referenceType",
+        "referenceLocator"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "referenceCategory": {
+          "$ref": "#/definitions/ReferenceCategory",
+          "description": ""
+        },
+        "referenceType": {
+          "$ref": "#/definitions/ReferenceType",
+          "description": ""
+        },
+        "referenceLocator": {
+          "$ref": "#/definitions/ReferenceLocator",
+          "description": ""
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "ReferenceType": {
+      "title": "ReferenceType",
+      "type": "string",
+      "enum": [
+        "cpe22Type",
+        "cpe23Type",
+        "advisory",
+        "fix",
+        "url",
+        "swid",
+        "maven",
+        "npm",
+        "nuget",
+        "bower",
+        "purl",
+        "swh",
+        "gitoid",
+        "other"
+      ]
+    },
+    "ReferenceLocator": {
+      "title": "ReferenceLocator",
+      "type": "object",
+      "description": "annex F - external repository identifiers",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "properties": {
+        "cpe22Type": {
+          "$ref": "#/definitions/CPE22Type",
+          "description": ""
+        },
+        "cpe23Type": {
+          "$ref": "#/definitions/CPE23Typ",
+          "description": ""
+        },
+        "advisory": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "fix": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "url": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "swid": {
+          "$ref": "#/definitions/SWID",
+          "description": ""
+        },
+        "maven": {
+          "$ref": "#/definitions/Package-Maven-Central",
+          "description": ""
+        },
+        "npm": {
+          "$ref": "#/definitions/Package-NPM",
+          "description": ""
+        },
+        "nuget": {
+          "$ref": "#/definitions/Package-Nuget",
+          "description": ""
+        },
+        "bower": {
+          "$ref": "#/definitions/Package-Bower",
+          "description": ""
+        },
+        "purl": {
+          "$ref": "#/definitions/Package-PURL",
+          "description": ""
+        },
+        "swh": {
+          "$ref": "#/definitions/PID-Swh",
+          "description": ""
+        },
+        "gitoid": {
+          "$ref": "#/definitions/PID-GitOID",
+          "description": ""
+        },
+        "other": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "CPE22Type": {
+      "title": "CPE22Type",
+      "type": "string",
+      "description": "Add regexes to all reference types",
+      "maxLength": 255
+    },
+    "CPE23Type": {
+      "title": "CPE23Type",
+      "type": "string",
+      "maxLength": 255
+    },
+    "SWID": {
+      "title": "SWID",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Package-Maven-Central": {
+      "title": "Package Maven Central",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Package-NPM": {
+      "title": "Package NPM",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Package-Nuget": {
+      "title": "Package Nuget",
+      "type": "string",
+      "maxLength": 255
+    },
+    "PackageBower": {
+      "title": "PackageBower",
+      "type": "string",
+      "maxLength": 255
+    },
+    "PackagePurl": {
+      "title": "PackagePurl",
+      "type": "string",
+      "maxLength": 255
+    },
+    "PID-Swh": {
+      "title": "PID Swh",
+      "type": "string",
+      "maxLength": 255
+    },
+    "PID-GitOID": {
+      "title": "PID GitOID",
+      "type": "string",
+      "maxLength": 255
+    },
+    "LicenseIdentifier": {
+      "title": "LicenseIdentifier",
+      "type": "string",
+      "description": "import from License List",
+      "maxLength": 255
+    },
+    "LicenseExpression": {
+      "title": "LicenseExpression",
+      "type": "string",
+      "maxLength": 255
+    },
+    "Range": {
+      "title": "Range",
+      "type": "object",
+      "description": "Simplify - start and end shouldn't have different types and references",
+      "additionalProperties": false,
+      "required": [
+        "startPointer",
+        "endPointer"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "startPointer": {
+          "$ref": "#/definitions/RangePointer",
+          "description": ""
+        },
+        "endPointer": {
+          "$ref": "#/definitions/RangePointer",
+          "description": ""
+        }
+      }
+    },
+    "RangePointer": {
+      "title": "RangePointer",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference"
+      ],
+      "minProperties": 2,
+      "maxProperties": 2,
+      "properties": {
+        "offset": {
+          "type": "integer"
+        },
+        "lineNumber": {
+          "type": "integer"
+        },
+        "reference": {
+          "$ref": "#/definitions/SpdxRef",
+          "description": ""
+        }
+      }
+    },
+    "Artifact": {
+      "title": "Artifact",
+      "type": "object",
+      "description": "Deprecated",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "homepage": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "projectURI": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        }
+      }
+    },
+    "ExtraLicensingInfo": {
+      "title": "ExtraLicensingInfo",
+      "type": "object",
+      "description": "Fields after comment not defined in v2.2",
+      "additionalProperties": false,
+      "required": [
+        "extractedText"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "licenseId": {
+          "$ref": "#/definitions/LicenseRef",
+          "description": ""
+        },
+        "extractedText": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "seeAlsos": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/URI",
+            "description": ""
+          }
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "isDeprecatedLicenseId": {
+          "type": "boolean"
+        },
+        "isFsfLibre": {
+          "type": "boolean"
+        },
+        "isOsiApproved": {
+          "type": "boolean"
+        },
+        "licenseText": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "licenseTextHtml": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "standardLicenseHeader": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "standardLicenseHeaderHtml": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "standardLicenseHeaderTemplate": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "standardLicenseTemplate": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "CrossRef": {
+      "title": "CrossRef",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "isLive",
+        "isValid",
+        "isWayBackLink",
+        "match",
+        "order",
+        "timestamp"
+      ],
+      "maxProperties": 1000,
+      "properties": {
+        "url": {
+          "$ref": "#/definitions/URI",
+          "description": ""
+        },
+        "isLive": {
+          "type": "boolean"
+        },
+        "isValid": {
+          "type": "boolean"
+        },
+        "isWayBackLink": {
+          "type": "boolean"
+        },
+        "match": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "order": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "$ref": "#/definitions/Timestamp",
+          "description": ""
+        }
+      }
+    },
+    "AnnotationType": {
+      "title": "AnnotationType",
+      "type": "string",
+      "enum": [
+        "REVIEW",
+        "OTHER"
+      ]
+    },
+    "FileType": {
+      "title": "FileType",
+      "type": "string",
+      "enum": [
+        "SOURCE",
+        "BINARY",
+        "ARCHIVE",
+        "APPLICATION",
+        "AUDIO",
+        "IMAGE",
+        "TEXT",
+        "VIDEO",
+        "DOCUMENTATION",
+        "SPDX",
+        "SHARED",
+        "OTHER"
+      ]
+    },
+    "HashAlgorithm": {
+      "title": "HashAlgorithm",
+      "type": "string",
+      "enum": [
+        "SHA1",
+        "SHA224",
+        "SHA256",
+        "SHA384",
+        "SHA512",
+        "MD2",
+        "MD4",
+        "MD5",
+        "MD6"
+      ]
+    },
+    "ReferenceCategory": {
+      "title": "ReferenceCategory",
+      "type": "string",
+      "description": "no underscores",
+      "enum": [
+        "SECURITY",
+        "PACKAGE-MANAGER",
+        "PERSISTENT-ID",
+        "OTHER"
+      ]
+    },
+    "RelationshipType": {
+      "title": "RelationshipType",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "DESCRIBES",
+        "DESCRIBED_BY",
+        "CONTAINS",
+        "CONTAINED_BY",
+        "DEPENDS_ON",
+        "DEPENENCY_OF",
+        "DEPENDENCY_MANIFEST_OF",
+        "BUILD_+DEPENDENCY_OF",
+        "DEV_DEPENDENCY_OF",
+        "OPTIONAL_DEPENDENCY_OF",
+        "PROVIDED_DEPENDENCY_OF",
+        "TEST_DEPENDENCY_OF",
+        "RUNTIME_DEPENDENCY_OF",
+        "EXAMPLE_OF",
+        "GENERATES",
+        "GENERATED_FROM",
+        "ANCESTOR_OF",
+        "DESCENDANT_OF",
+        "VARIANT_OF",
+        "DISTRIBUTION_ARTIFACT",
+        "PATCH_FOR",
+        "PATCH_APPLIED",
+        "COPY_OF",
+        "FILE_ADDED",
+        "FILE_DELETED",
+        "FILE_MODIFIED",
+        "EXPANDED_FROM_ARCHIVE",
+        "DYNAMIC_LINK",
+        "STATIC_LINK",
+        "DATA_FILE_OF",
+        "TEST_CASE_OF",
+        "BUILD_TOOL_OF",
+        "DEF_TOOL_OF",
+        "TEST_OF",
+        "TEST_TOOL_OF",
+        "DOCUMENTATION_OF",
+        "OPTIONAL_COMPONENT_OF",
+        "METAFILE_OF",
+        "PACKAGE_OF",
+        "AMENDS",
+        "PREREQUISITE_FOR",
+        "HAS_PREREQUISITE",
+        "NOASSERTION",
+        "OTHER"
+      ]
+    }
+  },
+  "imports": {
+    "ll": {}
+  }
+}

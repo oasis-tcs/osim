@@ -1,0 +1,265 @@
+# title: SPDX v2.3 Information Model
+# package: http://spdx.org/spdx-v2.3
+# license: CC0-1.0
+# namespaces: {'ll': 'http://spdx.org/license-list'}
+# exports: ['Document', 'TagMap$']
+# config: {'$FieldName': '^[a-zA-Z][_A-Za-z0-9]{0,63}$', '$MaxElements': 1000}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Document : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 spdxVersion : SpdxVersion  </td></tr>
+  <tr><td align="left">  2 dataLicense : SPDX-METADATA-LICENSE  </td></tr>
+  <tr><td align="left">  3 SPDXID : SPDXREF-DOCUMENT  </td></tr>
+  <tr><td align="left">  4 name : String  </td></tr>
+  <tr><td align="left">  5 documentNamespace : URI  </td></tr>
+  <tr><td align="left">  6 externalDocumentRefs : ExternalDocumentRef [0..*]  </td></tr>
+  <tr><td align="left">  7 licenseListVersion : String [0..1]  </td></tr>
+  <tr><td align="left">  8 creator : Creator [1..*]  </td></tr>
+  <tr><td align="left">  9 created : Timestamp  </td></tr>
+  <tr><td align="left">  10 creatorComment : String [0..1]  </td></tr>
+  <tr><td align="left">  11 documentComment : String [0..1]  </td></tr>
+  <tr><td align="left">  12 packages : PackageInfo [0..*]  </td></tr>
+  <tr><td align="left">  13 files : FileInfo [0..*]  </td></tr>
+  <tr><td align="left">  14 snippets : SnippetInfo [0..*]  </td></tr>
+  <tr><td align="left">  15 extractedLicensingInfos : ExtraLicensingInfo [0..*]  </td></tr>
+  <tr><td align="left">  16 relationships : Relationship [0..*]  </td></tr>
+  <tr><td align="left">  17 annotations : Annotation [0..*]  </td></tr>
+  <tr><td align="left">  18 reviews : Review [0..*]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  ExternalDocumentRef : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 externalDocumentId : DocumentRef  </td></tr>
+  <tr><td align="left">  2 spdxDocument : URI  </td></tr>
+  <tr><td align="left">  3 checksum : Checksum  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  CreationInfo : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 licenseListVersion : MajorMinorVersion [0..1]  </td></tr>
+  <tr><td align="left">  2 creators : Entity [1..*]  </td></tr>
+  <tr><td align="left">  3 created : Timestamp  </td></tr>
+  <tr><td align="left">  4 comment : String  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  PackageInfo : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 SPDXID : Key(SpdxRef)  </td></tr>
+  <tr><td align="left">  3 versionInfo : VersionInfo [0..1]  </td></tr>
+  <tr><td align="left">  4 packageFileName : PackageFileName [0..1]  </td></tr>
+  <tr><td align="left">  5 supplier : PackageSupplier [0..1]  </td></tr>
+  <tr><td align="left">  6 originator : Entity [0..1]  </td></tr>
+  <tr><td align="left">  7 downloadLocation : DownloadLocation  </td></tr>
+  <tr><td align="left">  8 filesAnalyzed : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  9 packageVerificationCode : PackageVerificationCode [0..1]  </td></tr>
+  <tr><td align="left">  10 checksums : Checksum [0..*]  </td></tr>
+  <tr><td align="left">  11 homepage : URI [0..1]  </td></tr>
+  <tr><td align="left">  12 sourceInfo : String [0..1]  </td></tr>
+  <tr><td align="left">  13 licenseConcluded : LicenseExpression [0..1]  </td></tr>
+  <tr><td align="left">  14 licenseInfoFromFiles : LicenseIdentifier [0..*]  </td></tr>
+  <tr><td align="left">  15 licenseDeclared : LicenseExpression  </td></tr>
+  <tr><td align="left">  16 licenseComments : String [0..1]  </td></tr>
+  <tr><td align="left">  17 copyrightText : String [0..1]  </td></tr>
+  <tr><td align="left">  18 summary : String [0..1]  </td></tr>
+  <tr><td align="left">  19 description : String [0..1]  </td></tr>
+  <tr><td align="left">  20 comment : String [0..1]  </td></tr>
+  <tr><td align="left">  21 externalRefs : ExternalRef [0..*]  </td></tr>
+  <tr><td align="left">  22 attributionTexts : String [0..*]  </td></tr>
+</table>>]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  FileInfo : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 fileName : String  </td></tr>
+  <tr><td align="left">  2 SPDXID : Key(SpdxRef)  </td></tr>
+  <tr><td align="left">  3 versionInfo : VersionInfo [0..1]  </td></tr>
+  <tr><td align="left">  4 fileTypes : FileType [0..*]  </td></tr>
+  <tr><td align="left">  5 checksums : Checksum [0..*]  </td></tr>
+  <tr><td align="left">  6 licenseConcluded : LicenseExpression [0..1]  </td></tr>
+  <tr><td align="left">  7 licenseInfoInFiles : LicenseExpression [0..*]  </td></tr>
+  <tr><td align="left">  8 licenseDeclared : String [0..1]  </td></tr>
+  <tr><td align="left">  9 licenseComments : String [0..1]  </td></tr>
+  <tr><td align="left">  10 copyrightText : String [0..1]  </td></tr>
+  <tr><td align="left">  11 comment : String [0..1]  </td></tr>
+  <tr><td align="left">  12 noticeText : String [0..1]  </td></tr>
+  <tr><td align="left">  13 fileContributors : FileContributor [0..*]  </td></tr>
+  <tr><td align="left">  14 externalRefs : ExternalRef [0..*]  </td></tr>
+  <tr><td align="left">  15 attributionText : String [0..*]  </td></tr>
+  <tr><td align="left">  16 annotations : Annotation [0..*]  </td></tr>
+  <tr><td align="left">  17 artifactOf : Artifact [0..*]  </td></tr>
+  <tr><td align="left">  18 dependencies : String [0..*]  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  SnippetInfo : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 SPDXID : Key(SpdxRef)  </td></tr>
+  <tr><td align="left">  2 snippetFromFile : SpdxRef  </td></tr>
+  <tr><td align="left">  3 ranges : Range [1..*]  </td></tr>
+  <tr><td align="left">  4 licenseConcluded : LicenseExpression  </td></tr>
+  <tr><td align="left">  5 licenseInfoInSnippets : LicenseExpression [0..*]  </td></tr>
+  <tr><td align="left">  6 licenseComments : String [0..1]  </td></tr>
+  <tr><td align="left">  7 copyrightText : String  </td></tr>
+  <tr><td align="left">  8 comment : String [0..1]  </td></tr>
+  <tr><td align="left">  9 name : String [0..1]  </td></tr>
+  <tr><td align="left">  10 attributionText : String [0..*]  </td></tr>
+  <tr><td align="left">  11 annotations : Annotation [0..*]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Relationship : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 spdxElementId : Key  </td></tr>
+  <tr><td align="left">  2 relationshipType : RelationshipType  </td></tr>
+  <tr><td align="left">  3 relatedSpdxElement : SpdxQualifiedRef  </td></tr>
+  <tr><td align="left">  4 comment : String [0..1]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Annotation : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 annotator : Entity  </td></tr>
+  <tr><td align="left">  2 annotationDate : Timestamp  </td></tr>
+  <tr><td align="left">  3 annotationType : AnnotationType  </td></tr>
+  <tr><td align="left">  4 comment : String  </td></tr>
+</table>>]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Review : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 reviewer : Creator [0..1]  </td></tr>
+  <tr><td align="left">  2 reviewDate : Timestamp [0..1]  </td></tr>
+  <tr><td align="left">  3 comment : String  </td></tr>
+</table>>]
+
+n24 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Entity-Alternate : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 person : String [0..1]  </td></tr>
+  <tr><td align="left">  2 organization : String [0..1]  </td></tr>
+  <tr><td align="left">  3 tool : String [0..1]  </td></tr>
+</table>>]
+
+n26 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  PackageVerificationCode : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 packageVerificationCodeValue : Binary /x  </td></tr>
+  <tr><td align="left">  2 packageVerificationCodeExcludedFiles : PackageFileName  </td></tr>
+</table>>]
+
+n27 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Checksum : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 algorithm : HashAlgorithm  </td></tr>
+  <tr><td align="left">  2 checksumValue : Binary /x  </td></tr>
+</table>>]
+
+n28 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Checksum-Alternate : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 sha1 : Binary{20..20} /x [0..1]  </td></tr>
+  <tr><td align="left">  2 sha224 : Binary{28..28} /x [0..1]  </td></tr>
+  <tr><td align="left">  3 sha256 : Binary{32..32} /x [0..1]  </td></tr>
+  <tr><td align="left">  4 sha384 : Binary{48..48} /x [0..1]  </td></tr>
+  <tr><td align="left">  5 sha512 : Binary{64..64} /x [0..1]  </td></tr>
+  <tr><td align="left">  6 md2 : Binary{16..16} /x [0..1]  </td></tr>
+  <tr><td align="left">  7 md4 : Binary{16..16} /x [0..1]  </td></tr>
+  <tr><td align="left">  8 md5 : Binary{16..16} /x [0..1]  </td></tr>
+  <tr><td align="left">  9 md6 : Binary /x [0..1]  </td></tr>
+</table>>]
+
+n29 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  ExternalRef : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 referenceCategory : ReferenceCategory  </td></tr>
+  <tr><td align="left">  2 referenceType : ReferenceType  </td></tr>
+  <tr><td align="left">  3 referenceLocator : ReferenceLocator  </td></tr>
+  <tr><td align="left">  4 comment : String [0..1]  </td></tr>
+</table>>]
+
+n31 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  ReferenceLocator : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 cpe22Type : CPE22Type  </td></tr>
+  <tr><td align="left">  2 cpe23Type : CPE23Typ  </td></tr>
+  <tr><td align="left">  3 advisory : URI  </td></tr>
+  <tr><td align="left">  4 fix : URI  </td></tr>
+  <tr><td align="left">  5 url : URI  </td></tr>
+  <tr><td align="left">  6 swid : SWID  </td></tr>
+  <tr><td align="left">  7 maven : Package-Maven-Central  </td></tr>
+  <tr><td align="left">  8 npm : Package-NPM  </td></tr>
+  <tr><td align="left">  9 nuget : Package-Nuget  </td></tr>
+  <tr><td align="left">  10 bower : Package-Bower  </td></tr>
+  <tr><td align="left">  11 purl : Package-PURL  </td></tr>
+  <tr><td align="left">  12 swh : PID-Swh  </td></tr>
+  <tr><td align="left">  13 gitoid : PID-GitOID  </td></tr>
+  <tr><td align="left">  99 other : String  </td></tr>
+</table>>]
+
+n44 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Range : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 startPointer : RangePointer  </td></tr>
+  <tr><td align="left">  2 endPointer : RangePointer  </td></tr>
+</table>>]
+
+n45 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  RangePointer : Record{2..2}  </b></td></tr><hr/>
+  <tr><td align="left">  1 offset : Integer [0..1]  </td></tr>
+  <tr><td align="left">  2 lineNumber : Integer [0..1]  </td></tr>
+  <tr><td align="left">  3 reference : SpdxRef  </td></tr>
+</table>>]
+
+n46 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Artifact : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 homepage : URI [0..1]  </td></tr>
+  <tr><td align="left">  3 projectURI : URI [0..1]  </td></tr>
+</table>>]
+
+n47 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  ExtraLicensingInfo : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 licenseId : LicenseRef [0..1]  </td></tr>
+  <tr><td align="left">  2 extractedText : String  </td></tr>
+  <tr><td align="left">  3 name : String [0..1]  </td></tr>
+  <tr><td align="left">  4 seeAlsos : URI [0..*]  </td></tr>
+  <tr><td align="left">  5 comment : String [0..1]  </td></tr>
+  <tr><td align="left">  6 isDeprecatedLicenseId : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  7 isFsfLibre : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  8 isOsiApproved : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  9 licenseText : String [0..1]  </td></tr>
+  <tr><td align="left">  10 licenseTextHtml : String [0..1]  </td></tr>
+  <tr><td align="left">  11 standardLicenseHeader : String [0..1]  </td></tr>
+  <tr><td align="left">  12 standardLicenseHeaderHtml : String [0..1]  </td></tr>
+  <tr><td align="left">  13 standardLicenseHeaderTemplate : String [0..1]  </td></tr>
+  <tr><td align="left">  14 standardLicenseTemplate : String [0..1]  </td></tr>
+</table>>]
+
+n48 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  CrossRef : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 url : URI  </td></tr>
+  <tr><td align="left">  2 isLive : Boolean  </td></tr>
+  <tr><td align="left">  3 isValid : Boolean  </td></tr>
+  <tr><td align="left">  4 isWayBackLink : Boolean  </td></tr>
+  <tr><td align="left">  5 match : String  </td></tr>
+  <tr><td align="left">  6 order : Integer  </td></tr>
+  <tr><td align="left">  7 timestamp : Timestamp  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=externalDocumentRefs, headlabel="0..*", taillabel="1"]
+  n0 -> n3 [label=packages, headlabel="0..*", taillabel="1"]
+  n0 -> n4 [label=files, headlabel="0..*", taillabel="1"]
+  n0 -> n5 [label=snippets, headlabel="0..*", taillabel="1"]
+  n0 -> n47 [label=extractedLicensingInfos, headlabel="0..*", taillabel="1"]
+  n0 -> n6 [label=relationships, headlabel="0..*", taillabel="1"]
+  n0 -> n7 [label=annotations, headlabel="0..*", taillabel="1"]
+  n0 -> n8 [label=reviews, headlabel="0..*", taillabel="1"]
+  n1 -> n27 [label=checksum, headlabel="1", taillabel="1"]
+  n3 -> n26 [label=packageVerificationCode, headlabel="0..1", taillabel="1"]
+  n3 -> n27 [label=checksums, headlabel="0..*", taillabel="1"]
+  n3 -> n29 [label=externalRefs, headlabel="0..*", taillabel="1"]
+  n4 -> n27 [label=checksums, headlabel="0..*", taillabel="1"]
+  n4 -> n29 [label=externalRefs, headlabel="0..*", taillabel="1"]
+  n4 -> n7 [label=annotations, headlabel="0..*", taillabel="1"]
+  n4 -> n46 [label=artifactOf, headlabel="0..*", taillabel="1"]
+  n5 -> n44 [label=ranges, headlabel="1..*", taillabel="1"]
+  n5 -> n7 [label=annotations, headlabel="0..*", taillabel="1"]
+  n29 -> n31 [label=referenceLocator, headlabel="1", taillabel="1"]
+  n44 -> n45 [label=startPointer, headlabel="1", taillabel="1"]
+  n44 -> n45 [label=endPointer, headlabel="1", taillabel="1"]
+}

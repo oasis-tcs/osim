@@ -9,6 +9,6 @@ So until we know what directories to form for each work product,
 this "working" directory is a place to stick stuff.
 
 It contains:
-- add stuff here as it comes in
+- [JADN Information Model Examples](JADN%20examples)
 - add stuff here as it comes in
 - add stuff here as it comes in

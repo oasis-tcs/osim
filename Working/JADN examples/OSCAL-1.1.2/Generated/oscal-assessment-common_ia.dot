@@ -1,0 +1,784 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-assessment-common
+# roots: ['Activity', 'Assessment-assets', 'Assessment-method', 'Assessment-subject-placeholder', 'Finding', 'Import-ssp', 'Local-objective', 'Observation', 'Risk']
+# namespaces: [['cc', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common'], ['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common'], ['ic', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common'], ['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata']]
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Activity : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 steps : Activity.steps [0..*]  </td></tr>
+  <tr><td align="left">  7 related-controls : Reviewed-controls [0..1]  </td></tr>
+  <tr><td align="left">  8 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  9 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Activity.steps : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 reviewed-controls : Reviewed-controls [0..1]  </td></tr>
+  <tr><td align="left">  7 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  8 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Reviewed-controls : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 description : String [0..1]  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 control-selections : Reviewed-controls.control-selections [1..*]  </td></tr>
+  <tr><td align="left">  5 control-objective-selections : Reviewed-controls.control-objective-selections [0..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Reviewed-controls.control-selections : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 description : String [0..1]  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 include-all : cc:Include-all [0..1]  </td></tr>
+  <tr><td align="left">  5 include-controls : Select-control-by-id [0..*]  </td></tr>
+  <tr><td align="left">  6 exclude-controls : Select-control-by-id [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-control-by-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 control-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 statement-ids : c:TokenDatatype [0..*]  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Reviewed-controls.control-objective-selections : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 description : String [0..1]  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 include-all : cc:Include-all [0..1]  </td></tr>
+  <tr><td align="left">  5 include-objectives : Select-objective-by-id [0..*]  </td></tr>
+  <tr><td align="left">  6 exclude-objectives : Select-objective-by-id [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-objective-by-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 objective-id : c:TokenDatatype  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-assets : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 components : ic:System-component [0..*]  </td></tr>
+  <tr><td align="left">  2 assessment-platforms : Assessment-assets.assessment-platforms [1..*]  </td></tr>
+</table>>]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-assets.assessment-platforms : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 uses-components : Assessment-assets.assessment-platforms.uses-components [0..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-assets.assessment-platforms.uses-components : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 component-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 responsible-parties : m:Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n10 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-method : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 description : String [0..1]  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 part : Assessment-part  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n11 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-part : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 name : Assessment-part.name  </td></tr>
+  <tr><td align="left">  3 ns : c:URIDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  5 title : String [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 prose : String [0..1]  </td></tr>
+  <tr><td align="left">  8 parts : Assessment-part [0..*]  </td></tr>
+  <tr><td align="left">  9 links : m:Link [0..*]  </td></tr>
+</table>>]
+
+n12 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-part.name : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Assessment-part.name.2  </td></tr>
+</table>>]
+
+n13 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-part.name.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 asset  </td></tr>
+  <tr><td align="left">  2 method  </td></tr>
+  <tr><td align="left">  3 objective  </td></tr>
+</table>>]
+
+n14 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-subject-placeholder : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 description : String [0..1]  </td></tr>
+  <tr><td align="left">  3 sources : Assessment-subject-placeholder.sources [1..*]  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n15 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-subject-placeholder.sources : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 task-uuid : c:UUIDDatatype  </td></tr>
+</table>>]
+
+n16 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 origins : Origin [0..*]  </td></tr>
+  <tr><td align="left">  7 target : Finding-target  </td></tr>
+  <tr><td align="left">  8 implementation-statement-uuid : c:UUIDDatatype [0..1]  </td></tr>
+  <tr><td align="left">  9 related-observations : Finding.related-observations [0..*]  </td></tr>
+  <tr><td align="left">  10 related-risks : Finding.related-risks [0..*]  </td></tr>
+  <tr><td align="left">  11 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n17 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Origin : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 actors : Origin-actor [1..*]  </td></tr>
+  <tr><td align="left">  2 related-tasks : Related-task [0..*]  </td></tr>
+</table>>]
+
+n18 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Origin-actor : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : Origin-actor.type  </td></tr>
+  <tr><td align="left">  2 actor-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  3 role-id : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+</table>>]
+
+n19 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Origin-actor.type : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Origin-actor.type.2  </td></tr>
+</table>>]
+
+n20 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Origin-actor.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 tool  </td></tr>
+  <tr><td align="left">  2 assessment-platform  </td></tr>
+  <tr><td align="left">  3 party  </td></tr>
+</table>>]
+
+n21 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Related-task : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 task-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 responsible-parties : m:Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  5 subjects : Assessment-subject [0..*]  </td></tr>
+  <tr><td align="left">  6 identified-subject : Related-task.identified-subject [0..1]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n22 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-subject : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : Assessment-subject.type  </td></tr>
+  <tr><td align="left">  2 description : String [0..1]  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 include-all : cc:Include-all [0..1]  </td></tr>
+  <tr><td align="left">  6 include-subjects : Select-subject-by-id [0..*]  </td></tr>
+  <tr><td align="left">  7 exclude-subjects : Select-subject-by-id [0..*]  </td></tr>
+  <tr><td align="left">  8 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n23 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-subject.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Assessment-subject.type.2  </td></tr>
+</table>>]
+
+n24 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-subject.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 component  </td></tr>
+  <tr><td align="left">  2 inventory-item  </td></tr>
+  <tr><td align="left">  3 location  </td></tr>
+  <tr><td align="left">  4 party  </td></tr>
+  <tr><td align="left">  5 user  </td></tr>
+</table>>]
+
+n25 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-subject-by-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 subject-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : Select-subject-by-id.type  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n26 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-subject-by-id.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Select-subject-by-id.type.2  </td></tr>
+</table>>]
+
+n27 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-subject-by-id.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 component  </td></tr>
+  <tr><td align="left">  2 inventory-item  </td></tr>
+  <tr><td align="left">  3 location  </td></tr>
+  <tr><td align="left">  4 party  </td></tr>
+  <tr><td align="left">  5 user  </td></tr>
+  <tr><td align="left">  6 resource  </td></tr>
+</table>>]
+
+n28 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Related-task.identified-subject : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 subject-placeholder-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 subjects : Assessment-subject [1..*]  </td></tr>
+</table>>]
+
+n29 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : Finding-target.type  </td></tr>
+  <tr><td align="left">  2 target-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  3 title : String [0..1]  </td></tr>
+  <tr><td align="left">  4 description : String [0..1]  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 status : Finding-target.status  </td></tr>
+  <tr><td align="left">  8 implementation-status : ic:Implementation-status [0..1]  </td></tr>
+  <tr><td align="left">  9 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n30 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.type : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Finding-target.type.2  </td></tr>
+</table>>]
+
+n31 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 statement-id  </td></tr>
+  <tr><td align="left">  2 objective-id  </td></tr>
+</table>>]
+
+n32 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.status : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 state : Finding-target.status.state  </td></tr>
+  <tr><td align="left">  2 reason : Finding-target.status.reason [0..1]  </td></tr>
+  <tr><td align="left">  3 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n33 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.status.state : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Finding-target.status.state.2  </td></tr>
+</table>>]
+
+n34 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.status.state.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 satisfied  </td></tr>
+  <tr><td align="left">  2 not-satisfied  </td></tr>
+</table>>]
+
+n35 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.status.reason : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Finding-target.status.reason.2  </td></tr>
+</table>>]
+
+n36 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding-target.status.reason.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 pass  </td></tr>
+  <tr><td align="left">  2 fail  </td></tr>
+  <tr><td align="left">  3 other  </td></tr>
+</table>>]
+
+n37 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding.related-observations : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 observation-uuid : c:UUIDDatatype  </td></tr>
+</table>>]
+
+n38 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Finding.related-risks : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 risk-uuid : c:UUIDDatatype  </td></tr>
+</table>>]
+
+n39 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Import-ssp : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n40 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Local-objective : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 control-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 description : String [0..1]  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 parts : cc:Part [1..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n41 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 methods : Observation.methods [1..*]  </td></tr>
+  <tr><td align="left">  7 types : Observation.types [0..*]  </td></tr>
+  <tr><td align="left">  8 origins : Origin [0..*]  </td></tr>
+  <tr><td align="left">  9 subjects : Subject-reference [0..*]  </td></tr>
+  <tr><td align="left">  10 relevant-evidence : Observation.relevant-evidence [0..*]  </td></tr>
+  <tr><td align="left">  11 collected : c:DateTimeWithTimezoneDatatype  </td></tr>
+  <tr><td align="left">  12 expires : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  13 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n42 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation.methods : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Observation.methods.2  </td></tr>
+</table>>]
+
+n43 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation.methods.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 EXAMINE  </td></tr>
+  <tr><td align="left">  2 INTERVIEW  </td></tr>
+  <tr><td align="left">  3 TEST  </td></tr>
+  <tr><td align="left">  4 UNKNOWN  </td></tr>
+</table>>]
+
+n44 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation.types : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Observation.types.2  </td></tr>
+</table>>]
+
+n45 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation.types.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 ssp-statement-issue  </td></tr>
+  <tr><td align="left">  2 control-objective  </td></tr>
+  <tr><td align="left">  3 mitigation  </td></tr>
+  <tr><td align="left">  4 finding  </td></tr>
+  <tr><td align="left">  5 historic  </td></tr>
+</table>>]
+
+n46 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Subject-reference : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 subject-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : Subject-reference.type  </td></tr>
+  <tr><td align="left">  3 title : String [0..1]  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n47 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Subject-reference.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Subject-reference.type.2  </td></tr>
+</table>>]
+
+n48 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Subject-reference.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 component  </td></tr>
+  <tr><td align="left">  2 inventory-item  </td></tr>
+  <tr><td align="left">  3 location  </td></tr>
+  <tr><td align="left">  4 party  </td></tr>
+  <tr><td align="left">  5 user  </td></tr>
+  <tr><td align="left">  6 resource  </td></tr>
+</table>>]
+
+n49 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Observation.relevant-evidence : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 description : String  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n50 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 statement : String  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 status : Risk-status  </td></tr>
+  <tr><td align="left">  8 origins : Origin [0..*]  </td></tr>
+  <tr><td align="left">  9 threat-ids : Threat-id [0..*]  </td></tr>
+  <tr><td align="left">  10 characterizations : Characterization [0..*]  </td></tr>
+  <tr><td align="left">  11 mitigating-factors : Risk.mitigating-factors [0..*]  </td></tr>
+  <tr><td align="left">  12 deadline : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  13 remediations : Response [0..*]  </td></tr>
+  <tr><td align="left">  14 risk-log : Risk.risk-log [0..1]  </td></tr>
+  <tr><td align="left">  15 related-observations : Risk.related-observations [0..*]  </td></tr>
+</table>>]
+
+n51 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk-status : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Risk-status.2  </td></tr>
+</table>>]
+
+n52 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk-status.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 open  </td></tr>
+  <tr><td align="left">  2 investigating  </td></tr>
+  <tr><td align="left">  3 remediating  </td></tr>
+  <tr><td align="left">  4 deviation-requested  </td></tr>
+  <tr><td align="left">  5 deviation-approved  </td></tr>
+  <tr><td align="left">  6 closed  </td></tr>
+</table>>]
+
+n53 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Threat-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 system : Threat-id.system  </td></tr>
+  <tr><td align="left">  2 href : c:URIReferenceDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 id : c:URIDatatype  </td></tr>
+</table>>]
+
+n54 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Threat-id.system : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:URIDatatype  </td></tr>
+  <tr><td align="left">  2  : Threat-id.system.2  </td></tr>
+</table>>]
+
+n55 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Threat-id.system.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 http://fedramp.gov  </td></tr>
+  <tr><td align="left">  2 http://fedramp.gov/ns/oscal  </td></tr>
+</table>>]
+
+n56 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Characterization : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  2 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  3 origin : Origin  </td></tr>
+  <tr><td align="left">  4 facets : Characterization.facets [1..*]  </td></tr>
+</table>>]
+
+n57 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Characterization.facets : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 system : Characterization.facets.system  </td></tr>
+  <tr><td align="left">  3 value : c:StringDatatype  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n58 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Characterization.facets.system : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:URIDatatype  </td></tr>
+  <tr><td align="left">  2  : Characterization.facets.system.2  </td></tr>
+</table>>]
+
+n59 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Characterization.facets.system.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 http://fedramp.gov  </td></tr>
+  <tr><td align="left">  2 http://fedramp.gov/ns/oscal  </td></tr>
+  <tr><td align="left">  3 http://csrc.nist.gov/ns/oscal  </td></tr>
+  <tr><td align="left">  4 http://csrc.nist.gov/ns/oscal/unknown  </td></tr>
+  <tr><td align="left">  5 http://cve.mitre.org  </td></tr>
+  <tr><td align="left">  6 http://www.first.org/cvss/v2.0  </td></tr>
+  <tr><td align="left">  7 http://www.first.org/cvss/v3.0  </td></tr>
+  <tr><td align="left">  8 http://www.first.org/cvss/v3.1  </td></tr>
+</table>>]
+
+n60 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk.mitigating-factors : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 implementation-uuid : c:UUIDDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 subjects : Subject-reference [0..*]  </td></tr>
+</table>>]
+
+n61 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Response : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 lifecycle : Response.lifecycle  </td></tr>
+  <tr><td align="left">  3 title : String  </td></tr>
+  <tr><td align="left">  4 description : String  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 origins : Origin [0..*]  </td></tr>
+  <tr><td align="left">  8 required-assets : Response.required-assets [0..*]  </td></tr>
+  <tr><td align="left">  9 tasks : Task [0..*]  </td></tr>
+  <tr><td align="left">  10 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n62 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Response.lifecycle : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Response.lifecycle.2  </td></tr>
+</table>>]
+
+n63 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Response.lifecycle.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 recommendation  </td></tr>
+  <tr><td align="left">  2 planned  </td></tr>
+  <tr><td align="left">  3 completed  </td></tr>
+</table>>]
+
+n64 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Response.required-assets : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 subjects : Subject-reference [0..*]  </td></tr>
+  <tr><td align="left">  3 title : String [0..1]  </td></tr>
+  <tr><td align="left">  4 description : String  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n65 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : Task.type  </td></tr>
+  <tr><td align="left">  3 title : String  </td></tr>
+  <tr><td align="left">  4 description : String [0..1]  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 timing : Task.timing [0..1]  </td></tr>
+  <tr><td align="left">  8 dependencies : Task.dependencies [0..*]  </td></tr>
+  <tr><td align="left">  9 tasks : Task [0..*]  </td></tr>
+  <tr><td align="left">  10 associated-activities : Task.associated-activities [0..*]  </td></tr>
+  <tr><td align="left">  11 subjects : Assessment-subject [0..*]  </td></tr>
+  <tr><td align="left">  12 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  13 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n66 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Task.type.2  </td></tr>
+</table>>]
+
+n67 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 milestone  </td></tr>
+  <tr><td align="left">  2 action  </td></tr>
+</table>>]
+
+n68 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 on-date : Task.timing.on-date [0..1]  </td></tr>
+  <tr><td align="left">  2 within-date-range : Task.timing.within-date-range [0..1]  </td></tr>
+  <tr><td align="left">  3 at-frequency : Task.timing.at-frequency [0..1]  </td></tr>
+</table>>]
+
+n69 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing.on-date : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 date : c:DateTimeWithTimezoneDatatype  </td></tr>
+</table>>]
+
+n70 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing.within-date-range : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 start : c:DateTimeWithTimezoneDatatype  </td></tr>
+  <tr><td align="left">  2 end : c:DateTimeWithTimezoneDatatype  </td></tr>
+</table>>]
+
+n71 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing.at-frequency : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 period : c:PositiveIntegerDatatype  </td></tr>
+  <tr><td align="left">  2 unit : Task.timing.at-frequency.unit  </td></tr>
+</table>>]
+
+n72 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing.at-frequency.unit : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Task.timing.at-frequency.unit.2  </td></tr>
+</table>>]
+
+n73 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.timing.at-frequency.unit.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 seconds  </td></tr>
+  <tr><td align="left">  2 minutes  </td></tr>
+  <tr><td align="left">  3 hours  </td></tr>
+  <tr><td align="left">  4 days  </td></tr>
+  <tr><td align="left">  5 months  </td></tr>
+  <tr><td align="left">  6 years  </td></tr>
+</table>>]
+
+n74 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.dependencies : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 task-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n75 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Task.associated-activities : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 activity-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  5 subjects : Assessment-subject [1..*]  </td></tr>
+  <tr><td align="left">  6 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n76 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk.risk-log : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 entries : Risk.risk-log.entries [1..*]  </td></tr>
+</table>>]
+
+n77 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk.risk-log.entries : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String [0..1]  </td></tr>
+  <tr><td align="left">  4 start : c:DateTimeWithTimezoneDatatype  </td></tr>
+  <tr><td align="left">  5 end : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  8 logged-by : Logged-by [0..*]  </td></tr>
+  <tr><td align="left">  9 status-change : Risk-status [0..1]  </td></tr>
+  <tr><td align="left">  10 related-responses : Risk.risk-log.entries.related-responses [0..*]  </td></tr>
+  <tr><td align="left">  11 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n78 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Logged-by : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 party-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 role-id : c:TokenDatatype [0..1]  </td></tr>
+</table>>]
+
+n79 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk.risk-log.entries.related-responses : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 response-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 related-tasks : Related-task [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n80 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Risk.related-observations : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 observation-uuid : c:UUIDDatatype  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=steps, headlabel="0..*", taillabel="1"]
+  n0 -> n2 [label=related_controls, headlabel="0..1", taillabel="1"]
+  n1 -> n2 [label=reviewed_controls, headlabel="0..1", taillabel="1"]
+  n2 -> n3 [label=control_selections, headlabel="1..*", taillabel="1"]
+  n2 -> n5 [label=control_objective_selections, headlabel="0..*", taillabel="1"]
+  n3 -> n4 [label=include_controls, headlabel="0..*", taillabel="1"]
+  n3 -> n4 [label=exclude_controls, headlabel="0..*", taillabel="1"]
+  n5 -> n6 [label=include_objectives, headlabel="0..*", taillabel="1"]
+  n5 -> n6 [label=exclude_objectives, headlabel="0..*", taillabel="1"]
+  n7 -> n8 [label=assessment_platforms, headlabel="1..*", taillabel="1"]
+  n8 -> n9 [label=uses_components, headlabel="0..*", taillabel="1"]
+  n10 -> n11 [label=part, headlabel="1", taillabel="1"]
+  n11 -> n12 [label=name, headlabel="1", taillabel="1"]
+  n11 -> n11 [label=parts, headlabel="0..*", taillabel="1"]
+  n12 -> n13 [label=c2, headlabel="1", taillabel="1"]
+  n14 -> n15 [label=sources, headlabel="1..*", taillabel="1"]
+  n16 -> n17 [label=origins, headlabel="0..*", taillabel="1"]
+  n16 -> n29 [label=target, headlabel="1", taillabel="1"]
+  n16 -> n37 [label=related_observations, headlabel="0..*", taillabel="1"]
+  n16 -> n38 [label=related_risks, headlabel="0..*", taillabel="1"]
+  n17 -> n18 [label=actors, headlabel="1..*", taillabel="1"]
+  n17 -> n21 [label=related_tasks, headlabel="0..*", taillabel="1"]
+  n18 -> n19 [label=type, headlabel="1", taillabel="1"]
+  n19 -> n20 [label=c2, headlabel="1", taillabel="1"]
+  n21 -> n22 [label=subjects, headlabel="0..*", taillabel="1"]
+  n21 -> n28 [label=identified_subject, headlabel="0..1", taillabel="1"]
+  n22 -> n23 [label=type, headlabel="1", taillabel="1"]
+  n22 -> n25 [label=include_subjects, headlabel="0..*", taillabel="1"]
+  n22 -> n25 [label=exclude_subjects, headlabel="0..*", taillabel="1"]
+  n23 -> n24 [label=c2, headlabel="1", taillabel="1"]
+  n25 -> n26 [label=type, headlabel="1", taillabel="1"]
+  n26 -> n27 [label=c2, headlabel="1", taillabel="1"]
+  n28 -> n22 [label=subjects, headlabel="1..*", taillabel="1"]
+  n29 -> n30 [label=type, headlabel="1", taillabel="1"]
+  n29 -> n32 [label=status, headlabel="1", taillabel="1"]
+  n30 -> n31 [label=c2, headlabel="1", taillabel="1"]
+  n32 -> n33 [label=state, headlabel="1", taillabel="1"]
+  n32 -> n35 [label=reason, headlabel="0..1", taillabel="1"]
+  n33 -> n34 [label=c2, headlabel="1", taillabel="1"]
+  n35 -> n36 [label=c2, headlabel="1", taillabel="1"]
+  n41 -> n42 [label=methods, headlabel="1..*", taillabel="1"]
+  n41 -> n44 [label=types, headlabel="0..*", taillabel="1"]
+  n41 -> n17 [label=origins, headlabel="0..*", taillabel="1"]
+  n41 -> n46 [label=subjects, headlabel="0..*", taillabel="1"]
+  n41 -> n49 [label=relevant_evidence, headlabel="0..*", taillabel="1"]
+  n42 -> n43 [label=c2, headlabel="1", taillabel="1"]
+  n44 -> n45 [label=c2, headlabel="1", taillabel="1"]
+  n46 -> n47 [label=type, headlabel="1", taillabel="1"]
+  n47 -> n48 [label=c2, headlabel="1", taillabel="1"]
+  n50 -> n51 [label=status, headlabel="1", taillabel="1"]
+  n50 -> n17 [label=origins, headlabel="0..*", taillabel="1"]
+  n50 -> n53 [label=threat_ids, headlabel="0..*", taillabel="1"]
+  n50 -> n56 [label=characterizations, headlabel="0..*", taillabel="1"]
+  n50 -> n60 [label=mitigating_factors, headlabel="0..*", taillabel="1"]
+  n50 -> n61 [label=remediations, headlabel="0..*", taillabel="1"]
+  n50 -> n76 [label=risk_log, headlabel="0..1", taillabel="1"]
+  n50 -> n80 [label=related_observations, headlabel="0..*", taillabel="1"]
+  n51 -> n52 [label=c2, headlabel="1", taillabel="1"]
+  n53 -> n54 [label=system, headlabel="1", taillabel="1"]
+  n54 -> n55 [label=c2, headlabel="1", taillabel="1"]
+  n56 -> n17 [label=origin, headlabel="1", taillabel="1"]
+  n56 -> n57 [label=facets, headlabel="1..*", taillabel="1"]
+  n57 -> n58 [label=system, headlabel="1", taillabel="1"]
+  n58 -> n59 [label=c2, headlabel="1", taillabel="1"]
+  n60 -> n46 [label=subjects, headlabel="0..*", taillabel="1"]
+  n61 -> n62 [label=lifecycle, headlabel="1", taillabel="1"]
+  n61 -> n17 [label=origins, headlabel="0..*", taillabel="1"]
+  n61 -> n64 [label=required_assets, headlabel="0..*", taillabel="1"]
+  n61 -> n65 [label=tasks, headlabel="0..*", taillabel="1"]
+  n62 -> n63 [label=c2, headlabel="1", taillabel="1"]
+  n64 -> n46 [label=subjects, headlabel="0..*", taillabel="1"]
+  n65 -> n66 [label=type, headlabel="1", taillabel="1"]
+  n65 -> n68 [label=timing, headlabel="0..1", taillabel="1"]
+  n65 -> n74 [label=dependencies, headlabel="0..*", taillabel="1"]
+  n65 -> n65 [label=tasks, headlabel="0..*", taillabel="1"]
+  n65 -> n75 [label=associated_activities, headlabel="0..*", taillabel="1"]
+  n65 -> n22 [label=subjects, headlabel="0..*", taillabel="1"]
+  n66 -> n67 [label=c2, headlabel="1", taillabel="1"]
+  n68 -> n69 [label=on_date, headlabel="0..1", taillabel="1"]
+  n68 -> n70 [label=within_date_range, headlabel="0..1", taillabel="1"]
+  n68 -> n71 [label=at_frequency, headlabel="0..1", taillabel="1"]
+  n71 -> n72 [label=unit, headlabel="1", taillabel="1"]
+  n72 -> n73 [label=c2, headlabel="1", taillabel="1"]
+  n75 -> n22 [label=subjects, headlabel="1..*", taillabel="1"]
+  n76 -> n77 [label=entries, headlabel="1..*", taillabel="1"]
+  n77 -> n78 [label=logged_by, headlabel="0..*", taillabel="1"]
+  n77 -> n51 [label=status_change, headlabel="0..1", taillabel="1"]
+  n77 -> n79 [label=related_responses, headlabel="0..*", taillabel="1"]
+  n79 -> n21 [label=related_tasks, headlabel="0..*", taillabel="1"]
+}
