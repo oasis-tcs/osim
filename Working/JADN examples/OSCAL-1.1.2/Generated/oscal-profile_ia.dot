@@ -1,0 +1,238 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-profile
+# comment: OSCAL Profile Model: JSON Schema
+# roots: ['Profile']
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+# namespaces: [['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata'], ['cc', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common'], ['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common']]
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Profile : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 metadata : m:Metadata  </td></tr>
+  <tr><td align="left">  3 imports : Import [1..*]  </td></tr>
+  <tr><td align="left">  4 merge : Merge [0..1]  </td></tr>
+  <tr><td align="left">  5 modify : Modify [0..1]  </td></tr>
+  <tr><td align="left">  6 back-matter : m:Back-matter [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Import : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  2 include-all : cc:Include-all [0..1]  </td></tr>
+  <tr><td align="left">  3 include-controls : Select-control-by-id [0..*]  </td></tr>
+  <tr><td align="left">  4 exclude-controls : Select-control-by-id [0..*]  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-control-by-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 with-child-controls : Select-control-by-id.with-child-controls [0..1]  </td></tr>
+  <tr><td align="left">  2 with-ids : With-id [0..*]  </td></tr>
+  <tr><td align="left">  3 matching : Matching [0..*]  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-control-by-id.with-child-controls : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Select-control-by-id.with-child-controls.2  </td></tr>
+</table>>]
+
+n4 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Select-control-by-id.with-child-controls.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 yes  </td></tr>
+  <tr><td align="left">  2 no  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  With-id : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Matching : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 pattern : c:StringDatatype [0..1]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 combine : Merge.combine [0..1]  </td></tr>
+  <tr><td align="left">  2 flat : Merge.flat [0..1]  </td></tr>
+  <tr><td align="left">  3 as-is : c:BooleanDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 custom : Merge.custom [0..1]  </td></tr>
+</table>>]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge.combine : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 method : Merge.combine.method [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge.combine.method : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Merge.combine.method.2  </td></tr>
+</table>>]
+
+n10 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge.combine.method.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 use-first  </td></tr>
+  <tr><td align="left">  2 merge  </td></tr>
+  <tr><td align="left">  3 keep  </td></tr>
+</table>>]
+
+n11 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge.flat : Record  </b></td></tr>
+</table>>]
+
+n12 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Merge.custom : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 groups : Group [0..*]  </td></tr>
+  <tr><td align="left">  2 insert-controls : Insert-controls [0..*]  </td></tr>
+</table>>]
+
+n13 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Group : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 id : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 title : String  </td></tr>
+  <tr><td align="left">  4 params : cc:Parameter [0..*]  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 parts : cc:Part [0..*]  </td></tr>
+  <tr><td align="left">  8 groups : Group [0..*]  </td></tr>
+  <tr><td align="left">  9 insert-controls : Insert-controls [0..*]  </td></tr>
+</table>>]
+
+n14 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Insert-controls : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 order : Insert-controls.order [0..1]  </td></tr>
+  <tr><td align="left">  2 include-all : cc:Include-all [0..1]  </td></tr>
+  <tr><td align="left">  3 include-controls : Select-control-by-id [0..*]  </td></tr>
+  <tr><td align="left">  4 exclude-controls : Select-control-by-id [0..*]  </td></tr>
+</table>>]
+
+n15 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Insert-controls.order : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Insert-controls.order.2  </td></tr>
+</table>>]
+
+n16 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Insert-controls.order.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 keep  </td></tr>
+  <tr><td align="left">  2 ascending  </td></tr>
+  <tr><td align="left">  3 descending  </td></tr>
+</table>>]
+
+n17 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 set-parameters : Modify.set-parameters [0..*]  </td></tr>
+  <tr><td align="left">  2 alters : Modify.alters [0..*]  </td></tr>
+</table>>]
+
+n18 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.set-parameters : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 param-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 depends-on : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 label : String [0..1]  </td></tr>
+  <tr><td align="left">  7 usage : String [0..1]  </td></tr>
+  <tr><td align="left">  8 constraints : cc:Parameter-constraint [0..*]  </td></tr>
+  <tr><td align="left">  9 guidelines : cc:Parameter-guideline [0..*]  </td></tr>
+  <tr><td align="left">  10 values : cc:Parameter-value [0..*]  </td></tr>
+  <tr><td align="left">  11 select : cc:Parameter-selection [0..1]  </td></tr>
+</table>>]
+
+n19 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 control-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 removes : Modify.alters.removes [0..*]  </td></tr>
+  <tr><td align="left">  3 adds : Modify.alters.adds [0..*]  </td></tr>
+</table>>]
+
+n20 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.removes : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 by-name : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 by-class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 by-id : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 by-item-name : Modify.alters.removes.by-item-name [0..1]  </td></tr>
+  <tr><td align="left">  5 by-ns : c:TokenDatatype [0..1]  </td></tr>
+</table>>]
+
+n21 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.removes.by-item-name : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Modify.alters.removes.by-item-name.2  </td></tr>
+</table>>]
+
+n22 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.removes.by-item-name.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 param  </td></tr>
+  <tr><td align="left">  2 prop  </td></tr>
+  <tr><td align="left">  3 link  </td></tr>
+  <tr><td align="left">  4 part  </td></tr>
+  <tr><td align="left">  5 mapping  </td></tr>
+  <tr><td align="left">  6 map  </td></tr>
+</table>>]
+
+n23 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.adds : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 position : Modify.alters.adds.position [0..1]  </td></tr>
+  <tr><td align="left">  2 by-id : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 title : String [0..1]  </td></tr>
+  <tr><td align="left">  4 params : cc:Parameter [0..*]  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 parts : cc:Part [0..*]  </td></tr>
+</table>>]
+
+n24 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.adds.position : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Modify.alters.adds.position.2  </td></tr>
+</table>>]
+
+n25 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Modify.alters.adds.position.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 before  </td></tr>
+  <tr><td align="left">  2 after  </td></tr>
+  <tr><td align="left">  3 starting  </td></tr>
+  <tr><td align="left">  4 ending  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=imports, headlabel="1..*", taillabel="1"]
+  n0 -> n7 [label=merge, headlabel="0..1", taillabel="1"]
+  n0 -> n17 [label=modify, headlabel="0..1", taillabel="1"]
+  n1 -> n2 [label=include_controls, headlabel="0..*", taillabel="1"]
+  n1 -> n2 [label=exclude_controls, headlabel="0..*", taillabel="1"]
+  n2 -> n3 [label=with_child_controls, headlabel="0..1", taillabel="1"]
+  n2 -> n5 [label=with_ids, headlabel="0..*", taillabel="1"]
+  n2 -> n6 [label=matching, headlabel="0..*", taillabel="1"]
+  n3 -> n4 [label=c2, headlabel="1", taillabel="1"]
+  n7 -> n8 [label=combine, headlabel="0..1", taillabel="1"]
+  n7 -> n11 [label=flat, headlabel="0..1", taillabel="1"]
+  n7 -> n12 [label=custom, headlabel="0..1", taillabel="1"]
+  n8 -> n9 [label=method, headlabel="0..1", taillabel="1"]
+  n9 -> n10 [label=c2, headlabel="1", taillabel="1"]
+  n12 -> n13 [label=groups, headlabel="0..*", taillabel="1"]
+  n12 -> n14 [label=insert_controls, headlabel="0..*", taillabel="1"]
+  n13 -> n13 [label=groups, headlabel="0..*", taillabel="1"]
+  n13 -> n14 [label=insert_controls, headlabel="0..*", taillabel="1"]
+  n14 -> n15 [label=order, headlabel="0..1", taillabel="1"]
+  n14 -> n2 [label=include_controls, headlabel="0..*", taillabel="1"]
+  n14 -> n2 [label=exclude_controls, headlabel="0..*", taillabel="1"]
+  n15 -> n16 [label=c2, headlabel="1", taillabel="1"]
+  n17 -> n18 [label=set_parameters, headlabel="0..*", taillabel="1"]
+  n17 -> n19 [label=alters, headlabel="0..*", taillabel="1"]
+  n19 -> n20 [label=removes, headlabel="0..*", taillabel="1"]
+  n19 -> n23 [label=adds, headlabel="0..*", taillabel="1"]
+  n20 -> n21 [label=by_item_name, headlabel="0..1", taillabel="1"]
+  n21 -> n22 [label=c2, headlabel="1", taillabel="1"]
+  n23 -> n24 [label=position, headlabel="0..1", taillabel="1"]
+  n24 -> n25 [label=c2, headlabel="1", taillabel="1"]
+}

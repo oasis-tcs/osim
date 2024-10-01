@@ -1,0 +1,96 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-ar
+# comment: OSCAL Assessment Results Model: JSON Schema
+# roots: ['Assessment-results']
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+# namespaces: [['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata'], ['cc', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common'], ['ic', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common'], ['ac', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-assessment-common'], ['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common']]
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-results : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 metadata : m:Metadata  </td></tr>
+  <tr><td align="left">  3 import-ap : Import-ap  </td></tr>
+  <tr><td align="left">  4 local-definitions : Assessment-results.local-definitions [0..1]  </td></tr>
+  <tr><td align="left">  5 results : Result [1..*]  </td></tr>
+  <tr><td align="left">  6 back-matter : m:Back-matter [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Import-ap : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Assessment-results.local-definitions : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 objectives-and-methods : ac:Local-objective [0..*]  </td></tr>
+  <tr><td align="left">  2 activities : ac:Activity [0..*]  </td></tr>
+  <tr><td align="left">  3 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Result : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 start : c:DateTimeWithTimezoneDatatype  </td></tr>
+  <tr><td align="left">  5 end : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  8 local-definitions : Result.local-definitions [0..1]  </td></tr>
+  <tr><td align="left">  9 reviewed-controls : ac:Reviewed-controls  </td></tr>
+  <tr><td align="left">  10 attestations : Result.attestations [0..*]  </td></tr>
+  <tr><td align="left">  11 assessment-log : Result.assessment-log [0..1]  </td></tr>
+  <tr><td align="left">  12 observations : ac:Observation [0..*]  </td></tr>
+  <tr><td align="left">  13 risks : ac:Risk [0..*]  </td></tr>
+  <tr><td align="left">  14 findings : ac:Finding [0..*]  </td></tr>
+  <tr><td align="left">  15 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Result.local-definitions : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 components : ic:System-component [0..*]  </td></tr>
+  <tr><td align="left">  2 inventory-items : ic:Inventory-item [0..*]  </td></tr>
+  <tr><td align="left">  3 users : ic:System-user [0..*]  </td></tr>
+  <tr><td align="left">  4 assessment-assets : ac:Assessment-assets [0..1]  </td></tr>
+  <tr><td align="left">  5 tasks : ac:Task [0..*]  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Result.attestations : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 responsible-parties : m:Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  2 parts : ac:Assessment-part [1..*]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Result.assessment-log : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 entries : Result.assessment-log.entries [1..*]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Result.assessment-log.entries : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String [0..1]  </td></tr>
+  <tr><td align="left">  4 start : c:DateTimeWithTimezoneDatatype  </td></tr>
+  <tr><td align="left">  5 end : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  8 logged-by : ac:Logged-by [0..*]  </td></tr>
+  <tr><td align="left">  9 related-tasks : ac:Related-task [0..*]  </td></tr>
+  <tr><td align="left">  10 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=import_ap, headlabel="1", taillabel="1"]
+  n0 -> n2 [label=local_definitions, headlabel="0..1", taillabel="1"]
+  n0 -> n3 [label=results, headlabel="1..*", taillabel="1"]
+  n3 -> n4 [label=local_definitions, headlabel="0..1", taillabel="1"]
+  n3 -> n5 [label=attestations, headlabel="0..*", taillabel="1"]
+  n3 -> n6 [label=assessment_log, headlabel="0..1", taillabel="1"]
+  n6 -> n7 [label=entries, headlabel="1..*", taillabel="1"]
+}

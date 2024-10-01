@@ -1,0 +1,39 @@
+     package: "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common"
+      config: {"$MaxString": 1000, "$Sys": ".", "$TypeName": "^[$A-Z][-.$A-Za-z0-9]{0,96}$", "$FieldName": "^[$a-z][-_$A-Za-z0-9]{0,63}$"}
+       roots: ["Base64Datatype", "BooleanDatatype", "DateDatatype", "DateTimeWithTimezoneDatatype", "EmailAddressDatatype", "Json-schema-directive", "NonNegativeIntegerDatatype", "PositiveIntegerDatatype", "TokenDatatype", "URIDatatype", "UUIDDatatype"]
+
+Base64Datatype = String{pattern="^[0-9A-Za-z+/]+={0,2}$"}    // Binary data encoded using the Base 64 encoding algorithm as defined by RFC4648.
+
+BooleanDatatype = Boolean                                    // A binary value that is either: true or false.
+
+DateDatatype = String{pattern="^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))?$"} // A string representing a 24-hour period with an optional timezone.
+
+DateTimeWithTimezoneDatatype = String{pattern="^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))$"} /date-time // A string representing a point in time with a required timezone.
+
+EmailAddressDatatype = Choice(allOf)                         // An email address string formatted according to RFC 6531.
+   1  StringDatatype                                         // c1::
+   2  String                                                 // c2::
+
+StringDatatype = String{pattern="^\S(.*\S)?$"}               // A non-empty string with leading and trailing whitespace disallowed. Whitespace is: U+9, U+10, U+32 or [ 
+	]+
+
+Json-schema-directive = Choice(allOf)                        // A JSON Schema directive to bind a specific schema to its document instance.
+   1  URIReferenceDatatype                                   // alias::
+
+URIReferenceDatatype = String /uri-reference                 // A URI Reference, either a URI or a relative-reference, formatted according to section 4.1 of RFC3986.
+
+NonNegativeIntegerDatatype = Choice(allOf)                   // An integer value that is equal to or greater than 0.
+   1  IntegerDatatype                                        // c1::
+   2  Number                                                 // c2::
+
+IntegerDatatype = Integer                                    // A whole number value.
+
+PositiveIntegerDatatype = Choice(allOf)                      // An integer value that is greater than 0.
+   1  IntegerDatatype                                        // c1::
+   2  Number                                                 // c2::
+
+TokenDatatype = String{pattern="^(\p{L}|_)(\p{L}|\p{N}|[.\-_])*$"} // A non-colonized name as defined by XML Schema Part 2: Datatypes Second Edition. https://www.w3.org/TR/xmlschema11-2/#NCName.
+
+URIDatatype = String{pattern="^[a-zA-Z][a-zA-Z0-9+\-.]+:.+$"} /uri // A universal resource identifier (URI) formatted according to RFC3986.
+
+UUIDDatatype = String{pattern="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[45][0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$"} // A type 4 ('random' or 'pseudorandom') or type 5 UUID per RFC 4122.

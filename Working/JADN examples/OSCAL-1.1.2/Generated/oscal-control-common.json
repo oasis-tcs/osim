@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Include-all": {
+      "title": "Include all",
+      "type": "object",
+      "description": "Include all controls from the imported catalog or profile resources.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {}
+    },
+    "Parameter": {
+      "title": "Parameter",
+      "type": "object",
+      "description": "Parameters provide a mechanism for the dynamic assignment of value(s) in a control.",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A unique identifier for the parameter."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a characterization of the type, purpose, use or scope of the parameter."
+        },
+        "depends-on": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "(deprecated) Another parameter invoking this one. This construct has been deprecated and should not be used."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.",
+          "maxLength": 1000
+        },
+        "usage": {
+          "type": "string",
+          "description": "Describes the purpose and use of a parameter.",
+          "maxLength": 1000
+        },
+        "constraints": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter-constraint",
+            "description": ""
+          }
+        },
+        "guidelines": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter-guideline",
+            "description": ""
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter-value",
+            "description": ""
+          }
+        },
+        "select": {
+          "$ref": "#/definitions/Parameter-selection",
+          "description": ""
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Parameter-constraint": {
+      "title": "Parameter constraint",
+      "type": "object",
+      "description": "A formal or informal expression of a constraint or test.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A textual summary of the constraint to be applied.",
+          "maxLength": 1000
+        },
+        "tests": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter-constraint.tests",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Parameter-constraint.tests": {
+      "title": "Parameter constraint.tests",
+      "type": "object",
+      "description": "A test expression which is expected to be evaluated by a tool.",
+      "additionalProperties": false,
+      "required": [
+        "expression"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "expression": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A formal (executable) expression of a constraint."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Parameter-guideline": {
+      "title": "Parameter guideline",
+      "type": "object",
+      "description": "A prose statement that provides a recommendation for the use of a parameter.",
+      "additionalProperties": false,
+      "required": [
+        "prose"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "prose": {
+          "type": "string",
+          "description": "Prose permits multiple paragraphs, lists, tables etc.",
+          "maxLength": 1000
+        }
+      }
+    },
+    "Parameter-value": {
+      "title": "Parameter value",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        }
+      ]
+    },
+    "Parameter-selection": {
+      "title": "Parameter selection",
+      "type": "object",
+      "description": "Presenting a choice among alternatives.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "how-many": {
+          "$ref": "#/definitions/Parameter-selection.how-many",
+          "description": "Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted."
+        },
+        "choice": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter-selection.choice",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Parameter-selection.how-many": {
+      "title": "Parameter selection.how many",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Parameter-selection.how-many.2"
+        }
+      ]
+    },
+    "Parameter-selection.how-many.2": {
+      "title": "Parameter selection.how many.2",
+      "type": "string",
+      "enum": [
+        "one",
+        "one-or-more"
+      ]
+    },
+    "Parameter-selection.choice": {
+      "title": "Parameter selection.choice",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "imports": {
+    "c": {
+      "TokenDatatype": {},
+      "StringDatatype": {}
+    },
+    "m": {
+      "Property": {},
+      "Link": {},
+      "Remarks": {}
+    }
+  }
+}

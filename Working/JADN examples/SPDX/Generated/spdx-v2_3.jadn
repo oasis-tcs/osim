@@ -1,0 +1,393 @@
+{
+  "info": {
+    "title": "SPDX v2.3 Information Model",
+    "package": "http://spdx.org/spdx-v2.3",
+    "license": "CC0-1.0",
+    "namespaces": {
+      "ll": "http://spdx.org/license-list"
+    },
+    "exports": ["Document", "TagMap$"],
+    "config": {
+      "$FieldName": "^[a-zA-Z][_A-Za-z0-9]{0,63}$",
+      "$MaxElements": 1000
+    }
+  },
+
+  "types": [
+    ["Document", "Record", [], "", [
+      [1, "spdxVersion", "SpdxVersion", [], "6.1 SPDX-M.N where M and N are major and minor version number"],
+      [2, "dataLicense", "SPDX-METADATA-LICENSE", [], ""],
+      [3, "SPDXID", "SPDXREF-DOCUMENT", [], ""],
+      [4, "name", "String", [], "6.4 Name of this document as designated by creator"],
+      [5, "documentNamespace", "URI", [], "6.5 Absolute URI (no #fragment)"],
+      [6, "externalDocumentRefs", "ExternalDocumentRef", ["[0", "]0"], "6.6"],
+      [7, "licenseListVersion", "String", ["[0"], "6.7"],
+      [8, "creator", "Creator", ["]0"], "6.8 Person / Organization / Tool"],
+      [9, "created", "Timestamp", [], "6.9 RFC-3339 string YYYY-MM-DDThh:mm:ssZ"],
+      [10, "creatorComment", "String", ["[0"], "6.10 Comments about creation of the SPDX document"],
+      [11, "documentComment", "String", ["[0"], "6.11 Comments to consumers of the SPDX document"],
+      [12, "packages", "PackageInfo", ["[0", "]0"], "Section 7 Package Information"],
+      [13, "files", "FileInfo", ["[0", "]0"], "Section 8 File Information"],
+      [14, "snippets", "SnippetInfo", ["[0", "]0"], "Section 9 Snippet Information"],
+      [15, "extractedLicensingInfos", "ExtraLicensingInfo", ["[0", "]0"], "Section 10 Other Licensing Information"],
+      [16, "relationships", "Relationship", ["[0", "]0"], "Section 11 Relationships"],
+      [17, "annotations", "Annotation", ["[0", "]0"], "Section 12 Annotations"],
+      [18, "reviews", "Review", ["[0", "]0"], "Section 13 Review Information (deprecated)"]
+    ]],
+
+    ["ExternalDocumentRef", "Record", [], "", [
+      [1, "externalDocumentId", "DocumentRef", [], ""],
+      [2, "spdxDocument", "URI", [], ""],
+      [3, "checksum", "Checksum", [], ""]
+    ]],
+
+    ["CreationInfo", "Record", [], "", [
+      [1, "licenseListVersion", "MajorMinorVersion", ["[0"], ""],
+      [2, "creators", "Entity", ["]0"], ""],
+      [3, "created", "Timestamp", [], ""],
+      [4, "comment", "String", [], ""]
+    ]],
+
+    ["PackageInfo", "Record", [], "", [
+      [1, "name", "String", [], ""],
+      [2, "SPDXID", "SpdxRef", ["K"], ""],
+      [3, "versionInfo", "VersionInfo", ["[0"], ""],
+      [4, "packageFileName", "PackageFileName", ["[0"], ""],
+      [5, "supplier", "PackageSupplier", ["[0"], ""],
+      [6, "originator", "Entity", ["[0"], "Person or Org, not Tool"],
+      [7, "downloadLocation", "DownloadLocation", [], "mandatory"],
+      [8, "filesAnalyzed", "Boolean", ["[0"], "Default True.   7.8.1"],
+      [9, "packageVerificationCode", "PackageVerificationCode", ["[0"], "optional if filesAnalyzed is True, prohibited if False"],
+      [10, "checksums", "Checksum", ["[0", "]0"], ""],
+      [11, "homepage", "URI", ["[0"], "URI, NONE, NOASSERTION"],
+      [12, "sourceInfo", "String", ["[0"], ""],
+      [13, "licenseConcluded", "LicenseExpression", ["[0"], "3.13.3 says mandatory"],
+      [14, "licenseInfoFromFiles", "LicenseIdentifier", ["[0", "]0"], "optional if filesAnalyzed is True, prohibited if False"],
+      [15, "licenseDeclared", "LicenseExpression", [], ""],
+      [16, "licenseComments", "String", ["[0"], ""],
+      [17, "copyrightText", "String", ["[0"], "3.17.3 says mandatory"],
+      [18, "summary", "String", ["[0"], ""],
+      [19, "description", "String", ["[0"], ""],
+      [20, "comment", "String", ["[0"], ""],
+      [21, "externalRefs", "ExternalRef", ["[0", "]0"], "ExternalRef includes category/type/locator/comment."],
+      [22, "attributionTexts", "String", ["[0", "]0"], ""]
+    ]],
+
+    ["FileInfo", "Record", [], "", [
+      [1, "fileName", "String", [], ""],
+      [2, "SPDXID", "SpdxRef", ["K"], ""],
+      [3, "versionInfo", "VersionInfo", ["[0"], "not in spec"],
+      [4, "fileTypes", "FileType", ["[0", "]0"], ""],
+      [5, "checksums", "Checksum", ["[0", "]0"], "4.4.3 says mandatory"],
+      [6, "licenseConcluded", "LicenseExpression", ["[0"], "4.5.3 says mandatory"],
+      [7, "licenseInfoInFiles", "LicenseExpression", ["[0", "]0"], "4.6.3 says mandatory"],
+      [8, "licenseDeclared", "String", ["[0"], "not in spec"],
+      [9, "licenseComments", "String", ["[0"], ""],
+      [10, "copyrightText", "String", ["[0"], "4.8.3 says mandatory"],
+      [11, "comment", "String", ["[0"], ""],
+      [12, "noticeText", "String", ["[0"], ""],
+      [13, "fileContributors", "FileContributor", ["[0", "]0"], "4.14.3 says [0..*] (array of strings)"],
+      [14, "externalRefs", "ExternalRef", ["[0", "]0"], "not in spec"],
+      [15, "attributionText", "String", ["[0", "]0"], "just attributions?"],
+      [16, "annotations", "Annotation", ["[0", "]0"], "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet"],
+      [17, "artifactOf", "Artifact", ["[0", "]0"], "deprecated - delete before new version"],
+      [18, "dependencies", "String", ["[0", "]0"], "deprecated - delete before new version"]
+    ]],
+
+    ["SnippetInfo", "Record", [], "", [
+      [1, "SPDXID", "SpdxRef", ["K"], ""],
+      [2, "snippetFromFile", "SpdxRef", [], ""],
+      [3, "ranges", "Range", ["]0"], ""],
+      [4, "licenseConcluded", "LicenseExpression", [], ""],
+      [5, "licenseInfoInSnippets", "LicenseExpression", ["[0", "]0"], ""],
+      [6, "licenseComments", "String", ["[0"], ""],
+      [7, "copyrightText", "String", [], ""],
+      [8, "comment", "String", ["[0"], ""],
+      [9, "name", "String", ["[0"], ""],
+      [10, "attributionText", "String", ["[0", "]0"], ""],
+      [11, "annotations", "Annotation", ["[0", "]0"], "8.4.6: For RDF annotations are a property of Document, Package, File or Snippet"]
+    ]],
+
+    ["Relationship", "Record", [], "", [
+      [1, "spdxElementId", "Key", [], ""],
+      [2, "relationshipType", "RelationshipType", [], ""],
+      [3, "relatedSpdxElement", "SpdxQualifiedRef", [], "Overloaded multiple targets, consider RelatedElement"],
+      [4, "comment", "String", ["[0"], ""]
+    ]],
+
+    ["Annotation", "Record", [], "", [
+      [1, "annotator", "Entity", [], ""],
+      [2, "annotationDate", "Timestamp", [], ""],
+      [3, "annotationType", "AnnotationType", [], ""],
+      [4, "comment", "String", [], ""]
+    ]],
+
+    ["Review", "Record", [], "Deprecated since v2.0", [
+      [1, "reviewer", "Creator", ["[0"], "Person / Organization / Tool"],
+      [2, "reviewDate", "Timestamp", ["[0"], "mandatory if reviewer present"],
+      [3, "comment", "String", [], "review comment"]
+    ]],
+
+    ["SpdxVersion", "String", ["%^SPDX-\\d{1,2}\\.\\d{1,4}$"], "Limit digits to below the absurd, or enumerate valid versions", []],
+
+    ["SpdxLicense", "String", [], "Import ll:License", []],
+
+    ["SPDXREF-DOCUMENT", "String", ["%^SPDXRef-DOCUMENT$"], "", []],
+
+    ["SpdxRef", "String", ["%^SPDXRef-[-+\\.a-zA-Z0-9]{1,64}$"], "3.2.4: SPDXRef-[idstring] - no underscore", []],
+
+    ["DocumentRef", "String", ["%^DocumentRef-[-+\\.a-zA-Z0-9]{1,64}$"], "", []],
+
+    ["SpdxQualifiedRef", "String", [], "[DocumentRef-xxx:]SpdxRef", []],
+
+    ["LicenseRef", "String", ["%^LicenseRef-[-+\\.a-zA-Z0-9]{1,64}$"], "", []],
+
+    ["MajorMinorVersion", "String", ["%^\\d{1,2}\\.\\d{1,4}$"], "", []],
+
+    ["VersionInfo", "String", [], "use versioning scheme?", []],
+
+    ["PackageFileName", "String", [], "", []],
+
+    ["Timestamp", "String", [], "Define an ISO 8601 (or RFC 3339?) text representation format for Integer time", []],
+
+    ["URI", "String", ["/uri"], "", []],
+
+    ["DownloadLocation", "String", [], "URI or SPDX-specific VCS schemes", []],
+
+    ["Entity", "String", [], "Should be a Map instead of strings.  Spec doesn't require comma-separated tag-values", []],
+
+    ["FileContributor", "String", [], "", []],
+
+    ["Entity-Alternate", "Map", ["{1"], "at least one must be present", [
+      [1, "person", "String", ["[0"], "validate person name with optional (email)"],
+      [2, "organization", "String", ["[0"], ""],
+      [3, "tool", "String", ["[0"], ""]
+    ]],
+
+    ["PackageSupplier", "String", [], "", []],
+
+    ["PackageVerificationCode", "Record", [], "", [
+      [1, "packageVerificationCodeValue", "Binary", ["/x"], ""],
+      [2, "packageVerificationCodeExcludedFiles", "PackageFileName", [], ""]
+    ]],
+
+    ["Checksum", "Record", [], "", [
+      [1, "algorithm", "HashAlgorithm", [], ""],
+      [2, "checksumValue", "Binary", ["/x"], "just value?"]
+    ]],
+
+    ["Checksum-Alternate", "Map", ["{1"], "md algorithms not recommended, better algorithms (blake, ripemd, ...) not listed", [
+      [1, "sha1", "Binary", ["/x", "}20", "{20", "[0"], ""],
+      [2, "sha224", "Binary", ["{28", "/x", "}28", "[0"], ""],
+      [3, "sha256", "Binary", ["}32", "{32", "/x", "[0"], ""],
+      [4, "sha384", "Binary", ["/x", "{48", "}48", "[0"], ""],
+      [5, "sha512", "Binary", ["{64", "/x", "}64", "[0"], ""],
+      [6, "md2", "Binary", ["/x", "{16", "}16", "[0"], ""],
+      [7, "md4", "Binary", ["/x", "{16", "}16", "[0"], ""],
+      [8, "md5", "Binary", ["/x", "{16", "}16", "[0"], ""],
+      [9, "md6", "Binary", ["/x", "[0"], "Variable-length SHA-3 candidate, need e.g., md6-256 or md6-384"]
+    ]],
+
+    ["ExternalRef", "Record", [], "", [
+      [1, "referenceCategory", "ReferenceCategory", [], ""],
+      [2, "referenceType", "ReferenceType", [], ""],
+      [3, "referenceLocator", "ReferenceLocator", [], ""],
+      [4, "comment", "String", ["[0"], ""]
+    ]],
+
+    ["ReferenceType", "Enumerated", ["#ReferenceLocator"], "", []],
+
+    ["ReferenceLocator", "Choice", [], "annex F - external repository identifiers", [
+      [1, "cpe22Type", "CPE22Type", [], ""],
+      [2, "cpe23Type", "CPE23Typ", [], ""],
+      [3, "advisory", "URI", [], ""],
+      [4, "fix", "URI", [], ""],
+      [5, "url", "URI", [], ""],
+      [6, "swid", "SWID", [], ""],
+      [7, "maven", "Package-Maven-Central", [], ""],
+      [8, "npm", "Package-NPM", [], ""],
+      [9, "nuget", "Package-Nuget", [], ""],
+      [10, "bower", "Package-Bower", [], ""],
+      [11, "purl", "Package-PURL", [], ""],
+      [12, "swh", "PID-Swh", [], ""],
+      [13, "gitoid", "PID-GitOID", [], ""],
+      [99, "other", "String", [], ""]
+    ]],
+
+    ["CPE22Type", "String", [], "Add regexes to all reference types", []],
+
+    ["CPE23Type", "String", [], "", []],
+
+    ["SWID", "String", [], "", []],
+
+    ["Package-Maven-Central", "String", [], "", []],
+
+    ["Package-NPM", "String", [], "", []],
+
+    ["Package-Nuget", "String", [], "", []],
+
+    ["PackageBower", "String", [], "", []],
+
+    ["PackagePurl", "String", [], "", []],
+
+    ["PID-Swh", "String", [], "", []],
+
+    ["PID-GitOID", "String", [], "", []],
+
+    ["LicenseIdentifier", "String", [], "import from License List", []],
+
+    ["LicenseExpression", "String", [], "", []],
+
+    ["Range", "Record", [], "Simplify - start and end shouldn't have different types and references", [
+      [1, "startPointer", "RangePointer", [], ""],
+      [2, "endPointer", "RangePointer", [], ""]
+    ]],
+
+    ["RangePointer", "Record", ["{2", "}2"], "", [
+      [1, "offset", "Integer", ["[0"], ""],
+      [2, "lineNumber", "Integer", ["[0"], ""],
+      [3, "reference", "SpdxRef", [], ""]
+    ]],
+
+    ["Artifact", "Record", [], "Deprecated", [
+      [1, "name", "String", [], ""],
+      [2, "homepage", "URI", ["[0"], ""],
+      [3, "projectURI", "URI", ["[0"], ""]
+    ]],
+
+    ["ExtraLicensingInfo", "Record", [], "Fields after comment not defined in v2.2", [
+      [1, "licenseId", "LicenseRef", ["[0"], ""],
+      [2, "extractedText", "String", [], ""],
+      [3, "name", "String", ["[0"], ""],
+      [4, "seeAlsos", "URI", ["[0", "]0"], ""],
+      [5, "comment", "String", ["[0"], ""],
+      [6, "isDeprecatedLicenseId", "Boolean", ["[0"], ""],
+      [7, "isFsfLibre", "Boolean", ["[0"], ""],
+      [8, "isOsiApproved", "Boolean", ["[0"], ""],
+      [9, "licenseText", "String", ["[0"], ""],
+      [10, "licenseTextHtml", "String", ["[0"], ""],
+      [11, "standardLicenseHeader", "String", ["[0"], ""],
+      [12, "standardLicenseHeaderHtml", "String", ["[0"], ""],
+      [13, "standardLicenseHeaderTemplate", "String", ["[0"], ""],
+      [14, "standardLicenseTemplate", "String", ["[0"], ""]
+    ]],
+
+    ["CrossRef", "Record", [], "", [
+      [1, "url", "URI", [], ""],
+      [2, "isLive", "Boolean", [], ""],
+      [3, "isValid", "Boolean", [], ""],
+      [4, "isWayBackLink", "Boolean", [], ""],
+      [5, "match", "String", [], ""],
+      [6, "order", "Integer", [], ""],
+      [7, "timestamp", "Timestamp", [], ""]
+    ]],
+
+    ["AnnotationType", "Enumerated", [], "", [
+      [1, "REVIEW", ""],
+      [9, "OTHER", ""]
+    ]],
+
+    ["FileType", "Enumerated", [], "", [
+      [1, "SOURCE", ""],
+      [2, "BINARY", ""],
+      [3, "ARCHIVE", ""],
+      [4, "APPLICATION", ""],
+      [5, "AUDIO", ""],
+      [6, "IMAGE", ""],
+      [7, "TEXT", ""],
+      [8, "VIDEO", ""],
+      [9, "DOCUMENTATION", ""],
+      [10, "SPDX", ""],
+      [11, "SHARED", "Cybeats"],
+      [99, "OTHER", ""]
+    ]],
+
+    ["HashAlgorithm", "Enumerated", [], "", [
+      [1, "SHA1", ""],
+      [2, "SHA224", ""],
+      [3, "SHA256", ""],
+      [4, "SHA384", ""],
+      [5, "SHA512", ""],
+      [6, "MD2", ""],
+      [7, "MD4", ""],
+      [8, "MD5", ""],
+      [9, "MD6", ""]
+    ]],
+
+    ["ReferenceCategory", "Enumerated", [], "no underscores", [
+      [1, "SECURITY", ""],
+      [2, "PACKAGE-MANAGER", ""],
+      [3, "PERSISTENT-ID", ""],
+      [99, "OTHER", ""]
+    ]],
+
+    ["RelationshipType", "Enumerated", [], "", [
+      [0, "NONE", ""],
+      [1, "DESCRIBES", ""],
+      [2, "DESCRIBED_BY", ""],
+      [3, "CONTAINS", ""],
+      [4, "CONTAINED_BY", ""],
+      [5, "DEPENDS_ON", ""],
+      [6, "DEPENENCY_OF", ""],
+      [7, "DEPENDENCY_MANIFEST_OF", ""],
+      [8, "BUILD_+DEPENDENCY_OF", ""],
+      [9, "DEV_DEPENDENCY_OF", ""],
+      [10, "OPTIONAL_DEPENDENCY_OF", ""],
+      [11, "PROVIDED_DEPENDENCY_OF", ""],
+      [12, "TEST_DEPENDENCY_OF", ""],
+      [13, "RUNTIME_DEPENDENCY_OF", ""],
+      [14, "EXAMPLE_OF", ""],
+      [15, "GENERATES", ""],
+      [16, "GENERATED_FROM", ""],
+      [17, "ANCESTOR_OF", ""],
+      [18, "DESCENDANT_OF", ""],
+      [19, "VARIANT_OF", ""],
+      [20, "DISTRIBUTION_ARTIFACT", ""],
+      [21, "PATCH_FOR", ""],
+      [22, "PATCH_APPLIED", ""],
+      [23, "COPY_OF", ""],
+      [24, "FILE_ADDED", ""],
+      [25, "FILE_DELETED", ""],
+      [26, "FILE_MODIFIED", ""],
+      [27, "EXPANDED_FROM_ARCHIVE", ""],
+      [28, "DYNAMIC_LINK", ""],
+      [29, "STATIC_LINK", ""],
+      [30, "DATA_FILE_OF", ""],
+      [31, "TEST_CASE_OF", ""],
+      [32, "BUILD_TOOL_OF", ""],
+      [33, "DEF_TOOL_OF", ""],
+      [34, "TEST_OF", ""],
+      [35, "TEST_TOOL_OF", ""],
+      [36, "DOCUMENTATION_OF", ""],
+      [37, "OPTIONAL_COMPONENT_OF", ""],
+      [38, "METAFILE_OF", ""],
+      [39, "PACKAGE_OF", ""],
+      [40, "AMENDS", ""],
+      [41, "PREREQUISITE_FOR", ""],
+      [42, "HAS_PREREQUISITE", ""],
+      [98, "NOASSERTION", "should deprecate"],
+      [99, "OTHER", ""]
+    ]],
+
+    ["TagMap$", "Enumerated", [], "Alias list: map of paths to tags", [
+      [1, "spdxVersion:SPDXVersion", ""],
+      [2, "dataLicense:DataLicense", ""],
+      [3, "SPDXID:SPDXID", ""],
+      [4, "name:DocumentName", ""],
+      [5, "documentNamespace:DocumentNamespace", ""],
+      [6, "externalDocumentRefs/*:ExternalDocumentRef", "handle plural to multiple tags"],
+      [7, "creationInfo/licenseListVersion:LicenseListVersion", ""],
+      [8, "creationInfo/creators/*:Creator", ""],
+      [9, "creationInfo/created:Created", ""],
+      [10, "creationInfo/comment:CreatorComment", ""],
+      [11, "comment:DocumentComment", ""],
+      [12, "packages/*:", ""],
+      [13, "files/*:", ""],
+      [14, "snippets/*:", ""],
+      [15, "hasExtractedLicensingInfos/*:", ""],
+      [16, "relationships/*:", ""],
+      [17, "annotations/*:", ""],
+      [18, "documentDescribes:DocumentDescribes", "not in v2.2 spec"]
+    ]]
+  ]
+}

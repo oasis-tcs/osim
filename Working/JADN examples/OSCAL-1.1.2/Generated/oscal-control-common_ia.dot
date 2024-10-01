@@ -1,0 +1,84 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common
+# roots: ['Include-all', 'Parameter']
+# namespaces: [['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common'], ['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata']]
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Include-all : Record  </b></td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 depends-on : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 label : String [0..1]  </td></tr>
+  <tr><td align="left">  7 usage : String [0..1]  </td></tr>
+  <tr><td align="left">  8 constraints : Parameter-constraint [0..*]  </td></tr>
+  <tr><td align="left">  9 guidelines : Parameter-guideline [0..*]  </td></tr>
+  <tr><td align="left">  10 values : Parameter-value [0..*]  </td></tr>
+  <tr><td align="left">  11 select : Parameter-selection [0..1]  </td></tr>
+  <tr><td align="left">  12 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-constraint : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 description : String [0..1]  </td></tr>
+  <tr><td align="left">  2 tests : Parameter-constraint.tests [0..*]  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-constraint.tests : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 expression : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-guideline : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 prose : String  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-value : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-selection : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 how-many : Parameter-selection.how-many [0..1]  </td></tr>
+  <tr><td align="left">  2 choice : Parameter-selection.choice [0..*]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-selection.how-many : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Parameter-selection.how-many.2  </td></tr>
+</table>>]
+
+n8 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-selection.how-many.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 one  </td></tr>
+  <tr><td align="left">  2 one-or-more  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Parameter-selection.choice : ArrayOf(String){1..*}  </b></td></tr>
+</table>>]
+
+  n1 -> n2 [label=constraints, headlabel="0..*", taillabel="1"]
+  n1 -> n4 [label=guidelines, headlabel="0..*", taillabel="1"]
+  n1 -> n5 [label=values, headlabel="0..*", taillabel="1"]
+  n1 -> n6 [label=select, headlabel="0..1", taillabel="1"]
+  n2 -> n3 [label=tests, headlabel="0..*", taillabel="1"]
+  n6 -> n7 [label=how_many, headlabel="0..1", taillabel="1"]
+  n6 -> n9 [label=choice, headlabel="0..*", taillabel="1"]
+  n7 -> n8 [label=c2, headlabel="1", taillabel="1"]
+}

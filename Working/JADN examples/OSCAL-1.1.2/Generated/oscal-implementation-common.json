@@ -1,0 +1,587 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Implementation-status": {
+      "title": "Implementation status",
+      "type": "object",
+      "description": "Indicates the degree to which the a given control is implemented.",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/Implementation-status.state",
+          "description": "Identifies the implementation status of the control or control objective."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Implementation-status.state": {
+      "title": "Implementation status.state",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Implementation-status.state.2"
+        }
+      ]
+    },
+    "Implementation-status.state.2": {
+      "title": "Implementation status.state.2",
+      "type": "string",
+      "enum": [
+        "implemented",
+        "partial",
+        "planned",
+        "alternative",
+        "not-applicable"
+      ]
+    },
+    "Inventory-item": {
+      "title": "Inventory item",
+      "type": "object",
+      "description": "A single managed inventory item within the system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this inventory item elsewhere in this or other OSCAL instances. The locally defined UUID of the inventory item can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the inventory item stating its purpose within the system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "implemented-components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Inventory-item.implemented-components",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Inventory-item.implemented-components": {
+      "title": "Inventory item.implemented components",
+      "type": "object",
+      "description": "The set of components that are implemented in a given system inventory item.",
+      "additionalProperties": false,
+      "required": [
+        "component-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "component-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a component that is implemented as part of an inventory item."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Set-parameter": {
+      "title": "Set parameter",
+      "type": "object",
+      "description": "Identifies the parameter that will be set by the enclosed value.",
+      "additionalProperties": false,
+      "required": [
+        "param-id",
+        "values"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "param-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A human-oriented reference to a parameter within a control, who's catalog has been imported into the current implementation context."
+        },
+        "values": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/c/StringDatatype",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-component": {
+      "title": "System component",
+      "type": "object",
+      "description": "A defined component that can be part of an implemented system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "type",
+        "title",
+        "description",
+        "status"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this component elsewhere in this or other OSCAL instances. The locally defined UUID of the component can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "type": {
+          "$ref": "#/definitions/System-component.type",
+          "description": "A category describing the purpose of the component."
+        },
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the system component.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the component, including information about its function.",
+          "maxLength": 1000
+        },
+        "purpose": {
+          "type": "string",
+          "description": "A summary of the technological or business purpose of the component.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/System-component.status",
+          "description": "Describes the operational status of the system component."
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Protocol",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-component.type": {
+      "title": "System component.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/System-component.type.2"
+        }
+      ]
+    },
+    "System-component.type.2": {
+      "title": "System component.type.2",
+      "type": "string",
+      "enum": [
+        "this-system",
+        "system",
+        "interconnection",
+        "software",
+        "hardware",
+        "service",
+        "policy",
+        "physical",
+        "process-procedure",
+        "plan",
+        "guidance",
+        "standard",
+        "validation",
+        "network"
+      ]
+    },
+    "System-component.status": {
+      "title": "System component.status",
+      "type": "object",
+      "description": "Describes the operational status of the system component.",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/System-component.status.state",
+          "description": "The operational status."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-component.status.state": {
+      "title": "System component.status.state",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/System-component.status.state.2"
+        }
+      ]
+    },
+    "System-component.status.state.2": {
+      "title": "System component.status.state.2",
+      "type": "string",
+      "enum": [
+        "under-development",
+        "operational",
+        "disposition",
+        "other"
+      ]
+    },
+    "Protocol": {
+      "title": "Protocol",
+      "type": "object",
+      "description": "Information about the protocol used to provide a service.",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this service protocol information elsewhere in this or other OSCAL instances. The locally defined UUID of the service protocol can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "name": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "The common name of the protocol, which should be the appropriate \"service name\" from the IANA Service Name and Transport Protocol Port Number Registry."
+        },
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the protocol (e.g., Transport Layer Security).",
+          "maxLength": 1000
+        },
+        "port-ranges": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Port-range",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Port-range": {
+      "title": "Port range",
+      "type": "object",
+      "description": "Where applicable this is the IPv4 port range on which the service operates.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "start": {
+          "$ref": "#/imports/c/NonNegativeIntegerDatatype",
+          "description": "Indicates the starting port number in a port range"
+        },
+        "end": {
+          "$ref": "#/imports/c/NonNegativeIntegerDatatype",
+          "description": "Indicates the ending port number in a port range"
+        },
+        "transport": {
+          "$ref": "#/definitions/Port-range.transport",
+          "description": "Indicates the transport type."
+        }
+      }
+    },
+    "Port-range.transport": {
+      "title": "Port range.transport",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Port-range.transport.2"
+        }
+      ]
+    },
+    "Port-range.transport.2": {
+      "title": "Port range.transport.2",
+      "type": "string",
+      "enum": [
+        "TCP",
+        "UDP"
+      ]
+    },
+    "System-id": {
+      "title": "System id",
+      "type": "object",
+      "description": "A human-oriented, globally unique identifier with cross-instance scope that can be used to reference this system identification property elsewhere in this or other OSCAL instances. When referencing an externally defined system identification, the system identification must be used in the context of the external / imported OSCAL instance (e.g., uri-reference). This string should be assigned per-subject, which means it should be consistently used to identify the same system across revisions of the document.",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "identifier-type": {
+          "$ref": "#/definitions/System-id.identifier-type",
+          "description": "Identifies the identification system from which the provided identifier was assigned."
+        },
+        "id": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": ""
+        }
+      }
+    },
+    "System-id.identifier-type": {
+      "title": "System id.identifier type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/URIDatatype"
+        },
+        {
+          "$ref": "#/definitions/System-id.identifier-type.2"
+        }
+      ]
+    },
+    "System-id.identifier-type.2": {
+      "title": "System id.identifier type.2",
+      "type": "string",
+      "enum": [
+        "https://fedramp.gov",
+        "http://fedramp.gov/ns/oscal",
+        "https://ietf.org/rfc/rfc4122",
+        "http://ietf.org/rfc/rfc4122"
+      ]
+    },
+    "System-user": {
+      "title": "System user",
+      "type": "object",
+      "description": "A type of user that interacts with the system based on an associated role.",
+      "additionalProperties": false,
+      "required": [
+        "uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this user class elsewhere in this or other OSCAL instances. The locally defined UUID of the system user can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name given to the user, which may be used by a tool for display and navigation.",
+          "maxLength": 1000
+        },
+        "short-name": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A short common name, abbreviation, or acronym for the user."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the user's purpose within the system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "role-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Role-id",
+            "description": ""
+          }
+        },
+        "authorized-privileges": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Authorized-privilege",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Authorized-privilege": {
+      "title": "Authorized privilege",
+      "type": "object",
+      "description": "Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "functions-performed"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the privilege.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the privilege's purpose within the system.",
+          "maxLength": 1000
+        },
+        "functions-performed": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Function-performed",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Function-performed": {
+      "title": "Function performed",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "c": {
+      "TokenDatatype": {},
+      "UUIDDatatype": {},
+      "StringDatatype": {},
+      "NonNegativeIntegerDatatype": {},
+      "URIDatatype": {}
+    },
+    "m": {
+      "Remarks": {},
+      "Property": {},
+      "Link": {},
+      "Responsible-party": {},
+      "Responsible-role": {},
+      "Role-id": {}
+    }
+  }
+}

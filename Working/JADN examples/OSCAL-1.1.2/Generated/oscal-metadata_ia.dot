@@ -1,0 +1,418 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata
+# roots: ['Back-matter', 'Metadata', 'Responsible-role', 'Role-id']
+# namespaces: [['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common']]
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Back-matter : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 resources : Back-matter.resources [0..*]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Back-matter.resources : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 description : String [0..1]  </td></tr>
+  <tr><td align="left">  4 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  5 document-ids : Document-id [0..*]  </td></tr>
+  <tr><td align="left">  6 citation : Back-matter.resources.citation [0..1]  </td></tr>
+  <tr><td align="left">  7 rlinks : Back-matter.resources.rlinks [0..*]  </td></tr>
+  <tr><td align="left">  8 base64 : Back-matter.resources.base64 [0..1]  </td></tr>
+  <tr><td align="left">  9 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Property : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 uuid : c:UUIDDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 ns : c:URIDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 value : c:StringDatatype  </td></tr>
+  <tr><td align="left">  5 class : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  6 group : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  7 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n3 [label=<<b>Remarks : String</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Document-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 scheme : Document-id.scheme [0..1]  </td></tr>
+  <tr><td align="left">  2 identifier : c:StringDatatype  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Document-id.scheme : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:URIDatatype  </td></tr>
+  <tr><td align="left">  2  : Document-id.scheme.2  </td></tr>
+</table>>]
+
+n6 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Document-id.scheme.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 http://www.doi.org/  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Back-matter.resources.citation : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 text : String  </td></tr>
+  <tr><td align="left">  2 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : Link [0..*]  </td></tr>
+</table>>]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Link : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  2 rel : Link.rel [0..1]  </td></tr>
+  <tr><td align="left">  3 media-type : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 resource-fragment : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  5 text : String [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Link.rel : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Link.rel.2  </td></tr>
+</table>>]
+
+n10 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Link.rel.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 reference  </td></tr>
+</table>>]
+
+n11 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Back-matter.resources.rlinks : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  2 media-type : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 hashes : Hash [0..*]  </td></tr>
+</table>>]
+
+n12 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Hash : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 algorithm : Hash.algorithm  </td></tr>
+  <tr><td align="left">  2 value : c:StringDatatype  </td></tr>
+</table>>]
+
+n13 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Hash.algorithm : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Hash.algorithm.2  </td></tr>
+</table>>]
+
+n14 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Hash.algorithm.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 SHA-224  </td></tr>
+  <tr><td align="left">  2 SHA-256  </td></tr>
+  <tr><td align="left">  3 SHA-384  </td></tr>
+  <tr><td align="left">  4 SHA-512  </td></tr>
+  <tr><td align="left">  5 SHA3-224  </td></tr>
+  <tr><td align="left">  6 SHA3-256  </td></tr>
+  <tr><td align="left">  7 SHA3-384  </td></tr>
+  <tr><td align="left">  8 SHA3-512  </td></tr>
+</table>>]
+
+n15 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Back-matter.resources.base64 : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 filename : c:TokenDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 media-type : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 value : c:Base64Datatype  </td></tr>
+</table>>]
+
+n16 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 title : String  </td></tr>
+  <tr><td align="left">  2 published : Published [0..1]  </td></tr>
+  <tr><td align="left">  3 last-modified : Last-modified  </td></tr>
+  <tr><td align="left">  4 version : Version  </td></tr>
+  <tr><td align="left">  5 oscal-version : Oscal-version  </td></tr>
+  <tr><td align="left">  6 revisions : Metadata.revisions [0..*]  </td></tr>
+  <tr><td align="left">  7 document-ids : Document-id [0..*]  </td></tr>
+  <tr><td align="left">  8 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  9 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  10 roles : Metadata.roles [0..*]  </td></tr>
+  <tr><td align="left">  11 locations : Metadata.locations [0..*]  </td></tr>
+  <tr><td align="left">  12 parties : Metadata.parties [0..*]  </td></tr>
+  <tr><td align="left">  13 responsible-parties : Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  14 actions : Action [0..*]  </td></tr>
+  <tr><td align="left">  15 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n17 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Published : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:DateTimeWithTimezoneDatatype  </td></tr>
+</table>>]
+
+n18 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Last-modified : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:DateTimeWithTimezoneDatatype  </td></tr>
+</table>>]
+
+n19 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Version : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+</table>>]
+
+n20 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Oscal-version : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+</table>>]
+
+n21 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.revisions : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 title : String [0..1]  </td></tr>
+  <tr><td align="left">  2 published : Published [0..1]  </td></tr>
+  <tr><td align="left">  3 last-modified : Last-modified [0..1]  </td></tr>
+  <tr><td align="left">  4 version : Version  </td></tr>
+  <tr><td align="left">  5 oscal-version : Oscal-version [0..1]  </td></tr>
+  <tr><td align="left">  6 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  8 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n22 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.roles : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 title : String  </td></tr>
+  <tr><td align="left">  3 short-name : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 description : String [0..1]  </td></tr>
+  <tr><td align="left">  5 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n23 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.locations : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 address : Address [0..1]  </td></tr>
+  <tr><td align="left">  4 email-addresses : Email-address [0..*]  </td></tr>
+  <tr><td align="left">  5 telephone-numbers : Telephone-number [0..*]  </td></tr>
+  <tr><td align="left">  6 urls : c:URIDatatype [0..*]  </td></tr>
+  <tr><td align="left">  7 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  8 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  9 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n24 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Address : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : Address.type [0..1]  </td></tr>
+  <tr><td align="left">  2 addr-lines : Addr-line [0..*]  </td></tr>
+  <tr><td align="left">  3 city : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 state : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  5 postal-code : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  6 country : c:StringDatatype [0..1]  </td></tr>
+</table>>]
+
+n25 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Address.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Address.type.2  </td></tr>
+</table>>]
+
+n26 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Address.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 home  </td></tr>
+  <tr><td align="left">  2 work  </td></tr>
+</table>>]
+
+n27 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Addr-line : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+</table>>]
+
+n28 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Email-address : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:EmailAddressDatatype  </td></tr>
+</table>>]
+
+n29 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Telephone-number : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : Telephone-number.type [0..1]  </td></tr>
+  <tr><td align="left">  2 number : c:StringDatatype  </td></tr>
+</table>>]
+
+n30 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Telephone-number.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Telephone-number.type.2  </td></tr>
+</table>>]
+
+n31 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Telephone-number.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 home  </td></tr>
+  <tr><td align="left">  2 office  </td></tr>
+  <tr><td align="left">  3 mobile  </td></tr>
+</table>>]
+
+n32 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : Metadata.parties.type  </td></tr>
+  <tr><td align="left">  3 name : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 short-name : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  5 external-ids : Metadata.parties.external-ids [0..*]  </td></tr>
+  <tr><td align="left">  6 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  8 email-addresses : Email-address [0..*]  </td></tr>
+  <tr><td align="left">  9 telephone-numbers : Telephone-number [0..*]  </td></tr>
+  <tr><td align="left">  10 addresses : Address [0..*]  </td></tr>
+  <tr><td align="left">  11 location-uuids : Location-uuid [0..*]  </td></tr>
+  <tr><td align="left">  12 member-of-organizations : c:UUIDDatatype [0..*]  </td></tr>
+  <tr><td align="left">  13 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n33 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties.type : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Metadata.parties.type.2  </td></tr>
+</table>>]
+
+n34 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 person  </td></tr>
+  <tr><td align="left">  2 organization  </td></tr>
+</table>>]
+
+n35 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties.external-ids : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 scheme : Metadata.parties.external-ids.scheme  </td></tr>
+  <tr><td align="left">  2 id : c:StringDatatype  </td></tr>
+</table>>]
+
+n36 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties.external-ids.scheme : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:URIDatatype  </td></tr>
+  <tr><td align="left">  2  : Metadata.parties.external-ids.scheme.2  </td></tr>
+</table>>]
+
+n37 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Metadata.parties.external-ids.scheme.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 http://orcid.org/  </td></tr>
+</table>>]
+
+n38 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Location-uuid : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:UUIDDatatype  </td></tr>
+</table>>]
+
+n39 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Responsible-party : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 role-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 party-uuids : Party-uuid [1..*]  </td></tr>
+  <tr><td align="left">  3 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n40 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Party-uuid : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:UUIDDatatype  </td></tr>
+</table>>]
+
+n41 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Action : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 date : c:DateTimeWithTimezoneDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 type : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  4 system : c:URIDatatype  </td></tr>
+  <tr><td align="left">  5 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  7 responsible-parties : Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  8 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n42 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Responsible-role : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 role-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 props : Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : Link [0..*]  </td></tr>
+  <tr><td align="left">  4 party-uuids : Party-uuid [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : Remarks [0..1]  </td></tr>
+</table>>]
+
+n43 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Role-id : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=resources, headlabel="0..*", taillabel="1"]
+  n1 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n1 -> n4 [label=document_ids, headlabel="0..*", taillabel="1"]
+  n1 -> n7 [label=citation, headlabel="0..1", taillabel="1"]
+  n1 -> n11 [label=rlinks, headlabel="0..*", taillabel="1"]
+  n1 -> n15 [label=base64, headlabel="0..1", taillabel="1"]
+  n1 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n2 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n4 -> n5 [label=scheme, headlabel="0..1", taillabel="1"]
+  n5 -> n6 [label=c2, headlabel="1", taillabel="1"]
+  n7 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n7 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n8 -> n9 [label=rel, headlabel="0..1", taillabel="1"]
+  n9 -> n10 [label=c2, headlabel="1", taillabel="1"]
+  n11 -> n12 [label=hashes, headlabel="0..*", taillabel="1"]
+  n12 -> n13 [label=algorithm, headlabel="1", taillabel="1"]
+  n13 -> n14 [label=c2, headlabel="1", taillabel="1"]
+  n16 -> n17 [label=published, headlabel="0..1", taillabel="1"]
+  n16 -> n18 [label=last_modified, headlabel="1", taillabel="1"]
+  n16 -> n19 [label=version, headlabel="1", taillabel="1"]
+  n16 -> n20 [label=oscal_version, headlabel="1", taillabel="1"]
+  n16 -> n21 [label=revisions, headlabel="0..*", taillabel="1"]
+  n16 -> n4 [label=document_ids, headlabel="0..*", taillabel="1"]
+  n16 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n16 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n16 -> n22 [label=roles, headlabel="0..*", taillabel="1"]
+  n16 -> n23 [label=locations, headlabel="0..*", taillabel="1"]
+  n16 -> n32 [label=parties, headlabel="0..*", taillabel="1"]
+  n16 -> n39 [label=responsible_parties, headlabel="0..*", taillabel="1"]
+  n16 -> n41 [label=actions, headlabel="0..*", taillabel="1"]
+  n16 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n21 -> n17 [label=published, headlabel="0..1", taillabel="1"]
+  n21 -> n18 [label=last_modified, headlabel="0..1", taillabel="1"]
+  n21 -> n19 [label=version, headlabel="1", taillabel="1"]
+  n21 -> n20 [label=oscal_version, headlabel="0..1", taillabel="1"]
+  n21 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n21 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n21 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n22 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n22 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n22 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n23 -> n24 [label=address, headlabel="0..1", taillabel="1"]
+  n23 -> n28 [label=email_addresses, headlabel="0..*", taillabel="1"]
+  n23 -> n29 [label=telephone_numbers, headlabel="0..*", taillabel="1"]
+  n23 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n23 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n23 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n24 -> n25 [label=type, headlabel="0..1", taillabel="1"]
+  n24 -> n27 [label=addr_lines, headlabel="0..*", taillabel="1"]
+  n25 -> n26 [label=c2, headlabel="1", taillabel="1"]
+  n29 -> n30 [label=type, headlabel="0..1", taillabel="1"]
+  n30 -> n31 [label=c2, headlabel="1", taillabel="1"]
+  n32 -> n33 [label=type, headlabel="1", taillabel="1"]
+  n32 -> n35 [label=external_ids, headlabel="0..*", taillabel="1"]
+  n32 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n32 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n32 -> n28 [label=email_addresses, headlabel="0..*", taillabel="1"]
+  n32 -> n29 [label=telephone_numbers, headlabel="0..*", taillabel="1"]
+  n32 -> n24 [label=addresses, headlabel="0..*", taillabel="1"]
+  n32 -> n38 [label=location_uuids, headlabel="0..*", taillabel="1"]
+  n32 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n33 -> n34 [label=c2, headlabel="1", taillabel="1"]
+  n35 -> n36 [label=scheme, headlabel="1", taillabel="1"]
+  n36 -> n37 [label=c2, headlabel="1", taillabel="1"]
+  n39 -> n40 [label=party_uuids, headlabel="1..*", taillabel="1"]
+  n39 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n39 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n39 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n41 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n41 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n41 -> n39 [label=responsible_parties, headlabel="0..*", taillabel="1"]
+  n41 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+  n42 -> n2 [label=props, headlabel="0..*", taillabel="1"]
+  n42 -> n8 [label=links, headlabel="0..*", taillabel="1"]
+  n42 -> n40 [label=party_uuids, headlabel="0..*", taillabel="1"]
+  n42 -> n3 [label=remarks, headlabel="0..1", taillabel="1"]
+}

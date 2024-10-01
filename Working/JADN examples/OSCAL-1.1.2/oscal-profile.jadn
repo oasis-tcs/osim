@@ -1,0 +1,188 @@
+{
+  "info": {
+    "package": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-profile",
+    "comment": "OSCAL Profile Model: JSON Schema",
+    "roots": ["Profile"],
+    "config": {
+      "$MaxString": 1000,
+      "$Sys": ".",
+      "$TypeName": "^[$A-Z][-.$A-Za-z0-9]{0,96}$",
+      "$FieldName": "^[$a-z][-_$A-Za-z0-9]{0,63}$"
+    },
+    "namespaces": [
+      ["m", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata"],
+      ["cc", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common"],
+      ["c", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common"]
+    ]
+  },
+
+  "types": [
+    ["Profile", "Record", [], "Each OSCAL profile is defined by a profile element.", [
+      [1, "uuid", "c:UUIDDatatype", [], "Provides a globally unique means to identify a given profile instance."],
+      [2, "metadata", "m:Metadata", [], ""],
+      [3, "imports", "Import", ["]0"], ""],
+      [4, "merge", "Merge", ["[0"], ""],
+      [5, "modify", "Modify", ["[0"], ""],
+      [6, "back-matter", "m:Back-matter", ["[0"], ""]
+    ]],
+
+    ["Import", "Record", [], "Designates a referenced source catalog or profile that provides a source of control information for use in creating a new overlay or baseline.", [
+      [1, "href", "c:URIReferenceDatatype", [], "A resolvable URL reference to the base catalog or profile that this profile is tailoring."],
+      [2, "include-all", "cc:Include-all", ["[0"], ""],
+      [3, "include-controls", "Select-control-by-id", ["[0", "]0"], ""],
+      [4, "exclude-controls", "Select-control-by-id", ["[0", "]0"], ""]
+    ]],
+
+    ["Select-control-by-id", "Record", [], "Select a control or controls from an imported control set.", [
+      [1, "with-child-controls", "Select-control-by-id.with-child-controls", ["[0"], "When a control is included, whether its child (dependent) controls are also included."],
+      [2, "with-ids", "With-id", ["[0", "]0"], ""],
+      [3, "matching", "Matching", ["[0", "]0"], ""]
+    ]],
+
+    ["Select-control-by-id.with-child-controls", "Choice", ["CA"], "When a control is included, whether its child (dependent) controls are also included.", [
+      [1, "c1", "c:TokenDatatype", [], ""],
+      [2, "c2", "Select-control-by-id.with-child-controls.2", [], ""]
+    ]],
+
+    ["Select-control-by-id.with-child-controls.2", "Enumerated", [], "", [
+      [1, "yes", ""],
+      [2, "no", ""]
+    ]],
+
+    ["With-id", "Choice", ["CA"], "Selecting a control by its ID given as a literal.", [
+      [1, "alias", "c:TokenDatatype", [], ""]
+    ]],
+
+    ["Matching", "Record", [], "Selecting a set of controls by matching their IDs with a wildcard pattern.", [
+      [1, "pattern", "c:StringDatatype", ["[0"], "A glob expression matching the IDs of one or more controls to be selected."]
+    ]],
+
+    ["Merge", "Record", [], "Provides structuring directives that instruct how controls are organized after profile resolution.", [
+      [1, "combine", "Merge.combine", ["[0"], "A Combine element defines how to resolve duplicate instances of the same control (e.g., controls with the same ID)."],
+      [2, "flat", "Merge.flat", ["[0"], "Directs that controls appear without any grouping structure."],
+      [3, "as-is", "c:BooleanDatatype", ["[0"], "Indicates that the controls selected should retain their original grouping as defined in the import source."],
+      [4, "custom", "Merge.custom", ["[0"], "Provides an alternate grouping structure that selected controls will be placed in."]
+    ]],
+
+    ["Merge.combine", "Record", [], "A Combine element defines how to resolve duplicate instances of the same control (e.g., controls with the same ID).", [
+      [1, "method", "Merge.combine.method", ["[0"], "Declare how clashing controls should be handled."]
+    ]],
+
+    ["Merge.combine.method", "Choice", ["CA"], "Declare how clashing controls should be handled.", [
+      [1, "c1", "c:StringDatatype", [], ""],
+      [2, "c2", "Merge.combine.method.2", [], ""]
+    ]],
+
+    ["Merge.combine.method.2", "Enumerated", [], "", [
+      [1, "use-first", ""],
+      [2, "merge", ""],
+      [3, "keep", ""]
+    ]],
+
+    ["Merge.flat", "Record", [], "Directs that controls appear without any grouping structure.", []],
+
+    ["Merge.custom", "Record", [], "Provides an alternate grouping structure that selected controls will be placed in.", [
+      [1, "groups", "Group", ["[0", "]0"], ""],
+      [2, "insert-controls", "Insert-controls", ["[0", "]0"], ""]
+    ]],
+
+    ["Group", "Record", [], "A group of (selected) controls or of groups of controls.", [
+      [1, "id", "c:TokenDatatype", ["[0"], "Identifies the group."],
+      [2, "class", "c:TokenDatatype", ["[0"], "A textual label that provides a sub-type or characterization of the group."],
+      [3, "title", "String", [], "A name to be given to the group for use in display."],
+      [4, "params", "cc:Parameter", ["[0", "]0"], ""],
+      [5, "props", "m:Property", ["[0", "]0"], ""],
+      [6, "links", "m:Link", ["[0", "]0"], ""],
+      [7, "parts", "cc:Part", ["[0", "]0"], ""],
+      [8, "groups", "Group", ["[0", "]0"], ""],
+      [9, "insert-controls", "Insert-controls", ["[0", "]0"], ""]
+    ]],
+
+    ["Insert-controls", "Record", [], "Specifies which controls to use in the containing context.", [
+      [1, "order", "Insert-controls.order", ["[0"], "A designation of how a selection of controls in a profile is to be ordered."],
+      [2, "include-all", "cc:Include-all", ["[0"], ""],
+      [3, "include-controls", "Select-control-by-id", ["[0", "]0"], ""],
+      [4, "exclude-controls", "Select-control-by-id", ["[0", "]0"], ""]
+    ]],
+
+    ["Insert-controls.order", "Choice", ["CA"], "A designation of how a selection of controls in a profile is to be ordered.", [
+      [1, "c1", "c:TokenDatatype", [], ""],
+      [2, "c2", "Insert-controls.order.2", [], ""]
+    ]],
+
+    ["Insert-controls.order.2", "Enumerated", [], "", [
+      [1, "keep", ""],
+      [2, "ascending", ""],
+      [3, "descending", ""]
+    ]],
+
+    ["Modify", "Record", [], "Set parameters or amend controls in resolution.", [
+      [1, "set-parameters", "Modify.set-parameters", ["[0", "]0"], ""],
+      [2, "alters", "Modify.alters", ["[0", "]0"], ""]
+    ]],
+
+    ["Modify.set-parameters", "Record", [], "A parameter setting, to be propagated to points of insertion.", [
+      [1, "param-id", "c:TokenDatatype", [], "An identifier for the parameter."],
+      [2, "class", "c:TokenDatatype", ["[0"], "A textual label that provides a characterization of the parameter."],
+      [3, "depends-on", "c:TokenDatatype", ["[0"], "**(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used."],
+      [4, "props", "m:Property", ["[0", "]0"], ""],
+      [5, "links", "m:Link", ["[0", "]0"], ""],
+      [6, "label", "String", ["[0"], "A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned."],
+      [7, "usage", "String", ["[0"], "Describes the purpose and use of a parameter."],
+      [8, "constraints", "cc:Parameter-constraint", ["[0", "]0"], ""],
+      [9, "guidelines", "cc:Parameter-guideline", ["[0", "]0"], ""],
+      [10, "values", "cc:Parameter-value", ["[0", "]0"], ""],
+      [11, "select", "cc:Parameter-selection", ["[0"], ""]
+    ]],
+
+    ["Modify.alters", "Record", [], "Specifies changes to be made to an included control when a profile is resolved.", [
+      [1, "control-id", "c:TokenDatatype", [], "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."],
+      [2, "removes", "Modify.alters.removes", ["[0", "]0"], ""],
+      [3, "adds", "Modify.alters.adds", ["[0", "]0"], ""]
+    ]],
+
+    ["Modify.alters.removes", "Record", [], "Specifies objects to be removed from a control based on specific aspects of the object that must all match.", [
+      [1, "by-name", "c:TokenDatatype", ["[0"], "Identify items remove by matching their assigned name."],
+      [2, "by-class", "c:TokenDatatype", ["[0"], "Identify items to remove by matching their class."],
+      [3, "by-id", "c:TokenDatatype", ["[0"], "Identify items to remove indicated by their id."],
+      [4, "by-item-name", "Modify.alters.removes.by-item-name", ["[0"], "Identify items to remove by the name of the item's information object name, e.g. title or prop."],
+      [5, "by-ns", "c:TokenDatatype", ["[0"], "Identify items to remove by the item's ns, which is the namespace associated with a part, or prop."]
+    ]],
+
+    ["Modify.alters.removes.by-item-name", "Choice", ["CA"], "Identify items to remove by the name of the item's information object name, e.g. title or prop.", [
+      [1, "c1", "c:TokenDatatype", [], ""],
+      [2, "c2", "Modify.alters.removes.by-item-name.2", [], ""]
+    ]],
+
+    ["Modify.alters.removes.by-item-name.2", "Enumerated", [], "", [
+      [1, "param", ""],
+      [2, "prop", ""],
+      [3, "link", ""],
+      [4, "part", ""],
+      [5, "mapping", ""],
+      [6, "map", ""]
+    ]],
+
+    ["Modify.alters.adds", "Record", [], "Specifies contents to be added into controls, in resolution.", [
+      [1, "position", "Modify.alters.adds.position", ["[0"], "Where to add the new content with respect to the targeted element (beside it or inside it)."],
+      [2, "by-id", "c:TokenDatatype", ["[0"], "Target location of the addition."],
+      [3, "title", "String", ["[0"], "A name given to the control, which may be used by a tool for display and navigation."],
+      [4, "params", "cc:Parameter", ["[0", "]0"], ""],
+      [5, "props", "m:Property", ["[0", "]0"], ""],
+      [6, "links", "m:Link", ["[0", "]0"], ""],
+      [7, "parts", "cc:Part", ["[0", "]0"], ""]
+    ]],
+
+    ["Modify.alters.adds.position", "Choice", ["CA"], "Where to add the new content with respect to the targeted element (beside it or inside it).", [
+      [1, "c1", "c:TokenDatatype", [], ""],
+      [2, "c2", "Modify.alters.adds.position.2", [], ""]
+    ]],
+
+    ["Modify.alters.adds.position.2", "Enumerated", [], "", [
+      [1, "before", ""],
+      [2, "after", ""],
+      [3, "starting", ""],
+      [4, "ending", ""]
+    ]]
+  ]
+}

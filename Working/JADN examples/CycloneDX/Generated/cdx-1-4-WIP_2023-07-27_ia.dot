@@ -1,0 +1,432 @@
+# title: CycloneDX v1.4 JADN Schema, as of 27 July. 
+# package: http://cyclonedx.org/schema/bom-1.4.schema.jadn
+# version: 1
+# exports: ['bom']
+# config: {'$TypeName': '^[a-zA-Z][-$A-Za-z0-9]{0,63}$', '$FieldName': '^[$a-z][_A-Za-z0-9\\-]{0,63}$'}
+# comment: Known shortcomings: required / optional values needed for most types; hasn't been tested against any CDX SBOM
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  bom : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 $schema : CDXSchema [0..1]  </td></tr>
+  <tr><td align="left">  2 bomFormat : CDX  </td></tr>
+  <tr><td align="left">  3 specVersion : Version  </td></tr>
+  <tr><td align="left">  4 serialNumber : SerialNumber [0..1]  </td></tr>
+  <tr><td align="left">  5 version : Integer  </td></tr>
+  <tr><td align="left">  6 metadata : metadata [0..1]  </td></tr>
+  <tr><td align="left">  7 components : component [0..*]  </td></tr>
+  <tr><td align="left">  8 services : service [0..*]  </td></tr>
+  <tr><td align="left">  9 externalReferences : externalReference [0..*]  </td></tr>
+  <tr><td align="left">  10 dependencies : dependency [0..*]  </td></tr>
+  <tr><td align="left">  11 compositions : compositions [0..*]  </td></tr>
+  <tr><td align="left">  12 vulnerabilities : vulnerability [0..*]  </td></tr>
+  <tr><td align="left">  13 signature : String [0..1]  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  metadata : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 timestamp : TimeStamp [0..1]  </td></tr>
+  <tr><td align="left">  2 tools : tool [0..*]  </td></tr>
+  <tr><td align="left">  3 authors : organizationalContact [0..*]  </td></tr>
+  <tr><td align="left">  4 component : component [0..1]  </td></tr>
+  <tr><td align="left">  5 manufacture : organizationalEntity [0..1]  </td></tr>
+  <tr><td align="left">  6 supplier : organizationalEntity [0..1]  </td></tr>
+  <tr><td align="left">  7 licenses : licenseChoice [0..*]  </td></tr>
+  <tr><td align="left">  8 properties : property [0..*]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  tool : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 vendor : String [0..1]  </td></tr>
+  <tr><td align="left">  2 name : String [0..1]  </td></tr>
+  <tr><td align="left">  3 version : String [0..1]  </td></tr>
+  <tr><td align="left">  4 hashes : hash [0..*]  </td></tr>
+  <tr><td align="left">  5 externalReferences : externalReference [0..*]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  component : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : componentType  </td></tr>
+  <tr><td align="left">  2 name : String  </td></tr>
+  <tr><td align="left">  3 mime-type : Mime-Type [0..1]  </td></tr>
+  <tr><td align="left">  4 bom-ref : refType [0..1]  </td></tr>
+  <tr><td align="left">  5 supplier : organizationalEntity [0..1]  </td></tr>
+  <tr><td align="left">  6 author : String [0..1]  </td></tr>
+  <tr><td align="left">  7 publisher : String [0..1]  </td></tr>
+  <tr><td align="left">  8 group : String [0..1]  </td></tr>
+  <tr><td align="left">  9 version : String [0..1]  </td></tr>
+  <tr><td align="left">  10 description : String [0..1]  </td></tr>
+  <tr><td align="left">  11 scope : componentScope  </td></tr>
+  <tr><td align="left">  12 hashes : hash [0..1]  </td></tr>
+  <tr><td align="left">  13 licenses : licenseChoice [0..*]  </td></tr>
+  <tr><td align="left">  14 copyright : String [0..1]  </td></tr>
+  <tr><td align="left">  15 cpe : String [0..1]  </td></tr>
+  <tr><td align="left">  16 purl : String [0..1]  </td></tr>
+  <tr><td align="left">  17 swid : swid [0..1]  </td></tr>
+  <tr><td align="left">  18 modified : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  19 pedigree : pedigree [0..1]  </td></tr>
+  <tr><td align="left">  20 externalReferences : externalReference [0..*]  </td></tr>
+  <tr><td align="left">  21 components : component [0..*]  </td></tr>
+  <tr><td align="left">  22 evidence : componentEvidence [0..1]  </td></tr>
+  <tr><td align="left">  23 releasetNotes : releaseNotes [0..1]  </td></tr>
+  <tr><td align="left">  24 properties : property [0..*]  </td></tr>
+  <tr><td align="left">  25 signature : signature [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  organizationalEntity : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String [0..1]  </td></tr>
+  <tr><td align="left">  2 url : URL [0..*]  </td></tr>
+  <tr><td align="left">  3 contact : organizationalContact [0..*]  </td></tr>
+</table>>]
+
+n10 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  organizationalContact : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 email : EmailAddr  </td></tr>
+  <tr><td align="left">  3 phone : String  </td></tr>
+</table>>]
+
+n11 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  property : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 value : String  </td></tr>
+</table>>]
+
+n17 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  vulnerabilitySource : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 url : URL  </td></tr>
+  <tr><td align="left">  2 name : String  </td></tr>
+</table>>]
+
+n20 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  advisory : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 title : String  </td></tr>
+  <tr><td align="left">  2 url : URL  </td></tr>
+</table>>]
+
+n23 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  identifiableAction : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 timestamp : TimeStamp  </td></tr>
+  <tr><td align="left">  2 name : String  </td></tr>
+  <tr><td align="left">  3 email : EmailAddr  </td></tr>
+</table>>]
+
+n24 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  attachment : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 contentType : String [0..1]  </td></tr>
+  <tr><td align="left">  2 encoding : contentEncoding  </td></tr>
+  <tr><td align="left">  3 content : String  </td></tr>
+</table>>]
+
+n25 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  diff : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 text : attachment  </td></tr>
+  <tr><td align="left">  2 url : URL  </td></tr>
+</table>>]
+
+n27 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  note : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 locale : localeType  </td></tr>
+  <tr><td align="left">  2 text : attachment  </td></tr>
+</table>>]
+
+n31 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  dataClassification : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 flow : dataFlow  </td></tr>
+  <tr><td align="left">  2 classification : String  </td></tr>
+</table>>]
+
+n34 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  rating : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 source : vulnerabilitySource  </td></tr>
+  <tr><td align="left">  2 score : Number  </td></tr>
+  <tr><td align="left">  3 severity : severity  </td></tr>
+  <tr><td align="left">  4 method : scoreMethod  </td></tr>
+  <tr><td align="left">  5 vector : String  </td></tr>
+  <tr><td align="left">  6 justification : String  </td></tr>
+</table>>]
+
+n35 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  commit : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uid : String  </td></tr>
+  <tr><td align="left">  2 url : URL  </td></tr>
+  <tr><td align="left">  3 author : identifiableAction  </td></tr>
+  <tr><td align="left">  4 committer : identifiableAction  </td></tr>
+  <tr><td align="left">  5 message : String  </td></tr>
+</table>>]
+
+n36 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  hash : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 alg : hash-alg  </td></tr>
+  <tr><td align="left">  2 content : hash-content  </td></tr>
+</table>>]
+
+n37 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  dependency : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 ref : refType  </td></tr>
+  <tr><td align="left">  2 dependsOn : refType [0..*]  </td></tr>
+</table>>]
+
+n38 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  compositions : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 aggregate : aggregateType  </td></tr>
+  <tr><td align="left">  2 assemblies : refType [0..*]  </td></tr>
+  <tr><td align="left">  3 dependencies : refType [0..*]  </td></tr>
+  <tr><td align="left">  4 signature : String  </td></tr>
+</table>>]
+
+n39 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  copyright : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 text : String  </td></tr>
+</table>>]
+
+n40 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  refItem : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 id : String  </td></tr>
+  <tr><td align="left">  2 source : vulnerabilitySource  </td></tr>
+</table>>]
+
+n41 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  swid : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 tagId : String  </td></tr>
+  <tr><td align="left">  2 name : String  </td></tr>
+  <tr><td align="left">  3 version : String  </td></tr>
+  <tr><td align="left">  4 tagVersion : Integer  </td></tr>
+  <tr><td align="left">  5 patch : Boolean  </td></tr>
+  <tr><td align="left">  6 text : attachment  </td></tr>
+  <tr><td align="left">  7 url : URL  </td></tr>
+</table>>]
+
+n43 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  licenseSelector : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 id : spdxLicenseId  </td></tr>
+  <tr><td align="left">  2 name : String  </td></tr>
+</table>>]
+
+n44 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  license : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 selector : licenseSelector  </td></tr>
+  <tr><td align="left">  2 text : attachment  </td></tr>
+  <tr><td align="left">  3 url : URL  </td></tr>
+</table>>]
+
+n45 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  licenseChoice : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 license : license  </td></tr>
+  <tr><td align="left">  2 expression : String  </td></tr>
+</table>>]
+
+n46 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  issue : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : issueType  </td></tr>
+  <tr><td align="left">  2 id : String [0..1]  </td></tr>
+  <tr><td align="left">  3 name : String [0..1]  </td></tr>
+  <tr><td align="left">  4 description : String [0..1]  </td></tr>
+  <tr><td align="left">  5 source : issueSource [0..1]  </td></tr>
+  <tr><td align="left">  6 references : URL [0..*]  </td></tr>
+</table>>]
+
+n48 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  issueSource : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 url : URL  </td></tr>
+</table>>]
+
+n49 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  externalReference : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 url : URL  </td></tr>
+  <tr><td align="left">  2 type : externalReferenceType  </td></tr>
+  <tr><td align="left">  3 comment : String [0..1]  </td></tr>
+  <tr><td align="left">  4 hashes : hash [0..*]  </td></tr>
+</table>>]
+
+n52 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  patch : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : patchType  </td></tr>
+  <tr><td align="left">  2 diff : diff  </td></tr>
+  <tr><td align="left">  3 resolves : issue [0..*]  </td></tr>
+</table>>]
+
+n53 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  vulnerability : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 bom-ref : refType [0..1]  </td></tr>
+  <tr><td align="left">  2 id : String [0..1]  </td></tr>
+  <tr><td align="left">  3 source : vulnerabilitySource [0..1]  </td></tr>
+  <tr><td align="left">  4 references : refItem [0..*]  </td></tr>
+  <tr><td align="left">  5 ratings : rating [0..*]  </td></tr>
+  <tr><td align="left">  6 cwes : cwe [0..*]  </td></tr>
+  <tr><td align="left">  7 description : String [0..1]  </td></tr>
+  <tr><td align="left">  8 detail : String [0..1]  </td></tr>
+  <tr><td align="left">  9 recommendation : String [0..1]  </td></tr>
+  <tr><td align="left">  10 advisories : advisory [0..*]  </td></tr>
+  <tr><td align="left">  11 created : TimeStamp [0..1]  </td></tr>
+  <tr><td align="left">  12 published : TimeStamp [0..1]  </td></tr>
+  <tr><td align="left">  13 updated : TimeStamp [0..1]  </td></tr>
+  <tr><td align="left">  14 credits : credits [0..1]  </td></tr>
+  <tr><td align="left">  15 tools : tool [0..*]  </td></tr>
+  <tr><td align="left">  16 analysis : analysis [0..1]  </td></tr>
+  <tr><td align="left">  17 affects : affected [0..*]  </td></tr>
+  <tr><td align="left">  18 properties : property [0..*]  </td></tr>
+</table>>]
+
+n54 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  releaseNotes : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 type : releaseType  </td></tr>
+  <tr><td align="left">  2 title : String  </td></tr>
+  <tr><td align="left">  3 featuredImage : URL  </td></tr>
+  <tr><td align="left">  4 socialImage : URL  </td></tr>
+  <tr><td align="left">  5 description : String  </td></tr>
+  <tr><td align="left">  6 timestamp : TimeStamp  </td></tr>
+  <tr><td align="left">  7 aliases : String [0..*]  </td></tr>
+  <tr><td align="left">  8 tags : String [0..*]  </td></tr>
+  <tr><td align="left">  9 resolves : issue [0..*]  </td></tr>
+  <tr><td align="left">  10 notes : note [0..*]  </td></tr>
+  <tr><td align="left">  11 properties : property [0..*]  </td></tr>
+</table>>]
+
+n55 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  componentEvidence : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 licenses : licenseChoice [0..*]  </td></tr>
+  <tr><td align="left">  2 copyright : copyright [0..*]  </td></tr>
+</table>>]
+
+n56 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  service : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String  </td></tr>
+  <tr><td align="left">  2 bom-ref : refType [0..1]  </td></tr>
+  <tr><td align="left">  3 provider : organizationalEntity [0..1]  </td></tr>
+  <tr><td align="left">  4 group : String [0..1]  </td></tr>
+  <tr><td align="left">  5 version : String [0..1]  </td></tr>
+  <tr><td align="left">  6 description : String [0..1]  </td></tr>
+  <tr><td align="left">  7 authenticated : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  8 x-trust-boundary : Boolean [0..1]  </td></tr>
+  <tr><td align="left">  9 data : dataClassification [0..*]  </td></tr>
+  <tr><td align="left">  10 licenses : licenseChoice [0..*]  </td></tr>
+  <tr><td align="left">  11 externalReferences : externalReference [0..*]  </td></tr>
+  <tr><td align="left">  12 services : service [0..*]  </td></tr>
+  <tr><td align="left">  13 releaseNotes : releaseNotes [0..1]  </td></tr>
+  <tr><td align="left">  14 properties : property [0..*]  </td></tr>
+  <tr><td align="left">  15 signature : String [0..1]  </td></tr>
+  <tr><td align="left">  16 endpoints : URL [0..*]  </td></tr>
+</table>>]
+
+n57 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  versionExpression : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 version : version  </td></tr>
+  <tr><td align="left">  2 range : range  </td></tr>
+</table>>]
+
+n58 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  affectedVersion : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 expression : versionExpression  </td></tr>
+  <tr><td align="left">  2 status : affectedStatus  </td></tr>
+</table>>]
+
+n59 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  credits : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 organizations : organizationalEntity [0..*]  </td></tr>
+  <tr><td align="left">  2 individuals : organizationalContact [0..*]  </td></tr>
+</table>>]
+
+n60 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  analysis : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 state : impactAnalysisState  </td></tr>
+  <tr><td align="left">  2 justification : impactAnalysisJustification  </td></tr>
+  <tr><td align="left">  3 response : response [0..*]  </td></tr>
+  <tr><td align="left">  4 detail : String  </td></tr>
+</table>>]
+
+n64 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  affected : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 ref : refType  </td></tr>
+  <tr><td align="left">  2 versions : affectedVersion [0..*]  </td></tr>
+</table>>]
+
+n68 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  pedigree : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 ancestors : component [0..*]  </td></tr>
+  <tr><td align="left">  2 descendants : component [0..*]  </td></tr>
+  <tr><td align="left">  3 variants : component [0..*]  </td></tr>
+  <tr><td align="left">  4 commits : commit [0..*]  </td></tr>
+  <tr><td align="left">  5 patches : patch [0..*]  </td></tr>
+  <tr><td align="left">  6 notes : String [0..1]  </td></tr>
+</table>>]
+
+  n0 -> n5 [label=metadata, headlabel="0..1", taillabel="1"]
+  n0 -> n7 [label=components, headlabel="0..*", taillabel="1"]
+  n0 -> n56 [label=services, headlabel="0..*", taillabel="1"]
+  n0 -> n49 [label=externalReferences, headlabel="0..*", taillabel="1"]
+  n0 -> n37 [label=dependencies, headlabel="0..*", taillabel="1"]
+  n0 -> n38 [label=compositions, headlabel="0..*", taillabel="1"]
+  n0 -> n53 [label=vulnerabilities, headlabel="0..*", taillabel="1"]
+  n5 -> n6 [label=tools, headlabel="0..*", taillabel="1"]
+  n5 -> n10 [label=authors, headlabel="0..*", taillabel="1"]
+  n5 -> n7 [label=component, headlabel="0..1", taillabel="1"]
+  n5 -> n9 [label=manufacture, headlabel="0..1", taillabel="1"]
+  n5 -> n9 [label=supplier, headlabel="0..1", taillabel="1"]
+  n5 -> n45 [label=licenses, headlabel="0..*", taillabel="1"]
+  n5 -> n11 [label=properties, headlabel="0..*", taillabel="1"]
+  n6 -> n36 [label=hashes, headlabel="0..*", taillabel="1"]
+  n6 -> n49 [label=externalReferences, headlabel="0..*", taillabel="1"]
+  n7 -> n9 [label=supplier, headlabel="0..1", taillabel="1"]
+  n7 -> n36 [label=hashes, headlabel="0..1", taillabel="1"]
+  n7 -> n45 [label=licenses, headlabel="0..*", taillabel="1"]
+  n7 -> n41 [label=swid, headlabel="0..1", taillabel="1"]
+  n7 -> n68 [label=pedigree, headlabel="0..1", taillabel="1"]
+  n7 -> n49 [label=externalReferences, headlabel="0..*", taillabel="1"]
+  n7 -> n7 [label=components, headlabel="0..*", taillabel="1"]
+  n7 -> n55 [label=evidence, headlabel="0..1", taillabel="1"]
+  n7 -> n54 [label=releasetNotes, headlabel="0..1", taillabel="1"]
+  n7 -> n11 [label=properties, headlabel="0..*", taillabel="1"]
+  n9 -> n10 [label=contact, headlabel="0..*", taillabel="1"]
+  n25 -> n24 [label=text, headlabel="1", taillabel="1"]
+  n27 -> n24 [label=text, headlabel="1", taillabel="1"]
+  n34 -> n17 [label=source, headlabel="1", taillabel="1"]
+  n35 -> n23 [label=author, headlabel="1", taillabel="1"]
+  n35 -> n23 [label=committer, headlabel="1", taillabel="1"]
+  n40 -> n17 [label=source, headlabel="1", taillabel="1"]
+  n41 -> n24 [label=text, headlabel="1", taillabel="1"]
+  n44 -> n43 [label=selector, headlabel="1", taillabel="1"]
+  n44 -> n24 [label=text, headlabel="1", taillabel="1"]
+  n45 -> n44 [label=license, headlabel="1", taillabel="1"]
+  n46 -> n48 [label=source, headlabel="0..1", taillabel="1"]
+  n49 -> n36 [label=hashes, headlabel="0..*", taillabel="1"]
+  n52 -> n25 [label=diff, headlabel="1", taillabel="1"]
+  n52 -> n46 [label=resolves, headlabel="0..*", taillabel="1"]
+  n53 -> n17 [label=source, headlabel="0..1", taillabel="1"]
+  n53 -> n40 [label=references, headlabel="0..*", taillabel="1"]
+  n53 -> n34 [label=ratings, headlabel="0..*", taillabel="1"]
+  n53 -> n20 [label=advisories, headlabel="0..*", taillabel="1"]
+  n53 -> n59 [label=credits, headlabel="0..1", taillabel="1"]
+  n53 -> n6 [label=tools, headlabel="0..*", taillabel="1"]
+  n53 -> n60 [label=analysis, headlabel="0..1", taillabel="1"]
+  n53 -> n64 [label=affects, headlabel="0..*", taillabel="1"]
+  n53 -> n11 [label=properties, headlabel="0..*", taillabel="1"]
+  n54 -> n46 [label=resolves, headlabel="0..*", taillabel="1"]
+  n54 -> n27 [label=notes, headlabel="0..*", taillabel="1"]
+  n54 -> n11 [label=properties, headlabel="0..*", taillabel="1"]
+  n55 -> n45 [label=licenses, headlabel="0..*", taillabel="1"]
+  n55 -> n39 [label=copyright, headlabel="0..*", taillabel="1"]
+  n56 -> n9 [label=provider, headlabel="0..1", taillabel="1"]
+  n56 -> n31 [label=data, headlabel="0..*", taillabel="1"]
+  n56 -> n45 [label=licenses, headlabel="0..*", taillabel="1"]
+  n56 -> n49 [label=externalReferences, headlabel="0..*", taillabel="1"]
+  n56 -> n56 [label=services, headlabel="0..*", taillabel="1"]
+  n56 -> n54 [label=releaseNotes, headlabel="0..1", taillabel="1"]
+  n56 -> n11 [label=properties, headlabel="0..*", taillabel="1"]
+  n58 -> n57 [label=expression, headlabel="1", taillabel="1"]
+  n59 -> n9 [label=organizations, headlabel="0..*", taillabel="1"]
+  n59 -> n10 [label=individuals, headlabel="0..*", taillabel="1"]
+  n64 -> n58 [label=versions, headlabel="0..*", taillabel="1"]
+  n68 -> n7 [label=ancestors, headlabel="0..*", taillabel="1"]
+  n68 -> n7 [label=descendants, headlabel="0..*", taillabel="1"]
+  n68 -> n7 [label=variants, headlabel="0..*", taillabel="1"]
+  n68 -> n35 [label=commits, headlabel="0..*", taillabel="1"]
+  n68 -> n52 [label=patches, headlabel="0..*", taillabel="1"]
+}

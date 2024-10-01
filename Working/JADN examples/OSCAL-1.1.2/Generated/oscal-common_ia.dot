@@ -1,0 +1,58 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common
+# roots: ['Base64Datatype', 'BooleanDatatype', 'DateDatatype', 'DateTimeWithTimezoneDatatype', 'EmailAddressDatatype', 'Json-schema-directive', 'NonNegativeIntegerDatatype', 'PositiveIntegerDatatype', 'TokenDatatype', 'URIDatatype', 'UUIDDatatype']
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<b>Base64Datatype : String{pattern="^[0-9A-Za-z+/]+={0,2}$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n1 [label=<<b>BooleanDatatype : Boolean</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n2 [label=<<b>DateDatatype : String{pattern="^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))?$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n3 [label=<<b>DateTimeWithTimezoneDatatype : String{pattern="^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))$"} /date-time</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  EmailAddressDatatype : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : StringDatatype  </td></tr>
+  <tr><td align="left">  2  : String  </td></tr>
+</table>>]
+
+n5 [label=<<b>StringDatatype : String{pattern="^\S(.*\S)?$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Json-schema-directive : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : URIReferenceDatatype  </td></tr>
+</table>>]
+
+n7 [label=<<b>URIReferenceDatatype : String /uri-reference</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  NonNegativeIntegerDatatype : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : IntegerDatatype  </td></tr>
+  <tr><td align="left">  2  : Number  </td></tr>
+</table>>]
+
+n9 [label=<<b>IntegerDatatype : Integer</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n10 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  PositiveIntegerDatatype : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : IntegerDatatype  </td></tr>
+  <tr><td align="left">  2  : Number  </td></tr>
+</table>>]
+
+n11 [label=<<b>TokenDatatype : String{pattern="^(\p{L}|_)(\p{L}|\p{N}|[.\-_])*$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n12 [label=<<b>URIDatatype : String{pattern="^[a-zA-Z][a-zA-Z0-9+\-.]+:.+$"} /uri</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n13 [label=<<b>UUIDDatatype : String{pattern="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[45][0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+  n4 -> n5 [label=c1, headlabel="1", taillabel="1"]
+  n6 -> n7 [label=alias, headlabel="1", taillabel="1"]
+  n8 -> n9 [label=c1, headlabel="1", taillabel="1"]
+  n10 -> n9 [label=c1, headlabel="1", taillabel="1"]
+}
