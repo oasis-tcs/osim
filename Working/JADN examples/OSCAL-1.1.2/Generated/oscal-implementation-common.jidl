@@ -1,0 +1,139 @@
+     package: "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common"
+  namespaces: [["c", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common"], ["m", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata"]]
+      config: {"$MaxString": 1000, "$Sys": ".", "$TypeName": "^[$A-Z][-.$A-Za-z0-9]{0,96}$", "$FieldName": "^[$a-z][-_$A-Za-z0-9]{0,63}$"}
+       roots: ["Implementation-status", "Inventory-item", "Set-parameter", "System-component", "System-id", "System-user"]
+
+Implementation-status = Record                               // Indicates the degree to which the a given control is implemented.
+   1 state                    Implementation-status.state    // Identifies the implementation status of the control or control objective.
+   2 remarks                  m:Remarks optional
+
+Implementation-status.state = Choice(anyOf)                  // Identifies the implementation status of the control or control objective.
+   1  c:TokenDatatype                                        // c1::
+   2  Implementation-status.state.2                          // c2::
+
+Implementation-status.state.2 = Enumerated
+   1 implemented
+   2 partial
+   3 planned
+   4 alternative
+   5 not-applicable
+
+Inventory-item = Record                                      // A single managed inventory item within the system.
+   1 uuid                     c:UUIDDatatype                 // A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this inventory item elsewhere in this or other OSCAL instances. The locally defined UUID of the inventory item can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+   2 description              String                         // A summary of the inventory item stating its purpose within the system.
+   3 props                    m:Property [0..*]
+   4 links                    m:Link [0..*]
+   5 responsible-parties      m:Responsible-party [0..*]
+   6 implemented-components   Inventory-item.implemented-components [0..*]
+   7 remarks                  m:Remarks optional
+
+Inventory-item.implemented-components = Record               // The set of components that are implemented in a given system inventory item.
+   1 component-uuid           c:UUIDDatatype                 // A machine-oriented identifier reference to a component that is implemented as part of an inventory item.
+   2 props                    m:Property [0..*]
+   3 links                    m:Link [0..*]
+   4 responsible-parties      m:Responsible-party [0..*]
+   5 remarks                  m:Remarks optional
+
+Set-parameter = Record                                       // Identifies the parameter that will be set by the enclosed value.
+   1 param-id                 c:TokenDatatype                // A human-oriented reference to a parameter within a control, who's catalog has been imported into the current implementation context.
+   2 values                   c:StringDatatype [1..*]
+   3 remarks                  m:Remarks optional
+
+System-component = Record                                    // A defined component that can be part of an implemented system.
+   1 uuid                     c:UUIDDatatype                 // A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this component elsewhere in this or other OSCAL instances. The locally defined UUID of the component can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+   2 type                     System-component.type          // A category describing the purpose of the component.
+   3 title                    String                         // A human readable name for the system component.
+   4 description              String                         // A description of the component, including information about its function.
+   5 purpose                  String optional                // A summary of the technological or business purpose of the component.
+   6 props                    m:Property [0..*]
+   7 links                    m:Link [0..*]
+   8 status                   System-component.status        // Describes the operational status of the system component.
+   9 responsible-roles        m:Responsible-role [0..*]
+  10 protocols                Protocol [0..*]
+  11 remarks                  m:Remarks optional
+
+System-component.type = Choice(anyOf)                        // A category describing the purpose of the component.
+   1  c:StringDatatype                                       // c1::
+   2  System-component.type.2                                // c2::
+
+System-component.type.2 = Enumerated
+   1 this-system
+   2 system
+   3 interconnection
+   4 software
+   5 hardware
+   6 service
+   7 policy
+   8 physical
+   9 process-procedure
+  10 plan
+  11 guidance
+  12 standard
+  13 validation
+  14 network
+
+System-component.status = Record                             // Describes the operational status of the system component.
+   1 state                    System-component.status.state  // The operational status.
+   2 remarks                  m:Remarks optional
+
+System-component.status.state = Choice(allOf)                // The operational status.
+   1  c:TokenDatatype                                        // c1::
+   2  System-component.status.state.2                        // c2::
+
+System-component.status.state.2 = Enumerated
+   1 under-development
+   2 operational
+   3 disposition
+   4 other
+
+Protocol = Record                                            // Information about the protocol used to provide a service.
+   1 uuid                     c:UUIDDatatype optional        // A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this service protocol information elsewhere in this or other OSCAL instances. The locally defined UUID of the service protocol can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+   2 name                     c:StringDatatype               // The common name of the protocol, which should be the appropriate "service name" from the IANA Service Name and Transport Protocol Port Number Registry.
+   3 title                    String optional                // A human readable name for the protocol (e.g., Transport Layer Security).
+   4 port-ranges              Port-range [0..*]
+
+Port-range = Record                                          // Where applicable this is the IPv4 port range on which the service operates.
+   1 start                    c:NonNegativeIntegerDatatype optional // Indicates the starting port number in a port range
+   2 end                      c:NonNegativeIntegerDatatype optional // Indicates the ending port number in a port range
+   3 transport                Port-range.transport optional  // Indicates the transport type.
+
+Port-range.transport = Choice(allOf)                         // Indicates the transport type.
+   1  c:TokenDatatype                                        // c1::
+   2  Port-range.transport.2                                 // c2::
+
+Port-range.transport.2 = Enumerated
+   1 TCP
+   2 UDP
+
+System-id = Record                                           // A human-oriented, globally unique identifier with cross-instance scope that can be used to reference this system identification property elsewhere in this or other OSCAL instances. When referencing an externally defined system identification, the system identification must be used in the context of the external / imported OSCAL instance (e.g., uri-reference). This string should be assigned per-subject, which means it should be consistently used to identify the same system across revisions of the document.
+   1 identifier-type          System-id.identifier-type optional // Identifies the identification system from which the provided identifier was assigned.
+   2 id                       c:StringDatatype
+
+System-id.identifier-type = Choice(anyOf)                    // Identifies the identification system from which the provided identifier was assigned.
+   1  c:URIDatatype                                          // c1::
+   2  System-id.identifier-type.2                            // c2::
+
+System-id.identifier-type.2 = Enumerated
+   1 https://fedramp.gov
+   2 http://fedramp.gov/ns/oscal
+   3 https://ietf.org/rfc/rfc4122
+   4 http://ietf.org/rfc/rfc4122
+
+System-user = Record                                         // A type of user that interacts with the system based on an associated role.
+   1 uuid                     c:UUIDDatatype                 // A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this user class elsewhere in this or other OSCAL instances. The locally defined UUID of the system user can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+   2 title                    String optional                // A name given to the user, which may be used by a tool for display and navigation.
+   3 short-name               c:StringDatatype optional      // A short common name, abbreviation, or acronym for the user.
+   4 description              String optional                // A summary of the user's purpose within the system.
+   5 props                    m:Property [0..*]
+   6 links                    m:Link [0..*]
+   7 role-ids                 m:Role-id [0..*]
+   8 authorized-privileges    Authorized-privilege [0..*]
+   9 remarks                  m:Remarks optional
+
+Authorized-privilege = Record                                // Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.
+   1 title                    String                         // A human readable name for the privilege.
+   2 description              String optional                // A summary of the privilege's purpose within the system.
+   3 functions-performed      Function-performed [1..*]
+
+Function-performed = Choice(allOf)                           // Describes a function performed for a given authorized privilege by this user class.
+   1  c:StringDatatype                                       // alias::

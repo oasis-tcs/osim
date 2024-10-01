@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.gov/ns/oscal/0.0.1/",
+  "title": "OSCAL",
+  "description": "OSCAL - Open Security Controls Assessment Language",
+  "$ref": "#/definitions/OSCAL",
+  "definitions": {
+    "OSCAL": {
+      "title": "OSCAL",
+      "type": "object",
+      "description": "OSCAL document - content must appear in this sequence",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "uuid",
+        "metadata",
+        "body"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "OSCAL model identifier",
+          "enum": [
+            "catalog",
+            "profile",
+            "component",
+            "ssp",
+            "ap",
+            "ar",
+            "poam"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/UUID",
+          "description": "Document instance unique identifier"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Identifying info, roles, parties and locations"
+        },
+        "body": {
+          "$ref": "#/definitions/Model",
+          "description": "Model-specific body"
+        },
+        "back_matter": {
+          "$ref": "#/definitions/Back-matter",
+          "description": "Linked and attached resources"
+        }
+      }
+    },
+    "Model": {
+      "title": "Model",
+      "type": "object",
+      "description": "Model-specific content",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "properties": {
+        "catalog": {
+          "$ref": "#/definitions/Catalog",
+          "description": "Control layer: catalog of controls"
+        },
+        "profile": {
+          "$ref": "#/definitions/Profile",
+          "description": "Control layer: selecting, organizing and tailoring a set of controls"
+        },
+        "component": {
+          "$ref": "#/definitions/Component",
+          "description": "Implementation layer: component definition and configuration"
+        },
+        "ssp": {
+          "$ref": "#/definitions/System-security-plan",
+          "description": "Implementation layer: security implementation of an information system"
+        },
+        "ap": {
+          "$ref": "#/definitions/Assessment-plan",
+          "description": "Assessment layer: scope and activities"
+        },
+        "ar": {
+          "$ref": "#/definitions/Assessment-results",
+          "description": "Assessment layer: information produced from assessment activities"
+        },
+        "poam": {
+          "$ref": "#/definitions/Plan-of-action-and-milestones",
+          "description": "Assessment layer: Plan of action and milestones: findings to be addressed by system owner"
+        }
+      }
+    }
+  },
+  "imports": {
+    "": {}
+  }
+}

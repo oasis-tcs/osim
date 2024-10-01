@@ -1,0 +1,490 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://docs.oasis-open.org/openc2/ns/types/v2.0",
+  "title": "OpenC2 Language Common Types",
+  "version": "0-wd01",
+  "description": "Common Types from the OpenC2 Language Specification version 1.1.  These definitions are referenced by or copied into Profiles",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "$ref": "#/definitions/Artifact"
+    },
+    "command_id": {
+      "$ref": "#/definitions/Command-ID"
+    },
+    "date_time": {
+      "$ref": "#/definitions/Date-Time"
+    },
+    "device": {
+      "$ref": "#/definitions/Device"
+    },
+    "domain_name": {
+      "$ref": "#/definitions/Domain-Name"
+    },
+    "duration": {
+      "$ref": "#/definitions/Duration"
+    },
+    "email_addr": {
+      "$ref": "#/definitions/Email-Addr"
+    },
+    "feature": {
+      "$ref": "#/definitions/Feature"
+    },
+    "features": {
+      "$ref": "#/definitions/Features"
+    },
+    "file": {
+      "$ref": "#/definitions/File"
+    },
+    "idn_domain_name": {
+      "$ref": "#/definitions/IDN-Domain-Name"
+    },
+    "idn_email_addr": {
+      "$ref": "#/definitions/IDN-Email-Addr"
+    },
+    "ipv4_net": {
+      "$ref": "#/definitions/IPv4-Net"
+    },
+    "ipv4_connection": {
+      "$ref": "#/definitions/IPv4-Connection"
+    },
+    "ipv6_net": {
+      "$ref": "#/definitions/IPv6-Net"
+    },
+    "ipv6_connection": {
+      "$ref": "#/definitions/IPv6-Connection"
+    },
+    "iri": {
+      "$ref": "#/definitions/IRI"
+    },
+    "mac_addr": {
+      "$ref": "#/definitions/MAC-Addr"
+    },
+    "nsid": {
+      "$ref": "#/definitions/Nsid"
+    },
+    "process": {
+      "$ref": "#/definitions/Process"
+    },
+    "properties": {
+      "$ref": "#/definitions/Properties"
+    },
+    "response_type": {
+      "$ref": "#/definitions/Response-Type"
+    },
+    "status_code": {
+      "$ref": "#/definitions/Status-Code"
+    },
+    "uri": {
+      "$ref": "#/definitions/URI"
+    },
+    "semver": {
+      "$ref": "#/definitions/SemVer"
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "title": "Artifact",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "mime_type": {
+          "type": "string",
+          "description": "Permitted values specified in the IANA Media Types registry, [[RFC6838]](#rfc6838)",
+          "maxLength": 255
+        },
+        "payload": {
+          "$ref": "#/definitions/Payload",
+          "description": "Choice of literal content or URL"
+        },
+        "hashes": {
+          "$ref": "#/definitions/Hashes",
+          "description": "Hashes of the payload content"
+        }
+      }
+    },
+    "Command-ID": {
+      "title": "Command ID",
+      "type": "string",
+      "description": "Command Identifier",
+      "maxLength": 255,
+      "pattern": "^\\S{0,36}$"
+    },
+    "Date-Time": {
+      "title": "Date Time",
+      "type": "integer",
+      "description": "Date and Time",
+      "minimum": 0
+    },
+    "Device": {
+      "title": "Device",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "hostname": {
+          "$ref": "#/definitions/Hostname",
+          "description": "A hostname that can be used to connect to this device over a network"
+        },
+        "idn_hostname": {
+          "$ref": "#/definitions/IDN-Hostname",
+          "description": "An internationalized hostname that can be used to connect to this device over a network"
+        },
+        "device_id": {
+          "type": "string",
+          "description": "An identifier that refers to this device within an inventory or management system",
+          "maxLength": 255
+        }
+      }
+    },
+    "Domain-Name": {
+      "title": "Domain Name",
+      "type": "string",
+      "description": "[[RFC1034]](#rfc1034), Section 3.5",
+      "format": "hostname",
+      "maxLength": 255
+    },
+    "Duration": {
+      "title": "Duration",
+      "type": "integer",
+      "description": "A length of time",
+      "minimum": 0
+    },
+    "Email-Addr": {
+      "title": "Email Addr",
+      "type": "string",
+      "description": "Email address, [[RFC5322]](#rfc5322), Section 3.4.1",
+      "format": "email",
+      "maxLength": 255
+    },
+    "Feature": {
+      "title": "Feature",
+      "type": "string",
+      "description": "Specifies the results to be returned from a query features Command",
+      "enum": [
+        "versions",
+        "profiles",
+        "pairs",
+        "rate_limit"
+      ]
+    },
+    "Features": {
+      "title": "Features",
+      "type": "array",
+      "description": "An array of names used to query a Consumer for its supported capabilities.",
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/definitions/Feature"
+      }
+    },
+    "File": {
+      "title": "File",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the file as defined in the file system",
+          "maxLength": 255
+        },
+        "path": {
+          "type": "string",
+          "description": "The absolute path to the location of the file in the file system",
+          "maxLength": 255
+        },
+        "hashes": {
+          "$ref": "#/definitions/Hashes",
+          "description": "One or more cryptographic hash codes of the file contents"
+        }
+      }
+    },
+    "IDN-Domain-Name": {
+      "title": "IDN Domain Name",
+      "type": "string",
+      "description": "Internationalized Domain Name, [[RFC5890]](#rfc5890), Section 2.3.2.3",
+      "format": "idn-hostname",
+      "maxLength": 255
+    },
+    "IDN-Email-Addr": {
+      "title": "IDN Email Addr",
+      "type": "string",
+      "description": "Internationalized email address, [[RFC6531]](#rfc6531)",
+      "format": "idn-email",
+      "maxLength": 255
+    },
+    "IPv4-Net": {
+      "title": "IPv4 Net",
+      "type": "string",
+      "description": "IPv4 address and prefix length",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])(\\/(3[0-2]|[0-2]?[0-9]))?$"
+    },
+    "IPv4-Connection": {
+      "title": "IPv4 Connection",
+      "type": "object",
+      "description": "5-tuple that specifies a tcp/ip connection",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "src_addr": {
+          "$ref": "#/definitions/IPv4-Net",
+          "description": "IPv4 source address range"
+        },
+        "src_port": {
+          "$ref": "#/definitions/Port",
+          "description": "Source service per [[RFC6335]](#rfc6335)"
+        },
+        "dst_addr": {
+          "$ref": "#/definitions/IPv4-Net",
+          "description": "IPv4 destination address range"
+        },
+        "dst_port": {
+          "$ref": "#/definitions/Port",
+          "description": "Destination service per [[RFC6335]](#rfc6335)"
+        },
+        "protocol": {
+          "$ref": "#/definitions/L4-Protocol",
+          "description": "Layer 4 protocol (e.g., TCP) - see [Section 3.4.2.10](#34210-l4-protocol)"
+        }
+      }
+    },
+    "IPv6-Net": {
+      "title": "IPv6 Net",
+      "type": "string",
+      "description": "IPv6 address and prefix length",
+      "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(%.+)?s*(\\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$"
+    },
+    "IPv6-Connection": {
+      "title": "IPv6 Connection",
+      "type": "object",
+      "description": "5-tuple that specifies a tcp/ip connection",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "src_addr": {
+          "$ref": "#/definitions/IPv6-Net",
+          "description": "IPv6 source address range"
+        },
+        "src_port": {
+          "$ref": "#/definitions/Port",
+          "description": "Source service per [[RFC6335]](#rfc6335)"
+        },
+        "dst_addr": {
+          "$ref": "#/definitions/IPv6-Net",
+          "description": "IPv6 destination address range"
+        },
+        "dst_port": {
+          "$ref": "#/definitions/Port",
+          "description": "Destination service per [[RFC6335]](#rfc6335)"
+        },
+        "protocol": {
+          "$ref": "#/definitions/L4-Protocol",
+          "description": "Layer 4 protocol (e.g., TCP) - [Section 3.4.2.10](#34210-l4-protocol)"
+        }
+      }
+    },
+    "IRI": {
+      "title": "IRI",
+      "type": "string",
+      "description": "Internationalized Resource Identifier, [[RFC3987]](#rfc3987).",
+      "format": "iri",
+      "maxLength": 255
+    },
+    "MAC-Addr": {
+      "title": "MAC Addr",
+      "type": "string",
+      "description": "Media Access Control / Extended Unique Identifier address - EUI-48 or EUI-64 as defined in [EUI](#eui)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}[0-9A-Fa-f]{2}(([:-][0-9A-Fa-f]{2}){2})?$"
+    },
+    "Nsid": {
+      "title": "Nsid",
+      "type": "string",
+      "description": "A short identifier that refers to a namespace.",
+      "minLength": 1,
+      "maxLength": 16
+    },
+    "Process": {
+      "title": "Process",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "description": "Process ID of the process",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the process",
+          "maxLength": 255
+        },
+        "cwd": {
+          "type": "string",
+          "description": "Current working directory of the process",
+          "maxLength": 255
+        },
+        "executable": {
+          "$ref": "#/definitions/File",
+          "description": "Executable that was executed to start the process"
+        },
+        "parent": {
+          "$ref": "#/definitions/Process",
+          "description": "Process that spawned this one"
+        },
+        "command_line": {
+          "type": "string",
+          "description": "The full command line invocation used to start this process, including all arguments",
+          "maxLength": 255
+        }
+      }
+    },
+    "Properties": {
+      "title": "Properties",
+      "type": "array",
+      "description": "A list of names that uniquely identify properties supported by a Consumer.",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Response-Type": {
+      "title": "Response Type",
+      "type": "string",
+      "enum": [
+        "none",
+        "ack",
+        "status",
+        "complete"
+      ]
+    },
+    "Status-Code": {
+      "title": "Status Code",
+      "type": "integer",
+      "enum": [
+        102,
+        200,
+        201,
+        400,
+        401,
+        403,
+        404,
+        500,
+        501,
+        503
+      ]
+    },
+    "URI": {
+      "title": "URI",
+      "type": "string",
+      "description": "Uniform Resource Identifier, [[RFC3986]](#rfc3986).",
+      "format": "uri",
+      "maxLength": 255
+    },
+    "SemVer": {
+      "title": "SemVer",
+      "type": "string",
+      "description": "Major.Minor.Patch version number",
+      "maxLength": 255,
+      "pattern": "^(\\d{1,4})(\\.(\\d{1,6})){0,2}$"
+    },
+    "Hashes": {
+      "title": "Hashes",
+      "type": "object",
+      "description": "Cryptographic hash values",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 100,
+      "properties": {
+        "md5": {
+          "type": "string",
+          "description": "MD5 hash as defined in [[RFC1321]](#rfc1321)",
+          "contentEncoding": "base16"
+        },
+        "sha1": {
+          "type": "string",
+          "description": "SHA1 hash as defined in [[RFC6234]](#rfc6234)",
+          "contentEncoding": "base16"
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA256 hash as defined in [[RFC6234]](#rfc6234)",
+          "contentEncoding": "base16"
+        }
+      }
+    },
+    "Hostname": {
+      "title": "Hostname",
+      "type": "string",
+      "description": "Internet host name as specified in [[RFC1123]](#rfc1123)",
+      "format": "hostname",
+      "maxLength": 255
+    },
+    "IDN-Hostname": {
+      "title": "IDN Hostname",
+      "type": "string",
+      "description": "Internationalized Internet host name as specified in [[RFC5890]](#rfc5890), Section 2.3.2.3.",
+      "format": "idn-hostname",
+      "maxLength": 255
+    },
+    "IPv4-Addr": {
+      "title": "IPv4 Addr",
+      "type": "string",
+      "description": "32 bit IPv4 address as defined in [[RFC0791]](#rfc0791)",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])$"
+    },
+    "IPv6-Addr": {
+      "title": "IPv6 Addr",
+      "type": "string",
+      "description": "128 bit IPv6 address as defined in [[RFC8200]](#rfc8200)",
+      "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(%.+)$"
+    },
+    "L4-Protocol": {
+      "title": "L4 Protocol",
+      "type": "string",
+      "description": "Value of the protocol (IPv4) or next header (IPv6) field in an IP packet. Any IANA value, [[RFC5237]](#rfc5237)",
+      "enum": [
+        "icmp",
+        "tcp",
+        "udp",
+        "sctp"
+      ]
+    },
+    "Payload": {
+      "title": "Payload",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "properties": {
+        "bin": {
+          "type": "string",
+          "description": "Specifies the data contained in the artifact",
+          "contentEncoding": "base64url"
+        },
+        "url": {
+          "$ref": "#/definitions/URI",
+          "description": "MUST be a valid URL that resolves to the un-encoded content"
+        }
+      }
+    },
+    "Port": {
+      "title": "Port",
+      "type": "integer",
+      "description": "Transport Protocol Port Number, [[RFC6335]](#rfc6335)",
+      "minimum": 0,
+      "maximum": 65535
+    }
+  }
+}
