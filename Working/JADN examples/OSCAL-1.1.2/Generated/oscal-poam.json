@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-poam",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Plan-of-action-and-milestones": {
+      "title": "Plan of action and milestones",
+      "type": "object",
+      "description": "A plan of action and milestones which identifies initial and residual risks, deviations, and disposition, such as those required by FedRAMP.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata",
+        "poam-items"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with instancescope that can be used to reference this POA&M instance in this OSCAL instance. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "import-ssp": {
+          "$ref": "#/imports/ac/Import-ssp",
+          "description": ""
+        },
+        "system-id": {
+          "$ref": "#/imports/ic/System-id",
+          "description": ""
+        },
+        "local-definitions": {
+          "$ref": "#/definitions/Local-definitions",
+          "description": ""
+        },
+        "observations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Observation",
+            "description": ""
+          }
+        },
+        "risks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Risk",
+            "description": ""
+          }
+        },
+        "findings": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Finding",
+            "description": ""
+          }
+        },
+        "poam-items": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Poam-item",
+            "description": ""
+          }
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Local-definitions": {
+      "title": "Local definitions",
+      "type": "object",
+      "description": "Allows components, and inventory-items to be defined within the POA&M for circumstances where no OSCAL-based SSP exists, or is not delivered with the POA&M.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-component",
+            "description": ""
+          }
+        },
+        "inventory-items": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Inventory-item",
+            "description": ""
+          }
+        },
+        "assessment-assets": {
+          "$ref": "#/imports/ac/Assessment-assets",
+          "description": ""
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Poam-item": {
+      "title": "Poam item",
+      "type": "object",
+      "description": "Describes an individual POA&M item.",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with instance scope that can be used to reference this POA&M item entry in this OSCAL instance. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or name for this POA&M item .",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of POA&M item.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "origins": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Poam-item.origins",
+            "description": ""
+          }
+        },
+        "related-findings": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Poam-item.related-findings",
+            "description": ""
+          }
+        },
+        "related-observations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Poam-item.related-observations",
+            "description": ""
+          }
+        },
+        "related-risks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Poam-item.related-risks",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Poam-item.origins": {
+      "title": "Poam item.origins",
+      "type": "object",
+      "description": "Identifies the source of the finding, such as a tool or person.",
+      "additionalProperties": false,
+      "required": [
+        "actors"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "actors": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Origin-actor",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Poam-item.related-findings": {
+      "title": "Poam item.related findings",
+      "type": "object",
+      "description": "Relates the poam-item to referenced finding(s).",
+      "additionalProperties": false,
+      "required": [
+        "finding-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "finding-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a finding defined in the list of findings."
+        }
+      }
+    },
+    "Poam-item.related-observations": {
+      "title": "Poam item.related observations",
+      "type": "object",
+      "description": "Relates the poam-item to a set of referenced observations that were used to determine the finding.",
+      "additionalProperties": false,
+      "required": [
+        "observation-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "observation-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an observation defined in the list of observations."
+        }
+      }
+    },
+    "Poam-item.related-risks": {
+      "title": "Poam item.related risks",
+      "type": "object",
+      "description": "Relates the finding to a set of referenced risks that were used to determine the finding.",
+      "additionalProperties": false,
+      "required": [
+        "risk-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "risk-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a risk defined in the list of risks."
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Remarks": {},
+      "Property": {},
+      "Link": {}
+    },
+    "cc": {},
+    "ic": {
+      "System-id": {},
+      "System-component": {},
+      "Inventory-item": {}
+    },
+    "ac": {
+      "Import-ssp": {},
+      "Observation": {},
+      "Risk": {},
+      "Finding": {},
+      "Assessment-assets": {},
+      "Origin-actor": {}
+    },
+    "c": {
+      "UUIDDatatype": {}
+    }
+  }
+}

@@ -1,0 +1,188 @@
+# package: http://docs.oasis-open.org/openc2/ns/types/v2.0
+# version: 0-wd01
+# title: OpenC2 Language Common Types
+# description: Common Types from the OpenC2 Language Specification version 1.1.  These definitions are referenced by or copied into Profiles
+# exports: ['Artifact', 'Command-ID', 'Date-Time', 'Device', 'Domain-Name', 'Duration', 'Email-Addr', 'Feature', 'Features', 'File', 'IDN-Domain-Name', 'IDN-Email-Addr', 'IPv4-Net', 'IPv4-Connection', 'IPv6-Net', 'IPv6-Connection', 'IRI', 'MAC-Addr', 'Nsid', 'Process', 'Properties', 'Response-Type', 'Status-Code', 'URI', 'SemVer']
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Artifact : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 mime_type : String [0..1]  </td></tr>
+  <tr><td align="left">  2 payload : Payload [0..1]  </td></tr>
+  <tr><td align="left">  3 hashes : Hashes [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Device : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 hostname : Hostname [0..1]  </td></tr>
+  <tr><td align="left">  2 idn_hostname : IDN-Hostname [0..1]  </td></tr>
+  <tr><td align="left">  3 device_id : String [0..1]  </td></tr>
+</table>>]
+
+n2 [label=<<b>Domain-Name : String /hostname</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n3 [label=<<b>Email-Addr : String /email</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Features : ArrayOf(Feature) unique  </b></td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  File : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 name : String [0..1]  </td></tr>
+  <tr><td align="left">  2 path : String [0..1]  </td></tr>
+  <tr><td align="left">  3 hashes : Hashes [0..1]  </td></tr>
+</table>>]
+
+n6 [label=<<b>IDN-Domain-Name : String /idn-hostname</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n7 [label=<<b>IDN-Email-Addr : String /idn-email</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  IPv4-Net : Array /ipv4-net  </b></td></tr><hr/>
+  <tr><td align="left">  1  : IPv4-Addr  </td></tr>
+  <tr><td align="left">  2  : Integer [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  IPv4-Connection : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 src_addr : IPv4-Net [0..1]  </td></tr>
+  <tr><td align="left">  2 src_port : Port [0..1]  </td></tr>
+  <tr><td align="left">  3 dst_addr : IPv4-Net [0..1]  </td></tr>
+  <tr><td align="left">  4 dst_port : Port [0..1]  </td></tr>
+  <tr><td align="left">  5 protocol : L4-Protocol [0..1]  </td></tr>
+</table>>]
+
+n10 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  IPv6-Net : Array /ipv6-net  </b></td></tr><hr/>
+  <tr><td align="left">  1  : IPv6-Addr  </td></tr>
+  <tr><td align="left">  2  : Integer [0..1]  </td></tr>
+</table>>]
+
+n11 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  IPv6-Connection : Record{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 src_addr : IPv6-Net [0..1]  </td></tr>
+  <tr><td align="left">  2 src_port : Port [0..1]  </td></tr>
+  <tr><td align="left">  3 dst_addr : IPv6-Net [0..1]  </td></tr>
+  <tr><td align="left">  4 dst_port : Port [0..1]  </td></tr>
+  <tr><td align="left">  5 protocol : L4-Protocol [0..1]  </td></tr>
+</table>>]
+
+n12 [label=<<b>IRI : String /iri</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n13 [label=<<b>MAC-Addr : Binary /eui</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n14 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Process : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 pid : Integer{0..*} [0..1]  </td></tr>
+  <tr><td align="left">  2 name : String [0..1]  </td></tr>
+  <tr><td align="left">  3 cwd : String [0..1]  </td></tr>
+  <tr><td align="left">  4 executable : File [0..1]  </td></tr>
+  <tr><td align="left">  5 parent : Process [0..1]  </td></tr>
+  <tr><td align="left">  6 command_line : String [0..1]  </td></tr>
+</table>>]
+
+n15 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Properties : ArrayOf(String){1..*} unique  </b></td></tr>
+</table>>]
+
+n16 [label=<<b>URI : String /uri</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n17 [label=<<b>Date-Time : Integer{0..*}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n18 [label=<<b>Duration : Integer{0..*}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n19 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Feature : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 versions  </td></tr>
+  <tr><td align="left">  2 profiles  </td></tr>
+  <tr><td align="left">  3 pairs  </td></tr>
+  <tr><td align="left">  4 rate_limit  </td></tr>
+</table>>]
+
+n20 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Hashes : Map{1..*}  </b></td></tr><hr/>
+  <tr><td align="left">  1 md5 : Binary{16..16} /x [0..1]  </td></tr>
+  <tr><td align="left">  2 sha1 : Binary{20..20} /x [0..1]  </td></tr>
+  <tr><td align="left">  3 sha256 : Binary{32..32} /x [0..1]  </td></tr>
+</table>>]
+
+n21 [label=<<b>Hostname : String /hostname</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n22 [label=<<b>IDN-Hostname : String /idn-hostname</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n23 [label=<<b>IPv4-Addr : Binary /ipv4-addr</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n24 [label=<<b>IPv6-Addr : Binary /ipv6-addr</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n25 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  L4-Protocol : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 icmp  </td></tr>
+  <tr><td align="left">  6 tcp  </td></tr>
+  <tr><td align="left">  17 udp  </td></tr>
+  <tr><td align="left">  132 sctp  </td></tr>
+</table>>]
+
+n26 [label=<<b>Nsid : String{1..16}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n27 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Payload : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 bin : Binary  </td></tr>
+  <tr><td align="left">  2 url : URI  </td></tr>
+</table>>]
+
+n28 [label=<<b>Port : Integer{0..65535}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n29 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Response-Type : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  0 none  </td></tr>
+  <tr><td align="left">  1 ack  </td></tr>
+  <tr><td align="left">  2 status  </td></tr>
+  <tr><td align="left">  3 complete  </td></tr>
+</table>>]
+
+n30 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Status-Code : Enumerated.ID  </b></td></tr><hr/>
+  <tr><td align="left">  102   </td></tr>
+  <tr><td align="left">  200   </td></tr>
+  <tr><td align="left">  201   </td></tr>
+  <tr><td align="left">  400   </td></tr>
+  <tr><td align="left">  401   </td></tr>
+  <tr><td align="left">  403   </td></tr>
+  <tr><td align="left">  404   </td></tr>
+  <tr><td align="left">  500   </td></tr>
+  <tr><td align="left">  501   </td></tr>
+  <tr><td align="left">  503   </td></tr>
+</table>>]
+
+n31 [label=<<b>Command-ID : String{pattern="^\S{0,36}$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+n32 [label=<<b>SemVer : String{pattern="^(\d{1,4})(\.(\d{1,6})){0,2}$"}</b>>, shape=ellipse, style=filled, fillcolor=palegreen]
+
+  n0 -> n27 [label=payload, headlabel="0..1", taillabel="1"]
+  n0 -> n20 [label=hashes, headlabel="0..1", taillabel="1"]
+  n1 -> n21 [label=hostname, headlabel="0..1", taillabel="1"]
+  n1 -> n22 [label=idn_hostname, headlabel="0..1", taillabel="1"]
+  n4 -> n19 [label=value, headlabel="1", taillabel="1"]
+  n5 -> n20 [label=hashes, headlabel="0..1", taillabel="1"]
+  n8 -> n23 [label=ipv4_addr, headlabel="1", taillabel="1"]
+  n9 -> n8 [label=src_addr, headlabel="0..1", taillabel="1"]
+  n9 -> n28 [label=src_port, headlabel="0..1", taillabel="1"]
+  n9 -> n8 [label=dst_addr, headlabel="0..1", taillabel="1"]
+  n9 -> n28 [label=dst_port, headlabel="0..1", taillabel="1"]
+  n9 -> n25 [label=protocol, headlabel="0..1", taillabel="1"]
+  n10 -> n24 [label=ipv6_addr, headlabel="1", taillabel="1"]
+  n11 -> n10 [label=src_addr, headlabel="0..1", taillabel="1"]
+  n11 -> n28 [label=src_port, headlabel="0..1", taillabel="1"]
+  n11 -> n10 [label=dst_addr, headlabel="0..1", taillabel="1"]
+  n11 -> n28 [label=dst_port, headlabel="0..1", taillabel="1"]
+  n11 -> n25 [label=protocol, headlabel="0..1", taillabel="1"]
+  n14 -> n5 [label=executable, headlabel="0..1", taillabel="1"]
+  n14 -> n14 [label=parent, headlabel="0..1", taillabel="1"]
+  n27 -> n16 [label=url, headlabel="1", taillabel="1"]
+}

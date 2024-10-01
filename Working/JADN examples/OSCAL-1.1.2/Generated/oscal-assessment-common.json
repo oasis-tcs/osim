@@ -1,0 +1,2641 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-assessment-common",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Activity": {
+      "title": "Activity",
+      "type": "object",
+      "description": "Identifies an assessment or related process that can be performed. In the assessment plan, this is an intended activity which may be associated with an assessment task. In the assessment results, this an activity that was actually performed as part of an assessment.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment activity elsewhere in this or other OSCAL instances. The locally defined UUID of the activity can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this included activity.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this included activity.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "steps": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Activity.steps",
+            "description": ""
+          }
+        },
+        "related-controls": {
+          "$ref": "#/definitions/Reviewed-controls",
+          "description": ""
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Activity.steps": {
+      "title": "Activity.steps",
+      "type": "object",
+      "description": "Identifies an individual step in a series of steps related to an activity, such as an assessment test or examination procedure.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this step elsewhere in this or other OSCAL instances. The locally defined UUID of the step (in a series of steps) can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this step.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this step.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "reviewed-controls": {
+          "$ref": "#/definitions/Reviewed-controls",
+          "description": ""
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Reviewed-controls": {
+      "title": "Reviewed controls",
+      "type": "object",
+      "description": "Identifies the controls being assessed and their control objectives.",
+      "additionalProperties": false,
+      "required": [
+        "control-selections"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of control objectives.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "control-selections": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Reviewed-controls.control-selections",
+            "description": ""
+          }
+        },
+        "control-objective-selections": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Reviewed-controls.control-objective-selections",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Reviewed-controls.control-selections": {
+      "title": "Reviewed controls.control selections",
+      "type": "object",
+      "description": "Identifies the controls being assessed. In the assessment plan, these are the planned controls. In the assessment results, these are the actual controls, and reflects any changes from the plan.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of in-scope controls specified for assessment.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "include-all": {
+          "$ref": "#/imports/cc/Include-all",
+          "description": ""
+        },
+        "include-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        },
+        "exclude-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Select-control-by-id": {
+      "title": "Select control by id",
+      "type": "object",
+      "description": "Used to select a control for inclusion/exclusion based on one or more control identifiers. A set of statement identifiers can be used to target the inclusion/exclusion to only specific control statements providing more granularity over the specific statements that are within the asessment scope.",
+      "additionalProperties": false,
+      "required": [
+        "control-id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "control-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."
+        },
+        "statement-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/c/TokenDatatype",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Reviewed-controls.control-objective-selections": {
+      "title": "Reviewed controls.control objective selections",
+      "type": "object",
+      "description": "Identifies the control objectives of the assessment. In the assessment plan, these are the planned objectives. In the assessment results, these are the assessed objectives, and reflects any changes from the plan.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this collection of control objectives.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "include-all": {
+          "$ref": "#/imports/cc/Include-all",
+          "description": ""
+        },
+        "include-objectives": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-objective-by-id",
+            "description": ""
+          }
+        },
+        "exclude-objectives": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-objective-by-id",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Select-objective-by-id": {
+      "title": "Select objective by id",
+      "type": "object",
+      "description": "Used to select a control objective for inclusion/exclusion based on the control objective's identifier.",
+      "additionalProperties": false,
+      "required": [
+        "objective-id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "objective-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Points to an assessment objective."
+        }
+      }
+    },
+    "Assessment-assets": {
+      "title": "Assessment assets",
+      "type": "object",
+      "description": "Identifies the assets used to perform this assessment, such as the assessment team, scanning tools, and assumptions.",
+      "additionalProperties": false,
+      "required": [
+        "assessment-platforms"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-component",
+            "description": ""
+          }
+        },
+        "assessment-platforms": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-assets.assessment-platforms",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Assessment-assets.assessment-platforms": {
+      "title": "Assessment assets.assessment platforms",
+      "type": "object",
+      "description": "Used to represent the toolset used to perform aspects of the assessment.",
+      "additionalProperties": false,
+      "required": [
+        "uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment platform elsewhere in this or other OSCAL instances. The locally defined UUID of the assessment platform can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or name for the assessment platform.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "uses-components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-assets.assessment-platforms.uses-components",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-assets.assessment-platforms.uses-components": {
+      "title": "Assessment assets.assessment platforms.uses components",
+      "type": "object",
+      "description": "The set of components that are used by the assessment platform.",
+      "additionalProperties": false,
+      "required": [
+        "component-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "component-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a component that is implemented as part of an inventory item."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-method": {
+      "title": "Assessment method",
+      "type": "object",
+      "description": "A local definition of a control objective. Uses catalog syntax for control objective and assessment activities.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "part"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment method elsewhere in this or other OSCAL instances. The locally defined UUID of the assessment method can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this assessment method.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "part": {
+          "$ref": "#/definitions/Assessment-part",
+          "description": ""
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-part": {
+      "title": "Assessment part",
+      "type": "object",
+      "description": "A partition of an assessment plan or results or a child of another part.",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this part elsewhere in this or other OSCAL instances. The locally defined UUID of the part can be used to reference the data item locally or globally (e.g., in an ported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "name": {
+          "$ref": "#/definitions/Assessment-part.name",
+          "description": "A textual label that uniquely identifies the part's semantic type."
+        },
+        "ns": {
+          "$ref": "#/imports/c/URIDatatype",
+          "description": "A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name given to the part, which may be used by a tool for display and navigation.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "prose": {
+          "type": "string",
+          "description": "Permits multiple paragraphs, lists, tables etc.",
+          "maxLength": 1000
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-part",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Assessment-part.name": {
+      "title": "Assessment part.name",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Assessment-part.name.2"
+        }
+      ]
+    },
+    "Assessment-part.name.2": {
+      "title": "Assessment part.name.2",
+      "type": "string",
+      "enum": [
+        "asset",
+        "method",
+        "objective"
+      ]
+    },
+    "Assessment-subject-placeholder": {
+      "title": "Assessment subject placeholder",
+      "type": "object",
+      "description": "Used when the assessment subjects will be determined as part of one or more other assessment activities. These assessment subjects will be recorded in the assessment results in the assessment log.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "sources"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier for a set of assessment subjects that will be identified by a task or an activity that is part of a task. The locally defined UUID of the assessment subject placeholder can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of intent of this assessment subject placeholder.",
+          "maxLength": 1000
+        },
+        "sources": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-subject-placeholder.sources",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-subject-placeholder.sources": {
+      "title": "Assessment subject placeholder.sources",
+      "type": "object",
+      "description": "Assessment subjects will be identified while conducting the referenced activity-instance.",
+      "additionalProperties": false,
+      "required": [
+        "task-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "task-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference (in this or other OSCAL instances) an assessment activity to be performed as part of the event. The locally defined UUID of the task can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        }
+      }
+    },
+    "Finding": {
+      "title": "Finding",
+      "type": "object",
+      "description": "Describes an individual finding.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "title",
+        "description",
+        "target"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this finding in this or other OSCAL instances. The locally defined UUID of the finding can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this finding.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this finding.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "origins": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Origin",
+            "description": ""
+          }
+        },
+        "target": {
+          "$ref": "#/definitions/Finding-target",
+          "description": ""
+        },
+        "implementation-statement-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to the implementation statement in the SSP to which this finding is related."
+        },
+        "related-observations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Finding.related-observations",
+            "description": ""
+          }
+        },
+        "related-risks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Finding.related-risks",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Origin": {
+      "title": "Origin",
+      "type": "object",
+      "description": "Identifies the source of the finding, such as a tool, interviewed person, or activity.",
+      "additionalProperties": false,
+      "required": [
+        "actors"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "actors": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Origin-actor",
+            "description": ""
+          }
+        },
+        "related-tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Related-task",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Origin-actor": {
+      "title": "Origin actor",
+      "type": "object",
+      "description": "The actor that produces an observation, a finding, or a risk. One or more actor type can be used to specify a person that is using a tool.",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "actor-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Origin-actor.type",
+          "description": "The kind of actor."
+        },
+        "actor-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to the tool or person based on the associated type."
+        },
+        "role-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "For a party, this can optionally be used to specify the role the actor was performing."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Origin-actor.type": {
+      "title": "Origin actor.type",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Origin-actor.type.2"
+        }
+      ]
+    },
+    "Origin-actor.type.2": {
+      "title": "Origin actor.type.2",
+      "type": "string",
+      "enum": [
+        "tool",
+        "assessment-platform",
+        "party"
+      ]
+    },
+    "Related-task": {
+      "title": "Related task",
+      "type": "object",
+      "description": "Identifies an individual task for which the containing object is a consequence of.",
+      "additionalProperties": false,
+      "required": [
+        "task-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "task-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a unique task."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-subject",
+            "description": ""
+          }
+        },
+        "identified-subject": {
+          "$ref": "#/definitions/Related-task.identified-subject",
+          "description": "Used to detail assessment subjects that were identfied by this task."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-subject": {
+      "title": "Assessment subject",
+      "type": "object",
+      "description": "Identifies system elements being assessed, such as components, inventory items, and locations. In the assessment plan, this identifies a planned assessment subject. In the assessment results this is an actual assessment subject, and reflects any changes from the plan. exactly what will be the focus of this assessment. Any subjects not identified in this way are out-of-scope.",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Assessment-subject.type",
+          "description": "Indicates the type of assessment subject, such as a component, inventory, item, location, or party represented by this selection statement."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the collection of subjects being included in this assessment.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "include-all": {
+          "$ref": "#/imports/cc/Include-all",
+          "description": ""
+        },
+        "include-subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-subject-by-id",
+            "description": ""
+          }
+        },
+        "exclude-subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-subject-by-id",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-subject.type": {
+      "title": "Assessment subject.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Assessment-subject.type.2"
+        }
+      ]
+    },
+    "Assessment-subject.type.2": {
+      "title": "Assessment subject.type.2",
+      "type": "string",
+      "enum": [
+        "component",
+        "inventory-item",
+        "location",
+        "party",
+        "user"
+      ]
+    },
+    "Select-subject-by-id": {
+      "title": "Select subject by id",
+      "type": "object",
+      "description": "Identifies a set of assessment subjects to include/exclude by UUID.",
+      "additionalProperties": false,
+      "required": [
+        "subject-uuid",
+        "type"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "subject-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID."
+        },
+        "type": {
+          "$ref": "#/definitions/Select-subject-by-id.type",
+          "description": "Used to indicate the type of object pointed to by the uuid-ref within a subject."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Select-subject-by-id.type": {
+      "title": "Select subject by id.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Select-subject-by-id.type.2"
+        }
+      ]
+    },
+    "Select-subject-by-id.type.2": {
+      "title": "Select subject by id.type.2",
+      "type": "string",
+      "enum": [
+        "component",
+        "inventory-item",
+        "location",
+        "party",
+        "user",
+        "resource"
+      ]
+    },
+    "Related-task.identified-subject": {
+      "title": "Related task.identified subject",
+      "type": "object",
+      "description": "Used to detail assessment subjects that were identfied by this task.",
+      "additionalProperties": false,
+      "required": [
+        "subject-placeholder-uuid",
+        "subjects"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "subject-placeholder-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a unique assessment subject placeholder defined by this task."
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-subject",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Finding-target": {
+      "title": "Finding target",
+      "type": "object",
+      "description": "Captures an assessor's conclusions regarding the degree to which an objective is satisfied.",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "target-id",
+        "status"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Finding-target.type",
+          "description": "Identifies the type of the target."
+        },
+        "target-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A machine-oriented identifier reference for a specific target qualified by the type."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this objective status.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the assessor's conclusions regarding the degree to which an objective is satisfied.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Finding-target.status",
+          "description": "A determination of if the objective is satisfied or not within a given system."
+        },
+        "implementation-status": {
+          "$ref": "#/imports/ic/Implementation-status",
+          "description": ""
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Finding-target.type": {
+      "title": "Finding target.type",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Finding-target.type.2"
+        }
+      ]
+    },
+    "Finding-target.type.2": {
+      "title": "Finding target.type.2",
+      "type": "string",
+      "enum": [
+        "statement-id",
+        "objective-id"
+      ]
+    },
+    "Finding-target.status": {
+      "title": "Finding target.status",
+      "type": "object",
+      "description": "A determination of if the objective is satisfied or not within a given system.",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/Finding-target.status.state",
+          "description": "An indication as to whether the objective is satisfied or not."
+        },
+        "reason": {
+          "$ref": "#/definitions/Finding-target.status.reason",
+          "description": "The reason the objective was given it's status."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Finding-target.status.state": {
+      "title": "Finding target.status.state",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Finding-target.status.state.2"
+        }
+      ]
+    },
+    "Finding-target.status.state.2": {
+      "title": "Finding target.status.state.2",
+      "type": "string",
+      "enum": [
+        "satisfied",
+        "not-satisfied"
+      ]
+    },
+    "Finding-target.status.reason": {
+      "title": "Finding target.status.reason",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Finding-target.status.reason.2"
+        }
+      ]
+    },
+    "Finding-target.status.reason.2": {
+      "title": "Finding target.status.reason.2",
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "other"
+      ]
+    },
+    "Finding.related-observations": {
+      "title": "Finding.related observations",
+      "type": "object",
+      "description": "Relates the finding to a set of referenced observations that were used to determine the finding.",
+      "additionalProperties": false,
+      "required": [
+        "observation-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "observation-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an observation defined in the list of observations."
+        }
+      }
+    },
+    "Finding.related-risks": {
+      "title": "Finding.related risks",
+      "type": "object",
+      "description": "Relates the finding to a set of referenced risks that were used to determine the finding.",
+      "additionalProperties": false,
+      "required": [
+        "risk-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "risk-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a risk defined in the list of risks."
+        }
+      }
+    },
+    "Import-ssp": {
+      "title": "Import ssp",
+      "type": "object",
+      "description": "Used by the assessment plan and POA&M to import information about the system.",
+      "additionalProperties": false,
+      "required": [
+        "href"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A resolvable URL reference to the system security plan for the system being assessed."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Local-objective": {
+      "title": "Local objective",
+      "type": "object",
+      "description": "A local definition of a control objective for this assessment. Uses catalog syntax for control objective and assessment actions.",
+      "additionalProperties": false,
+      "required": [
+        "control-id",
+        "parts"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "control-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this control objective.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Part",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Observation": {
+      "title": "Observation",
+      "type": "object",
+      "description": "Describes an individual observation.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description",
+        "methods",
+        "collected"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this observation elsewhere in this or other OSCAL instances. The locally defined UUID of the observation can be used to reference the data item locally or globally (e.g., in an imorted OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this observation.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this assessment observation.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Observation.methods",
+            "description": ""
+          }
+        },
+        "types": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Observation.types",
+            "description": ""
+          }
+        },
+        "origins": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Origin",
+            "description": ""
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Subject-reference",
+            "description": ""
+          }
+        },
+        "relevant-evidence": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Observation.relevant-evidence",
+            "description": ""
+          }
+        },
+        "collected": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Date/time stamp identifying when the finding information was collected."
+        },
+        "expires": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Date/time identifying when the finding information is out-of-date and no longer valid. Typically used with continuous assessment scenarios."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Observation.methods": {
+      "title": "Observation.methods",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Observation.methods.2"
+        }
+      ]
+    },
+    "Observation.methods.2": {
+      "title": "Observation.methods.2",
+      "type": "string",
+      "enum": [
+        "EXAMINE",
+        "INTERVIEW",
+        "TEST",
+        "UNKNOWN"
+      ]
+    },
+    "Observation.types": {
+      "title": "Observation.types",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Observation.types.2"
+        }
+      ]
+    },
+    "Observation.types.2": {
+      "title": "Observation.types.2",
+      "type": "string",
+      "enum": [
+        "ssp-statement-issue",
+        "control-objective",
+        "mitigation",
+        "finding",
+        "historic"
+      ]
+    },
+    "Subject-reference": {
+      "title": "Subject reference",
+      "type": "object",
+      "description": "A human-oriented identifier reference to a resource. Use type to indicate whether the identified resource is a component, inventory item, location, user, or something else.",
+      "additionalProperties": false,
+      "required": [
+        "subject-uuid",
+        "type"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "subject-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID."
+        },
+        "type": {
+          "$ref": "#/definitions/Subject-reference.type",
+          "description": "Used to indicate the type of object pointed to by the uuid-ref within a subject."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or name for the referenced subject.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Subject-reference.type": {
+      "title": "Subject reference.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Subject-reference.type.2"
+        }
+      ]
+    },
+    "Subject-reference.type.2": {
+      "title": "Subject reference.type.2",
+      "type": "string",
+      "enum": [
+        "component",
+        "inventory-item",
+        "location",
+        "party",
+        "user",
+        "resource"
+      ]
+    },
+    "Observation.relevant-evidence": {
+      "title": "Observation.relevant evidence",
+      "type": "object",
+      "description": "Links this observation to relevant evidence.",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A resolvable URL reference to relevant evidence."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this evidence.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Risk": {
+      "title": "Risk",
+      "type": "object",
+      "description": "An identified risk.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "title",
+        "description",
+        "statement",
+        "status"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this risk elsewhere in this or other OSCAL instances. The locally defined UUID of the risk can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this risk.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable summary of the identified risk, to include a statement of how the risk impacts the system.",
+          "maxLength": 1000
+        },
+        "statement": {
+          "type": "string",
+          "description": "An summary of impact for how the risk affects the system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Risk-status",
+          "description": ""
+        },
+        "origins": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Origin",
+            "description": ""
+          }
+        },
+        "threat-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Threat-id",
+            "description": ""
+          }
+        },
+        "characterizations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Characterization",
+            "description": ""
+          }
+        },
+        "mitigating-factors": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Risk.mitigating-factors",
+            "description": ""
+          }
+        },
+        "deadline": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "The date/time by which the risk must be resolved."
+        },
+        "remediations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Response",
+            "description": ""
+          }
+        },
+        "risk-log": {
+          "$ref": "#/definitions/Risk.risk-log",
+          "description": "A log of all risk-related tasks taken."
+        },
+        "related-observations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Risk.related-observations",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Risk-status": {
+      "title": "Risk status",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Risk-status.2"
+        }
+      ]
+    },
+    "Risk-status.2": {
+      "title": "Risk status.2",
+      "type": "string",
+      "enum": [
+        "open",
+        "investigating",
+        "remediating",
+        "deviation-requested",
+        "deviation-approved",
+        "closed"
+      ]
+    },
+    "Threat-id": {
+      "title": "Threat id",
+      "type": "object",
+      "description": "A pointer, by ID, to an externally-defined threat.",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "system": {
+          "$ref": "#/definitions/Threat-id.system",
+          "description": "Specifies the source of the threat information."
+        },
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "An optional location for the threat data, from which this ID originates."
+        },
+        "id": {
+          "$ref": "#/imports/c/URIDatatype",
+          "description": ""
+        }
+      }
+    },
+    "Threat-id.system": {
+      "title": "Threat id.system",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/URIDatatype"
+        },
+        {
+          "$ref": "#/definitions/Threat-id.system.2"
+        }
+      ]
+    },
+    "Threat-id.system.2": {
+      "title": "Threat id.system.2",
+      "type": "string",
+      "enum": [
+        "http://fedramp.gov",
+        "http://fedramp.gov/ns/oscal"
+      ]
+    },
+    "Characterization": {
+      "title": "Characterization",
+      "type": "object",
+      "description": "A collection of descriptive data about the containing object from a specific origin.",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "facets"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": ""
+        },
+        "facets": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Characterization.facets",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Characterization.facets": {
+      "title": "Characterization.facets",
+      "type": "object",
+      "description": "An individual characteristic that is part of a larger set produced by the same actor.",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "system",
+        "value"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "name": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "The name of the risk metric within the specified system."
+        },
+        "system": {
+          "$ref": "#/definitions/Characterization.facets.system",
+          "description": "Specifies the naming system under which this risk metric is organized, which allows for the same names to be used in different systems controlled by different parties. This avoids the potential of a name clash."
+        },
+        "value": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "Indicates the value of the facet."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Characterization.facets.system": {
+      "title": "Characterization.facets.system",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/URIDatatype"
+        },
+        {
+          "$ref": "#/definitions/Characterization.facets.system.2"
+        }
+      ]
+    },
+    "Characterization.facets.system.2": {
+      "title": "Characterization.facets.system.2",
+      "type": "string",
+      "enum": [
+        "http://fedramp.gov",
+        "http://fedramp.gov/ns/oscal",
+        "http://csrc.nist.gov/ns/oscal",
+        "http://csrc.nist.gov/ns/oscal/unknown",
+        "http://cve.mitre.org",
+        "http://www.first.org/cvss/v2.0",
+        "http://www.first.org/cvss/v3.0",
+        "http://www.first.org/cvss/v3.1"
+      ]
+    },
+    "Risk.mitigating-factors": {
+      "title": "Risk.mitigating factors",
+      "type": "object",
+      "description": "Describes an existing mitigating factor that may affect the overall determination of the risk, with an optional link to an implementation statement in the SSP.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this mitigating factor elsewhere in this or other OSCAL instances. The locally defined UUID of the mitigating factor can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "implementation-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this implementation statement elsewhere in this or other OSCAL instancess. The locally defined UUID of the implementation statement can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this mitigating factor.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Subject-reference",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Response": {
+      "title": "Response",
+      "type": "object",
+      "description": "Describes either recommended or an actual plan for addressing the risk.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "lifecycle",
+        "title",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this remediation elsewhere in this or other OSCAL instances. The locally defined UUID of the risk response can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "lifecycle": {
+          "$ref": "#/definitions/Response.lifecycle",
+          "description": "Identifies whether this is a recommendation, such as from an assessor or tool, or an actual plan accepted by the system owner."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this response activity.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this response plan.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "origins": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Origin",
+            "description": ""
+          }
+        },
+        "required-assets": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Response.required-assets",
+            "description": ""
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Task",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Response.lifecycle": {
+      "title": "Response.lifecycle",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Response.lifecycle.2"
+        }
+      ]
+    },
+    "Response.lifecycle.2": {
+      "title": "Response.lifecycle.2",
+      "type": "string",
+      "enum": [
+        "recommendation",
+        "planned",
+        "completed"
+      ]
+    },
+    "Response.required-assets": {
+      "title": "Response.required assets",
+      "type": "object",
+      "description": "Identifies an asset required to achieve remediation.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this required asset elsewhere in this or other OSCAL instances. The locally defined UUID of the asset can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Subject-reference",
+            "description": ""
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this required asset.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this required asset.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Task": {
+      "title": "Task",
+      "type": "object",
+      "description": "Represents a scheduled event or milestone, which may be associated with a series of assessment actions.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "type",
+        "title"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this task elsewhere in this or other OSCAL instances. The locally defined UUID of the task can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "type": {
+          "$ref": "#/definitions/Task.type",
+          "description": "The type of task."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this task.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this task.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "timing": {
+          "$ref": "#/definitions/Task.timing",
+          "description": "The timing under which the task is intended to occur."
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Task.dependencies",
+            "description": ""
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Task",
+            "description": ""
+          }
+        },
+        "associated-activities": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Task.associated-activities",
+            "description": ""
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-subject",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Task.type": {
+      "title": "Task.type",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Task.type.2"
+        }
+      ]
+    },
+    "Task.type.2": {
+      "title": "Task.type.2",
+      "type": "string",
+      "enum": [
+        "milestone",
+        "action"
+      ]
+    },
+    "Task.timing": {
+      "title": "Task.timing",
+      "type": "object",
+      "description": "The timing under which the task is intended to occur.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "on-date": {
+          "$ref": "#/definitions/Task.timing.on-date",
+          "description": "The task is intended to occur on the specified date."
+        },
+        "within-date-range": {
+          "$ref": "#/definitions/Task.timing.within-date-range",
+          "description": "The task is intended to occur within the specified date range."
+        },
+        "at-frequency": {
+          "$ref": "#/definitions/Task.timing.at-frequency",
+          "description": "The task is intended to occur at the specified frequency."
+        }
+      }
+    },
+    "Task.timing.on-date": {
+      "title": "Task.timing.on date",
+      "type": "object",
+      "description": "The task is intended to occur on the specified date.",
+      "additionalProperties": false,
+      "required": [
+        "date"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "date": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "The task must occur on the specified date."
+        }
+      }
+    },
+    "Task.timing.within-date-range": {
+      "title": "Task.timing.within date range",
+      "type": "object",
+      "description": "The task is intended to occur within the specified date range.",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "start": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "The task must occur on or after the specified date."
+        },
+        "end": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "The task must occur on or before the specified date."
+        }
+      }
+    },
+    "Task.timing.at-frequency": {
+      "title": "Task.timing.at frequency",
+      "type": "object",
+      "description": "The task is intended to occur at the specified frequency.",
+      "additionalProperties": false,
+      "required": [
+        "period",
+        "unit"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "period": {
+          "$ref": "#/imports/c/PositiveIntegerDatatype",
+          "description": "The task must occur after the specified period has elapsed."
+        },
+        "unit": {
+          "$ref": "#/definitions/Task.timing.at-frequency.unit",
+          "description": "The unit of time for the period."
+        }
+      }
+    },
+    "Task.timing.at-frequency.unit": {
+      "title": "Task.timing.at frequency.unit",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Task.timing.at-frequency.unit.2"
+        }
+      ]
+    },
+    "Task.timing.at-frequency.unit.2": {
+      "title": "Task.timing.at frequency.unit.2",
+      "type": "string",
+      "enum": [
+        "seconds",
+        "minutes",
+        "hours",
+        "days",
+        "months",
+        "years"
+      ]
+    },
+    "Task.dependencies": {
+      "title": "Task.dependencies",
+      "type": "object",
+      "description": "Used to indicate that a task is dependent on another task.",
+      "additionalProperties": false,
+      "required": [
+        "task-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "task-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a unique task."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Task.associated-activities": {
+      "title": "Task.associated activities",
+      "type": "object",
+      "description": "Identifies an individual activity to be performed as part of a task.",
+      "additionalProperties": false,
+      "required": [
+        "activity-uuid",
+        "subjects"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "activity-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an activity defined in the list of activities."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Assessment-subject",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Risk.risk-log": {
+      "title": "Risk.risk log",
+      "type": "object",
+      "description": "A log of all risk-related tasks taken.",
+      "additionalProperties": false,
+      "required": [
+        "entries"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Risk.risk-log.entries",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Risk.risk-log.entries": {
+      "title": "Risk.risk log.entries",
+      "type": "object",
+      "description": "Identifies an individual risk response that occurred as part of managing an identified risk.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "start"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this risk log entry elsewhere in this or other OSCAL instances. The locally defined UUID of the risk log entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this risk log entry.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of what was done regarding the risk.",
+          "maxLength": 1000
+        },
+        "start": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Identifies the start date and time of the event."
+        },
+        "end": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Identifies the end date and time of the event. If the event is a point in time, the start and end will be the same date and time."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "logged-by": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Logged-by",
+            "description": ""
+          }
+        },
+        "status-change": {
+          "$ref": "#/definitions/Risk-status",
+          "description": ""
+        },
+        "related-responses": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Risk.risk-log.entries.related-responses",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Logged-by": {
+      "title": "Logged by",
+      "type": "object",
+      "description": "Used to indicate who created a log entry in what role.",
+      "additionalProperties": false,
+      "required": [
+        "party-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "party-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to the party who is making the log entry."
+        },
+        "role-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A point to the role-id of the role in which the party is making the log entry."
+        }
+      }
+    },
+    "Risk.risk-log.entries.related-responses": {
+      "title": "Risk.risk log.entries.related responses",
+      "type": "object",
+      "description": "Identifies an individual risk response that this log entry is for.",
+      "additionalProperties": false,
+      "required": [
+        "response-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "response-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a unique risk response."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "related-tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Related-task",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Risk.related-observations": {
+      "title": "Risk.related observations",
+      "type": "object",
+      "description": "Relates the finding to a set of referenced observations that were used to determine the finding.",
+      "additionalProperties": false,
+      "required": [
+        "observation-uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "observation-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an observation defined in the list of observations."
+        }
+      }
+    }
+  },
+  "imports": {
+    "cc": {
+      "Include-all": {},
+      "Part": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "TokenDatatype": {},
+      "URIDatatype": {},
+      "StringDatatype": {},
+      "URIReferenceDatatype": {},
+      "DateTimeWithTimezoneDatatype": {},
+      "PositiveIntegerDatatype": {}
+    },
+    "ic": {
+      "System-component": {},
+      "Implementation-status": {}
+    },
+    "m": {
+      "Property": {},
+      "Link": {},
+      "Responsible-role": {},
+      "Remarks": {},
+      "Responsible-party": {}
+    }
+  }
+}

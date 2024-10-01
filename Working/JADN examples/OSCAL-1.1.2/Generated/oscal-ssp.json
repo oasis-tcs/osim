@@ -1,0 +1,1352 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-ssp",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "System-security-plan": {
+      "title": "System security plan",
+      "type": "object",
+      "description": "A system security plan, such as those described in NIST SP 800-18.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata",
+        "import-profile",
+        "system-characteristics",
+        "system-implementation",
+        "control-implementation"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this system security plan (SSP) elsewhere in this or other OSCAL instances. The locally defined UUID of the SSP can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance).This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "import-profile": {
+          "$ref": "#/definitions/Import-profile",
+          "description": ""
+        },
+        "system-characteristics": {
+          "$ref": "#/definitions/System-characteristics",
+          "description": ""
+        },
+        "system-implementation": {
+          "$ref": "#/definitions/System-implementation",
+          "description": ""
+        },
+        "control-implementation": {
+          "$ref": "#/definitions/Control-implementation",
+          "description": ""
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Import-profile": {
+      "title": "Import profile",
+      "type": "object",
+      "description": "Used to import the OSCAL profile representing the system's control baseline.",
+      "additionalProperties": false,
+      "required": [
+        "href"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A resolvable URL reference to the profile or catalog to use as the system's control baseline."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-characteristics": {
+      "title": "System characteristics",
+      "type": "object",
+      "description": "Contains the characteristics of the system, such as its name, purpose, and security impact level.",
+      "additionalProperties": false,
+      "required": [
+        "system-ids",
+        "system-name",
+        "description",
+        "system-information",
+        "status",
+        "authorization-boundary"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "system-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-id",
+            "description": ""
+          }
+        },
+        "system-name": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "The full name of the system."
+        },
+        "system-name-short": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A short name for the system, such as an acronym, that is suitable for display in a data table or summary list."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "date-authorized": {
+          "$ref": "#/definitions/Date-authorized",
+          "description": ""
+        },
+        "security-sensitivity-level": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "The overall information system sensitivity categorization, such as defined by FIPS-199."
+        },
+        "system-information": {
+          "$ref": "#/definitions/System-information",
+          "description": ""
+        },
+        "security-impact-level": {
+          "$ref": "#/definitions/Security-impact-level",
+          "description": ""
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": ""
+        },
+        "authorization-boundary": {
+          "$ref": "#/definitions/Authorization-boundary",
+          "description": ""
+        },
+        "network-architecture": {
+          "$ref": "#/definitions/Network-architecture",
+          "description": ""
+        },
+        "data-flow": {
+          "$ref": "#/definitions/Data-flow",
+          "description": ""
+        },
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Date-authorized": {
+      "title": "Date authorized",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/DateDatatype"
+        }
+      ]
+    },
+    "System-information": {
+      "title": "System information",
+      "type": "object",
+      "description": "Contains details about all information types that are stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60.",
+      "additionalProperties": false,
+      "required": [
+        "information-types"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "information-types": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/System-information.information-types",
+            "description": ""
+          }
+        }
+      }
+    },
+    "System-information.information-types": {
+      "title": "System information.information types",
+      "type": "object",
+      "description": "Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60.",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this information type elsewhere in this or other OSCAL instances. The locally defined UUID of the information type can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the information type. This title should be meaningful within the context of the system.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of how this information type is used within the system.",
+          "maxLength": 1000
+        },
+        "categorizations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/System-information.information-types.categorizations",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "confidentiality-impact": {
+          "$ref": "#/definitions/Impact",
+          "description": ""
+        },
+        "integrity-impact": {
+          "$ref": "#/definitions/Impact",
+          "description": ""
+        },
+        "availability-impact": {
+          "$ref": "#/definitions/Impact",
+          "description": ""
+        }
+      }
+    },
+    "System-information.information-types.categorizations": {
+      "title": "System information.information types.categorizations",
+      "type": "object",
+      "description": "A set of information type identifiers qualified by the given identification system used, such as NIST SP 800-60.",
+      "additionalProperties": false,
+      "required": [
+        "system"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "system": {
+          "$ref": "#/definitions/System-information.information-types.categorizations.system",
+          "description": "Specifies the information type identification system used."
+        },
+        "information-type-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/c/StringDatatype",
+            "description": ""
+          }
+        }
+      }
+    },
+    "System-information.information-types.categorizations.system": {
+      "title": "System information.information types.categorizations.system",
+      "anyOf": [
+        {
+          "$ref": "#/imports/c/URIDatatype"
+        },
+        {
+          "$ref": "#/definitions/System-information.information-types.categorizations.system.2"
+        }
+      ]
+    },
+    "System-information.information-types.categorizations.system.2": {
+      "title": "System information.information types.categorizations.system.2",
+      "type": "string",
+      "enum": [
+        "http://doi.org/10.6028/NIST.SP.800-60v2r1"
+      ]
+    },
+    "Impact": {
+      "title": "Impact",
+      "type": "object",
+      "description": "The expected level of impact resulting from the described information.",
+      "additionalProperties": false,
+      "required": [
+        "base"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "base": {
+          "$ref": "#/definitions/Base",
+          "description": ""
+        },
+        "selected": {
+          "$ref": "#/definitions/Selected",
+          "description": ""
+        },
+        "adjustment-justification": {
+          "$ref": "#/definitions/Adjustment-justification",
+          "description": ""
+        }
+      }
+    },
+    "Base": {
+      "title": "Base",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        }
+      ]
+    },
+    "Selected": {
+      "title": "Selected",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        }
+      ]
+    },
+    "Adjustment-justification": {
+      "title": "Adjustment justification",
+      "type": "string",
+      "description": "If the selected security level is different from the base security level, this contains the justification for the change.",
+      "maxLength": 1000
+    },
+    "Security-impact-level": {
+      "title": "Security impact level",
+      "type": "object",
+      "description": "The overall level of expected impact resulting from unauthorized disclosure, modification, or loss of access to information.",
+      "additionalProperties": false,
+      "required": [
+        "security-objective-confidentiality",
+        "security-objective-integrity",
+        "security-objective-availability"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "security-objective-confidentiality": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A target-level of confidentiality for the system, based on the sensitivity of information within the system."
+        },
+        "security-objective-integrity": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A target-level of integrity for the system, based on the sensitivity of information within the system."
+        },
+        "security-objective-availability": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A target-level of availability for the system, based on the sensitivity of information within the system."
+        }
+      }
+    },
+    "Status": {
+      "title": "Status",
+      "type": "object",
+      "description": "Describes the operational status of the system.",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/Status.state",
+          "description": "The current operating status."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Status.state": {
+      "title": "Status.state",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Status.state.2"
+        }
+      ]
+    },
+    "Status.state.2": {
+      "title": "Status.state.2",
+      "type": "string",
+      "enum": [
+        "operational",
+        "under-development",
+        "under-major-modification",
+        "disposition",
+        "other"
+      ]
+    },
+    "Authorization-boundary": {
+      "title": "Authorization boundary",
+      "type": "object",
+      "description": "A description of this system's authorization boundary, optionally supplemented by diagrams that illustrate the authorization boundary.",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A summary of the system's authorization boundary.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "diagrams": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Diagram",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Diagram": {
+      "title": "Diagram",
+      "type": "object",
+      "description": "A graphic that provides a visual representation the system, or some aspect of it.",
+      "additionalProperties": false,
+      "required": [
+        "uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this diagram elsewhere in this or other OSCAL instances. The locally defined UUID of the diagram can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the diagram.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "caption": {
+          "type": "string",
+          "description": "A brief caption to annotate the diagram.",
+          "maxLength": 1000
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Network-architecture": {
+      "title": "Network architecture",
+      "type": "object",
+      "description": "A description of the system's network architecture, optionally supplemented by diagrams that illustrate the network architecture.",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A summary of the system's network architecture.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "diagrams": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Diagram",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Data-flow": {
+      "title": "Data flow",
+      "type": "object",
+      "description": "A description of the logical flow of information within the system and across its boundaries, optionally supplemented by diagrams that illustrate these flows.",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A summary of the system's data flow.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "diagrams": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Diagram",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-implementation": {
+      "title": "System implementation",
+      "type": "object",
+      "description": "Provides information as to how the system is implemented.",
+      "additionalProperties": false,
+      "required": [
+        "users",
+        "components"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "leveraged-authorizations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/System-implementation.leveraged-authorizations",
+            "description": ""
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-user",
+            "description": ""
+          }
+        },
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-component",
+            "description": ""
+          }
+        },
+        "inventory-items": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Inventory-item",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "System-implementation.leveraged-authorizations": {
+      "title": "System implementation.leveraged authorizations",
+      "type": "object",
+      "description": "A description of another authorized system from which this system inherits capabilities that satisfy security requirements. Another term for this concept is a common control provider.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "title",
+        "party-uuid",
+        "date-authorized"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope and can be used to reference this leveraged authorization elsewhere in this or other OSCAL instances. The locally defined UUID of the leveraged authorization can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "A human readable name for the leveraged authorization in the context of the system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "party-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to the party that manages the leveraged system."
+        },
+        "date-authorized": {
+          "$ref": "#/definitions/Date-authorized",
+          "description": ""
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Control-implementation": {
+      "title": "Control implementation",
+      "type": "object",
+      "description": "Describes how the system satisfies a set of controls.",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "implemented-requirements"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A statement describing important things to know about how this set of control satisfaction documentation is approached.",
+          "maxLength": 1000
+        },
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Set-parameter",
+            "description": ""
+          }
+        },
+        "implemented-requirements": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Implemented-requirement",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Implemented-requirement": {
+      "title": "Implemented requirement",
+      "type": "object",
+      "description": "Describes how the system satisfies the requirements of an individual control.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "control-id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this control requirement elsewhere in this or other OSCAL instances. The locally defined UUID of the control requirement can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "control-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Set-parameter",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "statements": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Statement",
+            "description": ""
+          }
+        },
+        "by-components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Statement": {
+      "title": "Statement",
+      "type": "object",
+      "description": "Identifies which statements within a control are addressed.",
+      "additionalProperties": false,
+      "required": [
+        "statement-id",
+        "uuid"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "statement-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A human-oriented identifier reference to a control statement."
+        },
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this control statement elsewhere in this or other OSCAL instances. The UUID of the control statement in the source OSCAL instance is sufficient to reference the data item locally or globally (e.g., in an imported OSCAL instance)."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "by-components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "By-component": {
+      "title": "By component",
+      "type": "object",
+      "description": "Defines how the referenced component implements a set of controls.",
+      "additionalProperties": false,
+      "required": [
+        "component-uuid",
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "component-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to the component that is implemeting a given control."
+        },
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this by-component entry elsewhere in this or other OSCAL instances. The locally defined UUID of the by-component entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes how a control or a control statement is implemented within the referenced system component.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Set-parameter",
+            "description": ""
+          }
+        },
+        "implementation-status": {
+          "$ref": "#/imports/ic/Implementation-status",
+          "description": ""
+        },
+        "export": {
+          "$ref": "#/definitions/By-component.export",
+          "description": "Identifies content intended for external consumption, such as with leveraged organizations."
+        },
+        "inherited": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component.inherited",
+            "description": ""
+          }
+        },
+        "satisfied": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component.satisfied",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "By-component.export": {
+      "title": "By component.export",
+      "type": "object",
+      "description": "Identifies content intended for external consumption, such as with leveraged organizations.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes the aspects of the control or control statement implementation that can be available to another system leveraging this system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "provided": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component.export.provided",
+            "description": ""
+          }
+        },
+        "responsibilities": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/By-component.export.responsibilities",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "By-component.export.provided": {
+      "title": "By component.export.provided",
+      "type": "object",
+      "description": "Describes a capability which may be inherited by a leveraging system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this provided entry elsewhere in this or other OSCAL instances. The locally defined UUID of the provided entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "By-component.export.responsibilities": {
+      "title": "By component.export.responsibilities",
+      "type": "object",
+      "description": "Describes a control implementation responsibility imposed on a leveraging system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this responsibility elsewhere in this or other OSCAL instances. The locally defined UUID of the responsibility can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "provided-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an inherited control implementation that a leveraging system is inheriting from a leveraged system."
+        },
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "By-component.inherited": {
+      "title": "By component.inherited",
+      "type": "object",
+      "description": "Describes a control implementation inherited by a leveraging system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this inherited entry elsewhere in this or other OSCAL instances. The locally defined UUID of the inherited control implementation can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "provided-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to an inherited control implementation that a leveraging system is inheriting from a leveraged system."
+        },
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        }
+      }
+    },
+    "By-component.satisfied": {
+      "title": "By component.satisfied",
+      "type": "object",
+      "description": "Describes how this system satisfies a responsibility imposed by a leveraged system.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "description"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this satisfied control implementation entry elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "responsibility-uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented identifier reference to a control implementation that satisfies a responsibility imposed by a leveraged system."
+        },
+        "description": {
+          "type": "string",
+          "description": "An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is implementing based on a requirement from a leveraged system.",
+          "maxLength": 1000
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "responsible-roles": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-role",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Remarks": {},
+      "Property": {},
+      "Link": {},
+      "Responsible-party": {},
+      "Responsible-role": {}
+    },
+    "cc": {},
+    "ic": {
+      "System-id": {},
+      "System-user": {},
+      "System-component": {},
+      "Inventory-item": {},
+      "Set-parameter": {},
+      "Implementation-status": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "URIReferenceDatatype": {},
+      "StringDatatype": {},
+      "DateDatatype": {},
+      "URIDatatype": {},
+      "TokenDatatype": {}
+    }
+  }
+}

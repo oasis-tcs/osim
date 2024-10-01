@@ -1,0 +1,127 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-component-definition
+# comment: OSCAL Component Definition Model: JSON Schema
+# roots: ['Component-definition']
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+# namespaces: [['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata'], ['cc', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common'], ['ic', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common'], ['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common']]
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Component-definition : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 metadata : m:Metadata  </td></tr>
+  <tr><td align="left">  3 import-component-definitions : Import-component-definition [0..*]  </td></tr>
+  <tr><td align="left">  4 components : Defined-component [0..*]  </td></tr>
+  <tr><td align="left">  5 capabilities : Capability [0..*]  </td></tr>
+  <tr><td align="left">  6 back-matter : m:Back-matter [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Import-component-definition : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 href : c:URIReferenceDatatype  </td></tr>
+</table>>]
+
+n2 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Defined-component : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : Defined-component.type  </td></tr>
+  <tr><td align="left">  3 title : String  </td></tr>
+  <tr><td align="left">  4 description : String  </td></tr>
+  <tr><td align="left">  5 purpose : String [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  8 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  9 protocols : ic:Protocol [0..*]  </td></tr>
+  <tr><td align="left">  10 control-implementations : Control-implementation [0..*]  </td></tr>
+  <tr><td align="left">  11 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Defined-component.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : Defined-component.type.2  </td></tr>
+</table>>]
+
+n4 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Defined-component.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 interconnection  </td></tr>
+  <tr><td align="left">  2 software  </td></tr>
+  <tr><td align="left">  3 hardware  </td></tr>
+  <tr><td align="left">  4 service  </td></tr>
+  <tr><td align="left">  5 policy  </td></tr>
+  <tr><td align="left">  6 physical  </td></tr>
+  <tr><td align="left">  7 process-procedure  </td></tr>
+  <tr><td align="left">  8 plan  </td></tr>
+  <tr><td align="left">  9 guidance  </td></tr>
+  <tr><td align="left">  10 standard  </td></tr>
+  <tr><td align="left">  11 validation  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Control-implementation : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 source : c:URIReferenceDatatype  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 set-parameters : ic:Set-parameter [0..*]  </td></tr>
+  <tr><td align="left">  7 implemented-requirements : Implemented-requirement [1..*]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Implemented-requirement : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 control-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 set-parameters : ic:Set-parameter [0..*]  </td></tr>
+  <tr><td align="left">  7 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  8 statements : Statement [0..*]  </td></tr>
+  <tr><td align="left">  9 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Statement : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 statement-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n8 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Capability : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 name : c:StringDatatype  </td></tr>
+  <tr><td align="left">  3 description : String  </td></tr>
+  <tr><td align="left">  4 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  5 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  6 incorporates-components : Incorporates-component [0..*]  </td></tr>
+  <tr><td align="left">  7 control-implementations : Control-implementation [0..*]  </td></tr>
+  <tr><td align="left">  8 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Incorporates-component : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 component-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 description : String  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=import_component_definitions, headlabel="0..*", taillabel="1"]
+  n0 -> n2 [label=components, headlabel="0..*", taillabel="1"]
+  n0 -> n8 [label=capabilities, headlabel="0..*", taillabel="1"]
+  n2 -> n3 [label=type, headlabel="1", taillabel="1"]
+  n2 -> n5 [label=control_implementations, headlabel="0..*", taillabel="1"]
+  n3 -> n4 [label=c2, headlabel="1", taillabel="1"]
+  n5 -> n6 [label=implemented_requirements, headlabel="1..*", taillabel="1"]
+  n6 -> n7 [label=statements, headlabel="0..*", taillabel="1"]
+  n8 -> n9 [label=incorporates_components, headlabel="0..*", taillabel="1"]
+  n8 -> n5 [label=control_implementations, headlabel="0..*", taillabel="1"]
+}

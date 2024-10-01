@@ -1,0 +1,687 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-profile",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Profile": {
+      "title": "Profile",
+      "type": "object",
+      "description": "Each OSCAL profile is defined by a profile element.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata",
+        "imports"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "Provides a globally unique means to identify a given profile instance."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "imports": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Import",
+            "description": ""
+          }
+        },
+        "merge": {
+          "$ref": "#/definitions/Merge",
+          "description": ""
+        },
+        "modify": {
+          "$ref": "#/definitions/Modify",
+          "description": ""
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Import": {
+      "title": "Import",
+      "type": "object",
+      "description": "Designates a referenced source catalog or profile that provides a source of control information for use in creating a new overlay or baseline.",
+      "additionalProperties": false,
+      "required": [
+        "href"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A resolvable URL reference to the base catalog or profile that this profile is tailoring."
+        },
+        "include-all": {
+          "$ref": "#/imports/cc/Include-all",
+          "description": ""
+        },
+        "include-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        },
+        "exclude-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Select-control-by-id": {
+      "title": "Select control by id",
+      "type": "object",
+      "description": "Select a control or controls from an imported control set.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "with-child-controls": {
+          "$ref": "#/definitions/Select-control-by-id.with-child-controls",
+          "description": "When a control is included, whether its child (dependent) controls are also included."
+        },
+        "with-ids": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/With-id",
+            "description": ""
+          }
+        },
+        "matching": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Matching",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Select-control-by-id.with-child-controls": {
+      "title": "Select control by id.with child controls",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Select-control-by-id.with-child-controls.2"
+        }
+      ]
+    },
+    "Select-control-by-id.with-child-controls.2": {
+      "title": "Select control by id.with child controls.2",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "With-id": {
+      "title": "With id",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        }
+      ]
+    },
+    "Matching": {
+      "title": "Matching",
+      "type": "object",
+      "description": "Selecting a set of controls by matching their IDs with a wildcard pattern.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "pattern": {
+          "$ref": "#/imports/c/StringDatatype",
+          "description": "A glob expression matching the IDs of one or more controls to be selected."
+        }
+      }
+    },
+    "Merge": {
+      "title": "Merge",
+      "type": "object",
+      "description": "Provides structuring directives that instruct how controls are organized after profile resolution.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "combine": {
+          "$ref": "#/definitions/Merge.combine",
+          "description": "A Combine element defines how to resolve duplicate instances of the same control (e.g., controls with the same ID)."
+        },
+        "flat": {
+          "$ref": "#/definitions/Merge.flat",
+          "description": "Directs that controls appear without any grouping structure."
+        },
+        "as-is": {
+          "$ref": "#/imports/c/BooleanDatatype",
+          "description": "Indicates that the controls selected should retain their original grouping as defined in the import source."
+        },
+        "custom": {
+          "$ref": "#/definitions/Merge.custom",
+          "description": "Provides an alternate grouping structure that selected controls will be placed in."
+        }
+      }
+    },
+    "Merge.combine": {
+      "title": "Merge.combine",
+      "type": "object",
+      "description": "A Combine element defines how to resolve duplicate instances of the same control (e.g., controls with the same ID).",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/Merge.combine.method",
+          "description": "Declare how clashing controls should be handled."
+        }
+      }
+    },
+    "Merge.combine.method": {
+      "title": "Merge.combine.method",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/StringDatatype"
+        },
+        {
+          "$ref": "#/definitions/Merge.combine.method.2"
+        }
+      ]
+    },
+    "Merge.combine.method.2": {
+      "title": "Merge.combine.method.2",
+      "type": "string",
+      "enum": [
+        "use-first",
+        "merge",
+        "keep"
+      ]
+    },
+    "Merge.flat": {
+      "title": "Merge.flat",
+      "type": "object",
+      "description": "Directs that controls appear without any grouping structure.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {}
+    },
+    "Merge.custom": {
+      "title": "Merge.custom",
+      "type": "object",
+      "description": "Provides an alternate grouping structure that selected controls will be placed in.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Group",
+            "description": ""
+          }
+        },
+        "insert-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Insert-controls",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Group": {
+      "title": "Group",
+      "type": "object",
+      "description": "A group of (selected) controls or of groups of controls.",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identifies the group."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a sub-type or characterization of the group."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name to be given to the group for use in display.",
+          "maxLength": 1000
+        },
+        "params": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Part",
+            "description": ""
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Group",
+            "description": ""
+          }
+        },
+        "insert-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Insert-controls",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Insert-controls": {
+      "title": "Insert controls",
+      "type": "object",
+      "description": "Specifies which controls to use in the containing context.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/Insert-controls.order",
+          "description": "A designation of how a selection of controls in a profile is to be ordered."
+        },
+        "include-all": {
+          "$ref": "#/imports/cc/Include-all",
+          "description": ""
+        },
+        "include-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        },
+        "exclude-controls": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Select-control-by-id",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Insert-controls.order": {
+      "title": "Insert controls.order",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Insert-controls.order.2"
+        }
+      ]
+    },
+    "Insert-controls.order.2": {
+      "title": "Insert controls.order.2",
+      "type": "string",
+      "enum": [
+        "keep",
+        "ascending",
+        "descending"
+      ]
+    },
+    "Modify": {
+      "title": "Modify",
+      "type": "object",
+      "description": "Set parameters or amend controls in resolution.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "set-parameters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Modify.set-parameters",
+            "description": ""
+          }
+        },
+        "alters": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Modify.alters",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Modify.set-parameters": {
+      "title": "Modify.set parameters",
+      "type": "object",
+      "description": "A parameter setting, to be propagated to points of insertion.",
+      "additionalProperties": false,
+      "required": [
+        "param-id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "param-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "An identifier for the parameter."
+        },
+        "class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A textual label that provides a characterization of the parameter."
+        },
+        "depends-on": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "**(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.",
+          "maxLength": 1000
+        },
+        "usage": {
+          "type": "string",
+          "description": "Describes the purpose and use of a parameter.",
+          "maxLength": 1000
+        },
+        "constraints": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter-constraint",
+            "description": ""
+          }
+        },
+        "guidelines": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter-guideline",
+            "description": ""
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter-value",
+            "description": ""
+          }
+        },
+        "select": {
+          "$ref": "#/imports/cc/Parameter-selection",
+          "description": ""
+        }
+      }
+    },
+    "Modify.alters": {
+      "title": "Modify.alters",
+      "type": "object",
+      "description": "Specifies changes to be made to an included control when a profile is resolved.",
+      "additionalProperties": false,
+      "required": [
+        "control-id"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "control-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "A reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference)."
+        },
+        "removes": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Modify.alters.removes",
+            "description": ""
+          }
+        },
+        "adds": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Modify.alters.adds",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Modify.alters.removes": {
+      "title": "Modify.alters.removes",
+      "type": "object",
+      "description": "Specifies objects to be removed from a control based on specific aspects of the object that must all match.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "by-name": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identify items remove by matching their assigned name."
+        },
+        "by-class": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identify items to remove by matching their class."
+        },
+        "by-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identify items to remove indicated by their id."
+        },
+        "by-item-name": {
+          "$ref": "#/definitions/Modify.alters.removes.by-item-name",
+          "description": "Identify items to remove by the name of the item's information object name, e.g. title or prop."
+        },
+        "by-ns": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Identify items to remove by the item's ns, which is the namespace associated with a part, or prop."
+        }
+      }
+    },
+    "Modify.alters.removes.by-item-name": {
+      "title": "Modify.alters.removes.by item name",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Modify.alters.removes.by-item-name.2"
+        }
+      ]
+    },
+    "Modify.alters.removes.by-item-name.2": {
+      "title": "Modify.alters.removes.by item name.2",
+      "type": "string",
+      "enum": [
+        "param",
+        "prop",
+        "link",
+        "part",
+        "mapping",
+        "map"
+      ]
+    },
+    "Modify.alters.adds": {
+      "title": "Modify.alters.adds",
+      "type": "object",
+      "description": "Specifies contents to be added into controls, in resolution.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "position": {
+          "$ref": "#/definitions/Modify.alters.adds.position",
+          "description": "Where to add the new content with respect to the targeted element (beside it or inside it)."
+        },
+        "by-id": {
+          "$ref": "#/imports/c/TokenDatatype",
+          "description": "Target location of the addition."
+        },
+        "title": {
+          "type": "string",
+          "description": "A name given to the control, which may be used by a tool for display and navigation.",
+          "maxLength": 1000
+        },
+        "params": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Parameter",
+            "description": ""
+          }
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/cc/Part",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Modify.alters.adds.position": {
+      "title": "Modify.alters.adds.position",
+      "allOf": [
+        {
+          "$ref": "#/imports/c/TokenDatatype"
+        },
+        {
+          "$ref": "#/definitions/Modify.alters.adds.position.2"
+        }
+      ]
+    },
+    "Modify.alters.adds.position.2": {
+      "title": "Modify.alters.adds.position.2",
+      "type": "string",
+      "enum": [
+        "before",
+        "after",
+        "starting",
+        "ending"
+      ]
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Property": {},
+      "Link": {}
+    },
+    "cc": {
+      "Include-all": {},
+      "Parameter": {},
+      "Part": {},
+      "Parameter-constraint": {},
+      "Parameter-guideline": {},
+      "Parameter-value": {},
+      "Parameter-selection": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "URIReferenceDatatype": {},
+      "TokenDatatype": {},
+      "StringDatatype": {},
+      "BooleanDatatype": {}
+    }
+  }
+}

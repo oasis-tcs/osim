@@ -1,0 +1,34 @@
+# title: OSCAL
+# package: https://example.gov/ns/oscal/0.0.1/
+# description: OSCAL - Open Security Controls Assessment Language
+# namespaces: [['', 'https://example.gov/ns/oscal/0.0.1/metadata/'], ['', 'https://example.gov/ns/oscal/0.0.1/catalog/'], ['', 'https://example.gov/ns/oscal/0.0.1/profile/'], ['', 'https://example.gov/ns/oscal/0.0.1/component/'], ['', 'https://example.gov/ns/oscal/0.0.1/ssp/'], ['', 'https://example.gov/ns/oscal/0.0.1/assessment_plan/'], ['', 'https://example.gov/ns/oscal/0.0.1/assessment_results/'], ['', 'https://example.gov/ns/oscal/0.0.1/poam/']]
+# exports: ['OSCAL']
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  OSCAL : Record sequence  </b></td></tr><hr/>
+  <tr><td align="left">  1 model : Enumerated(Enum[Model])  </td></tr>
+  <tr><td align="left">  2 uuid : UUID  </td></tr>
+  <tr><td align="left">  3 metadata : Metadata  </td></tr>
+  <tr><td align="left">  4 body : Model(TagId[model])  </td></tr>
+  <tr><td align="left">  5 back_matter : Back-matter [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Model : Choice  </b></td></tr><hr/>
+  <tr><td align="left">  1 catalog : Catalog  </td></tr>
+  <tr><td align="left">  2 profile : Profile  </td></tr>
+  <tr><td align="left">  3 component : Component  </td></tr>
+  <tr><td align="left">  4 ssp : System-security-plan  </td></tr>
+  <tr><td align="left">  5 ap : Assessment-plan  </td></tr>
+  <tr><td align="left">  6 ar : Assessment-results  </td></tr>
+  <tr><td align="left">  7 poam : Plan-of-action-and-milestones  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=body, headlabel="1", taillabel="1"]
+}

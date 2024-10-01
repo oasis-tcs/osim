@@ -1,0 +1,207 @@
+# package: http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common
+# roots: ['Implementation-status', 'Inventory-item', 'Set-parameter', 'System-component', 'System-id', 'System-user']
+# namespaces: [['c', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common'], ['m', 'http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata']]
+# config: {'$MaxString': 1000, '$Sys': '.', '$TypeName': '^[$A-Z][-.$A-Za-z0-9]{0,96}$', '$FieldName': '^[$a-z][-_$A-Za-z0-9]{0,63}$'}
+
+digraph G {
+  graph [fontname=Arial, fontsize=12];
+  node [fontname=Arial, fontsize=8, shape=plain, style=filled, fillcolor=lightskyblue1];
+  edge [fontname=Arial, fontsize=7, arrowsize=0.5, labelangle=45.0, labeldistance=0.9];
+  bgcolor="transparent";
+
+n0 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Implementation-status : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 state : Implementation-status.state  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n1 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Implementation-status.state : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Implementation-status.state.2  </td></tr>
+</table>>]
+
+n2 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Implementation-status.state.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 implemented  </td></tr>
+  <tr><td align="left">  2 partial  </td></tr>
+  <tr><td align="left">  3 planned  </td></tr>
+  <tr><td align="left">  4 alternative  </td></tr>
+  <tr><td align="left">  5 not-applicable  </td></tr>
+</table>>]
+
+n3 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Inventory-item : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 description : String  </td></tr>
+  <tr><td align="left">  3 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  4 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  5 responsible-parties : m:Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  6 implemented-components : Inventory-item.implemented-components [0..*]  </td></tr>
+  <tr><td align="left">  7 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n4 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Inventory-item.implemented-components : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 component-uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  3 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  4 responsible-parties : m:Responsible-party [0..*]  </td></tr>
+  <tr><td align="left">  5 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n5 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Set-parameter : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 param-id : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2 values : c:StringDatatype [1..*]  </td></tr>
+  <tr><td align="left">  3 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n6 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 type : System-component.type  </td></tr>
+  <tr><td align="left">  3 title : String  </td></tr>
+  <tr><td align="left">  4 description : String  </td></tr>
+  <tr><td align="left">  5 purpose : String [0..1]  </td></tr>
+  <tr><td align="left">  6 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  7 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  8 status : System-component.status  </td></tr>
+  <tr><td align="left">  9 responsible-roles : m:Responsible-role [0..*]  </td></tr>
+  <tr><td align="left">  10 protocols : Protocol [0..*]  </td></tr>
+  <tr><td align="left">  11 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n7 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component.type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+  <tr><td align="left">  2  : System-component.type.2  </td></tr>
+</table>>]
+
+n8 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component.type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 this-system  </td></tr>
+  <tr><td align="left">  2 system  </td></tr>
+  <tr><td align="left">  3 interconnection  </td></tr>
+  <tr><td align="left">  4 software  </td></tr>
+  <tr><td align="left">  5 hardware  </td></tr>
+  <tr><td align="left">  6 service  </td></tr>
+  <tr><td align="left">  7 policy  </td></tr>
+  <tr><td align="left">  8 physical  </td></tr>
+  <tr><td align="left">  9 process-procedure  </td></tr>
+  <tr><td align="left">  10 plan  </td></tr>
+  <tr><td align="left">  11 guidance  </td></tr>
+  <tr><td align="left">  12 standard  </td></tr>
+  <tr><td align="left">  13 validation  </td></tr>
+  <tr><td align="left">  14 network  </td></tr>
+</table>>]
+
+n9 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component.status : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 state : System-component.status.state  </td></tr>
+  <tr><td align="left">  2 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n10 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component.status.state : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : System-component.status.state.2  </td></tr>
+</table>>]
+
+n11 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-component.status.state.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 under-development  </td></tr>
+  <tr><td align="left">  2 operational  </td></tr>
+  <tr><td align="left">  3 disposition  </td></tr>
+  <tr><td align="left">  4 other  </td></tr>
+</table>>]
+
+n12 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Protocol : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 name : c:StringDatatype  </td></tr>
+  <tr><td align="left">  3 title : String [0..1]  </td></tr>
+  <tr><td align="left">  4 port-ranges : Port-range [0..*]  </td></tr>
+</table>>]
+
+n13 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Port-range : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 start : c:NonNegativeIntegerDatatype [0..1]  </td></tr>
+  <tr><td align="left">  2 end : c:NonNegativeIntegerDatatype [0..1]  </td></tr>
+  <tr><td align="left">  3 transport : Port-range.transport [0..1]  </td></tr>
+</table>>]
+
+n14 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Port-range.transport : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:TokenDatatype  </td></tr>
+  <tr><td align="left">  2  : Port-range.transport.2  </td></tr>
+</table>>]
+
+n15 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Port-range.transport.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 TCP  </td></tr>
+  <tr><td align="left">  2 UDP  </td></tr>
+</table>>]
+
+n16 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-id : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 identifier-type : System-id.identifier-type [0..1]  </td></tr>
+  <tr><td align="left">  2 id : c:StringDatatype  </td></tr>
+</table>>]
+
+n17 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-id.identifier-type : Choice(anyOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:URIDatatype  </td></tr>
+  <tr><td align="left">  2  : System-id.identifier-type.2  </td></tr>
+</table>>]
+
+n18 [fillcolor=palegreen, label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-id.identifier-type.2 : Enumerated  </b></td></tr><hr/>
+  <tr><td align="left">  1 https://fedramp.gov  </td></tr>
+  <tr><td align="left">  2 http://fedramp.gov/ns/oscal  </td></tr>
+  <tr><td align="left">  3 https://ietf.org/rfc/rfc4122  </td></tr>
+  <tr><td align="left">  4 http://ietf.org/rfc/rfc4122  </td></tr>
+</table>>]
+
+n19 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  System-user : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 uuid : c:UUIDDatatype  </td></tr>
+  <tr><td align="left">  2 title : String [0..1]  </td></tr>
+  <tr><td align="left">  3 short-name : c:StringDatatype [0..1]  </td></tr>
+  <tr><td align="left">  4 description : String [0..1]  </td></tr>
+  <tr><td align="left">  5 props : m:Property [0..*]  </td></tr>
+  <tr><td align="left">  6 links : m:Link [0..*]  </td></tr>
+  <tr><td align="left">  7 role-ids : m:Role-id [0..*]  </td></tr>
+  <tr><td align="left">  8 authorized-privileges : Authorized-privilege [0..*]  </td></tr>
+  <tr><td align="left">  9 remarks : m:Remarks [0..1]  </td></tr>
+</table>>]
+
+n20 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Authorized-privilege : Record  </b></td></tr><hr/>
+  <tr><td align="left">  1 title : String  </td></tr>
+  <tr><td align="left">  2 description : String [0..1]  </td></tr>
+  <tr><td align="left">  3 functions-performed : Function-performed [1..*]  </td></tr>
+</table>>]
+
+n21 [label=<<table cellborder="0" cellpadding="1" cellspacing="0">
+<tr><td cellpadding="4"><b>  Function-performed : Choice(allOf)  </b></td></tr><hr/>
+  <tr><td align="left">  1  : c:StringDatatype  </td></tr>
+</table>>]
+
+  n0 -> n1 [label=state, headlabel="1", taillabel="1"]
+  n1 -> n2 [label=c2, headlabel="1", taillabel="1"]
+  n3 -> n4 [label=implemented_components, headlabel="0..*", taillabel="1"]
+  n6 -> n7 [label=type, headlabel="1", taillabel="1"]
+  n6 -> n9 [label=status, headlabel="1", taillabel="1"]
+  n6 -> n12 [label=protocols, headlabel="0..*", taillabel="1"]
+  n7 -> n8 [label=c2, headlabel="1", taillabel="1"]
+  n9 -> n10 [label=state, headlabel="1", taillabel="1"]
+  n10 -> n11 [label=c2, headlabel="1", taillabel="1"]
+  n12 -> n13 [label=port_ranges, headlabel="0..*", taillabel="1"]
+  n13 -> n14 [label=transport, headlabel="0..1", taillabel="1"]
+  n14 -> n15 [label=c2, headlabel="1", taillabel="1"]
+  n16 -> n17 [label=identifier_type, headlabel="0..1", taillabel="1"]
+  n17 -> n18 [label=c2, headlabel="1", taillabel="1"]
+  n19 -> n20 [label=authorized_privileges, headlabel="0..*", taillabel="1"]
+  n20 -> n21 [label=functions_performed, headlabel="1..*", taillabel="1"]
+}

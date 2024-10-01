@@ -1,0 +1,71 @@
+{
+  "info": {
+    "package": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-poam",
+    "comment": "OSCAL Plan of Action and Milestones (POA&M) Model: JSON Schema",
+    "roots": ["Plan-of-action-and-milestones"],
+    "config": {
+      "$MaxString": 1000,
+      "$Sys": ".",
+      "$TypeName": "^[$A-Z][-.$A-Za-z0-9]{0,96}$",
+      "$FieldName": "^[$a-z][-_$A-Za-z0-9]{0,63}$"
+    },
+    "namespaces": [
+      ["m", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-metadata"],
+      ["cc", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-control-common"],
+      ["ic", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-implementation-common"],
+      ["ac", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-assessment-common"],
+      ["c", "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-common"]
+    ]
+  },
+
+  "types": [
+    ["Plan-of-action-and-milestones", "Record", [], "A plan of action and milestones which identifies initial and residual risks, deviations, and disposition, such as those required by FedRAMP.", [
+      [1, "uuid", "c:UUIDDatatype", [], "A machine-oriented, globally unique identifier with instancescope that can be used to reference this POA&M instance in this OSCAL instance. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."],
+      [2, "metadata", "m:Metadata", [], ""],
+      [3, "import-ssp", "ac:Import-ssp", ["[0"], ""],
+      [4, "system-id", "ic:System-id", ["[0"], ""],
+      [5, "local-definitions", "Local-definitions", ["[0"], ""],
+      [6, "observations", "ac:Observation", ["[0", "]0"], ""],
+      [7, "risks", "ac:Risk", ["[0", "]0"], ""],
+      [8, "findings", "ac:Finding", ["[0", "]0"], ""],
+      [9, "poam-items", "Poam-item", ["]0"], ""],
+      [10, "back-matter", "m:Back-matter", ["[0"], ""]
+    ]],
+
+    ["Local-definitions", "Record", [], "Allows components, and inventory-items to be defined within the POA&M for circumstances where no OSCAL-based SSP exists, or is not delivered with the POA&M.", [
+      [1, "components", "ic:System-component", ["[0", "]0"], ""],
+      [2, "inventory-items", "ic:Inventory-item", ["[0", "]0"], ""],
+      [3, "assessment-assets", "ac:Assessment-assets", ["[0"], ""],
+      [4, "remarks", "m:Remarks", ["[0"], ""]
+    ]],
+
+    ["Poam-item", "Record", [], "Describes an individual POA&M item.", [
+      [1, "uuid", "c:UUIDDatatype", ["[0"], "A machine-oriented, globally unique identifier with instance scope that can be used to reference this POA&M item entry in this OSCAL instance. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."],
+      [2, "title", "String", [], "The title or name for this POA&M item ."],
+      [3, "description", "String", [], "A human-readable description of POA&M item."],
+      [4, "props", "m:Property", ["[0", "]0"], ""],
+      [5, "links", "m:Link", ["[0", "]0"], ""],
+      [6, "origins", "Poam-item.origins", ["[0", "]0"], ""],
+      [7, "related-findings", "Poam-item.related-findings", ["[0", "]0"], ""],
+      [8, "related-observations", "Poam-item.related-observations", ["[0", "]0"], ""],
+      [9, "related-risks", "Poam-item.related-risks", ["[0", "]0"], ""],
+      [10, "remarks", "m:Remarks", ["[0"], ""]
+    ]],
+
+    ["Poam-item.origins", "Record", [], "Identifies the source of the finding, such as a tool or person.", [
+      [1, "actors", "ac:Origin-actor", ["]0"], ""]
+    ]],
+
+    ["Poam-item.related-findings", "Record", [], "Relates the poam-item to referenced finding(s).", [
+      [1, "finding-uuid", "c:UUIDDatatype", [], "A machine-oriented identifier reference to a finding defined in the list of findings."]
+    ]],
+
+    ["Poam-item.related-observations", "Record", [], "Relates the poam-item to a set of referenced observations that were used to determine the finding.", [
+      [1, "observation-uuid", "c:UUIDDatatype", [], "A machine-oriented identifier reference to an observation defined in the list of observations."]
+    ]],
+
+    ["Poam-item.related-risks", "Record", [], "Relates the finding to a set of referenced risks that were used to determine the finding.", [
+      [1, "risk-uuid", "c:UUIDDatatype", [], "A machine-oriented identifier reference to a risk defined in the list of risks."]
+    ]]
+  ]
+}

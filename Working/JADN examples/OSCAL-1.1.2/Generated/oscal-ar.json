@@ -1,0 +1,421 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://csrc.nist.gov/ns/oscal/1.1.2/oscal-ar",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "Assessment-results": {
+      "title": "Assessment results",
+      "type": "object",
+      "description": "Security assessment results, such as those provided by a FedRAMP assessor in the FedRAMP Security Assessment Report.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "metadata",
+        "import-ap",
+        "results"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment results instance in this or other OSCAL instances. The locally defined UUID of the assessment result can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "metadata": {
+          "$ref": "#/imports/m/Metadata",
+          "description": ""
+        },
+        "import-ap": {
+          "$ref": "#/definitions/Import-ap",
+          "description": ""
+        },
+        "local-definitions": {
+          "$ref": "#/definitions/Assessment-results.local-definitions",
+          "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP."
+        },
+        "results": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Result",
+            "description": ""
+          }
+        },
+        "back-matter": {
+          "$ref": "#/imports/m/Back-matter",
+          "description": ""
+        }
+      }
+    },
+    "Import-ap": {
+      "title": "Import ap",
+      "type": "object",
+      "description": "Used by assessment-results to import information about the original plan for assessing the system.",
+      "additionalProperties": false,
+      "required": [
+        "href"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "href": {
+          "$ref": "#/imports/c/URIReferenceDatatype",
+          "description": "A resolvable URL reference to the assessment plan governing the assessment activities."
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Assessment-results.local-definitions": {
+      "title": "Assessment results.local definitions",
+      "type": "object",
+      "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "objectives-and-methods": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Local-objective",
+            "description": ""
+          }
+        },
+        "activities": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Activity",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Result": {
+      "title": "Result",
+      "type": "object",
+      "description": "Used by the assessment results and POA&M. In the assessment results, this identifies all of the assessment observations and findings, initial and residual risks, deviations, and disposition. In the POA&M, this identifies initial and residual risks, deviations, and disposition.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "title",
+        "description",
+        "start",
+        "reviewed-controls"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this set of results in this or other OSCAL instances. The locally defined UUID of the assessment result can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this set of results.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this set of test results.",
+          "maxLength": 1000
+        },
+        "start": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Date/time stamp identifying the start of the evidence collection reflected in these results."
+        },
+        "end": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Date/time stamp identifying the end of the evidence collection reflected in these results. In a continuous motoring scenario, this may contain the same value as start if appropriate."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "local-definitions": {
+          "$ref": "#/definitions/Result.local-definitions",
+          "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP."
+        },
+        "reviewed-controls": {
+          "$ref": "#/imports/ac/Reviewed-controls",
+          "description": ""
+        },
+        "attestations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Result.attestations",
+            "description": ""
+          }
+        },
+        "assessment-log": {
+          "$ref": "#/definitions/Result.assessment-log",
+          "description": "A log of all assessment-related actions taken."
+        },
+        "observations": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Observation",
+            "description": ""
+          }
+        },
+        "risks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Risk",
+            "description": ""
+          }
+        },
+        "findings": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Finding",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    },
+    "Result.local-definitions": {
+      "title": "Result.local definitions",
+      "type": "object",
+      "description": "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.",
+      "additionalProperties": false,
+      "maxProperties": 100,
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-component",
+            "description": ""
+          }
+        },
+        "inventory-items": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/Inventory-item",
+            "description": ""
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ic/System-user",
+            "description": ""
+          }
+        },
+        "assessment-assets": {
+          "$ref": "#/imports/ac/Assessment-assets",
+          "description": ""
+        },
+        "tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Task",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Result.attestations": {
+      "title": "Result.attestations",
+      "type": "object",
+      "description": "A set of textual statements, typically written by the assessor.",
+      "additionalProperties": false,
+      "required": [
+        "parts"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "responsible-parties": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Responsible-party",
+            "description": ""
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Assessment-part",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Result.assessment-log": {
+      "title": "Result.assessment log",
+      "type": "object",
+      "description": "A log of all assessment-related actions taken.",
+      "additionalProperties": false,
+      "required": [
+        "entries"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Result.assessment-log.entries",
+            "description": ""
+          }
+        }
+      }
+    },
+    "Result.assessment-log.entries": {
+      "title": "Result.assessment log.entries",
+      "type": "object",
+      "description": "Identifies the result of an action and/or task that occurred as part of executing an assessment plan or an assessment event that occurred in producing the assessment results.",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "start"
+      ],
+      "maxProperties": 100,
+      "properties": {
+        "uuid": {
+          "$ref": "#/imports/c/UUIDDatatype",
+          "description": "A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference an assessment event in this or other OSCAL instances. The locally defined UUID of the assessment log entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title for this event.",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of this event.",
+          "maxLength": 1000
+        },
+        "start": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Identifies the start date and time of an event."
+        },
+        "end": {
+          "$ref": "#/imports/c/DateTimeWithTimezoneDatatype",
+          "description": "Identifies the end date and time of an event. If the event is a point in time, the start and end will be the same date and time."
+        },
+        "props": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Property",
+            "description": ""
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/m/Link",
+            "description": ""
+          }
+        },
+        "logged-by": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Logged-by",
+            "description": ""
+          }
+        },
+        "related-tasks": {
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/imports/ac/Related-task",
+            "description": ""
+          }
+        },
+        "remarks": {
+          "$ref": "#/imports/m/Remarks",
+          "description": ""
+        }
+      }
+    }
+  },
+  "imports": {
+    "m": {
+      "Metadata": {},
+      "Back-matter": {},
+      "Remarks": {},
+      "Property": {},
+      "Link": {},
+      "Responsible-party": {}
+    },
+    "cc": {},
+    "ic": {
+      "System-component": {},
+      "Inventory-item": {},
+      "System-user": {}
+    },
+    "ac": {
+      "Local-objective": {},
+      "Activity": {},
+      "Reviewed-controls": {},
+      "Observation": {},
+      "Risk": {},
+      "Finding": {},
+      "Assessment-assets": {},
+      "Task": {},
+      "Assessment-part": {},
+      "Logged-by": {},
+      "Related-task": {}
+    },
+    "c": {
+      "UUIDDatatype": {},
+      "URIReferenceDatatype": {},
+      "DateTimeWithTimezoneDatatype": {}
+    }
+  }
+}
