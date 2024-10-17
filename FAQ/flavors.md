@@ -29,7 +29,7 @@ What must/should be exchanged, and what formats to use, is left to the individua
 based on the value propositions in their specific use cases.
 
 The [Supplychain Information Model](tbd)
-contains [Supplychain Profiles] which specify collections of 
+contains [Supplychain Profiles](./profiles.md) which specify collections of 
 optional attributes that together form a profile to 
 solve the need of particular use case.
 
