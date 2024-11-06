@@ -1,4 +1,4 @@
-## **What is an SBOM?**
+## **Q: What is an SBOM?**
 **A:** A Software Bill of Materials (SBOM) 
 is a formal record containing the details 
 and supply chain relationships of various components used in building software.
