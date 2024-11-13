@@ -1,4 +1,4 @@
-## **What is JADN?**
+## **Q: What is JADN?**
 **A:** 
 JSON Abstract Data Notation (JADN) is
 an information modeling language, based on information theory principles, 
