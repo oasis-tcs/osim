@@ -1,4 +1,4 @@
-## **What is meant by 'information model'?**
+## **Q: What is meant by 'information model'?**
 **A:** 
 An Information Model (IM) defines the essential content of messages used in computing, 
 independently of how those messages are represented (i.e., serialized) for communication or storage. 
