@@ -2,7 +2,8 @@
 For our project the term "use cases" is used loosely and means any
 "cases" (eg scenarios) where the work products of this TC would be "used".
 
-There are two subdirectories, aimed at two different audiences.
+There are two subdirectories ("[Value Scenarios](./ValueScenarios/)", "[Practioner Playbooks](./PractionerPlaybooks/)"), aimed at two different audiences.
+There is a third subdirectory ("Fictitious Props") which support both of the previous directories.
 
 Value Scenarios describe the value proposition of the work of the TC.
 The intended audience of Value Scenarios is outside the TC,
@@ -19,4 +20,10 @@ one per TC member organization.
 Other work has shown that better consensus is reached if everybody
 can present their own problem statments and solutions in a 
 judgement-free environment.
-Consensus can then be reached
+Consensus can then be reached.
+
+The third subdirectory, "[Fictitious Props](./FictitiousProps/)", 
+provides a common reference across the OSIM documents and use cases, 
+using a few fictitious entities.
+Any resemblance to actual persons/companies/organizations/tools/products
+is coincidental and unintended.
