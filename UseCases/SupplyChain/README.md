@@ -39,3 +39,26 @@ mergers and acquisition (M&A) decisions. For each use, the document provides a b
 narrative description followed by a table that summarizes the use cases’ actors, 
 business motivation, objectives, steps to achieve the objectives, SBOM elements used, 
 other supplementary data, and benefits achieved.
+
+The use cases are:
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+* link to be provided once use case agreed to 
+
+## References
+Much of the text in this document was based on previous work.
+This section provides the documents that were referenced above.
+### SBOM Operations Working Group
+1. SBOM Community, SBOM Operations Working Group. Improving Risk Management Decisions with SBOM Data. (2025, March 2). https://docs.google.com/document/d/1vFVbWEJmNsAbNPRAtHclC89YQlLUt6xYIvKmFGRkcQA/edit?tab=t.0#heading=h.10zm8vq6u9e0 {Editor's Note: Link will be replaced once doc published on CISA website}
