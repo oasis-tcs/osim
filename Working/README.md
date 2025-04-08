@@ -9,6 +9,7 @@ So until we know what directories to form for each work product,
 this "working" directory is a place to stick stuff.
 
 It contains:
+- [JADN Language Description](JADN%20IM/JADN%20Version%202.0.pdf)
 - [JADN Information Model Examples](JADN%20examples)
 - [Teapot](./Teapot/)
    + a directory with a image of a particular example teapot software and relationships.
