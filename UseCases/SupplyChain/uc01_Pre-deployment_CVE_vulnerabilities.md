@@ -38,4 +38,6 @@ The key attributes of this use case:
    - Minimizes liability for the Producer.
    - Supports security attestations and security advisories that may be required by software procurers.
 
+The text of this use case was adapted from [Reference 1](./README.md#references).
+
 
