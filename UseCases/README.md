@@ -34,4 +34,4 @@ requires understanding of the broader supply chain uses
 in which OSIM plays a role.
 For example to see the value of information modeling to 
 software bill of materials (SBOM), 
-you first have to undershand the value of SBOMs.
+you first have to understand the value of SBOMs.
