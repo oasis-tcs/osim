@@ -61,10 +61,4 @@ The key attributes of this use case:
 ** software producer and consumer maintain the security and compliance of deployed software products that may be impacted by new CVEs posted in the NVD.
 ** producer and consumer supporting functions can take appropriate actions to contain, mitigate and report new vulnerabilities before exploitation.
 
-
-
-
-
-
-
-
+The text of this use case was adapted from [Reference 1](./README.md#references).
