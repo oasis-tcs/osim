@@ -57,6 +57,6 @@ Key attributes of this use case are:
 ** Provides specific actions legal teams should take based on the SBOM's license data to protect the organization from potential legal exposure. This includes setting policies for component updates, replacements, or license conflict resolution.
 ** Ensures that software vendors and internal teams comply with established OSS license requirements and policies. 
 
-
+The text of this use case was adapted from [Reference 1](./README.md#references).
 
 
