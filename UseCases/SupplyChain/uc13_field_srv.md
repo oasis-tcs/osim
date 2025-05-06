@@ -46,32 +46,32 @@ expected risk profiles and determine necessary mitigations.
 The key attributes of this use case:
 
 * actors
-** Producer Field Service Representatives, Product Security Team, Consumer IT Team, Consumer Security Team
+   - Producer Field Service Representatives, Product Security Team, Consumer IT Team, Consumer Security Team
 * business motivation
-** Maintain reliability of software-enabled devices
-** Maintain supportability, performance and availability of software-enabled devices
-** Reduce exposure to vulnerabilities from unnecessary components
+   - Maintain reliability of software-enabled devices
+   - Maintain supportability, performance and availability of software-enabled devices
+   - Reduce exposure to vulnerabilities from unnecessary components
 * functional objectives
-** Compare software inventory on a deployed device to the software inventory provided at the time of the device’s release by the manufacturer
+   - Compare software inventory on a deployed device to the software inventory provided at the time of the device’s release by the manufacturer
 * processes or steps to achieve objectives
-** Obtain most recently verified deployed device SBOM
-** Generate SBOM for deployed device
-** Identify differences between two SBOMs
-** Determine potential reasons, both intended and unintended, for the differences
-** Compare deployed device’s patch level of components to those recommended by manufacturer
-** Inform Producer’s Product Security Team and Consumer’s Security Team and IT team of any unintended additions to the device’s software and any security issues in deployed device
+   - Obtain most recently verified deployed device SBOM
+   - Generate SBOM for deployed device
+   - Identify differences between two SBOMs
+   - Determine potential reasons, both intended and unintended, for the differences
+   - Compare deployed device’s patch level of components to those recommended by manufacturer
+   - Inform Producer’s Product Security Team and Consumer’s Security Team and IT team of any unintended additions to the device’s software and any security issues in deployed device
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Dependency Relationship, Author of
 SBOM Data, Timestamp.
 * added or cross-linked data
-** Manufacturer’s recommended patch levels for components
-** Manufacturer’s installation instructions
-** Component hash
+   - Manufacturer’s recommended patch levels for components
+   - Manufacturer’s installation instructions
+   - Component hash
 * benefits achieved
-** Assures Consumer that software-enabled devices are performing reliably and securely
-** Assures Consumer that device’s software is at latest patch level
-** Provides Producer’s field service representatives with software status needed for maintenance
+   - Assures Consumer that software-enabled devices are performing reliably and securely
+   - Assures Consumer that device’s software is at latest patch level
+   - Provides Producer’s field service representatives with software status needed for maintenance
 
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
