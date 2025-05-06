@@ -37,28 +37,28 @@ reinforcing a holistic, end-to-end risk management strategy.
 The key attributes of this use case:
 
 * actors
-** Security Teams, Incident Response Teams, Engineering Management, Regulatory, Governance, Vendor Management, Audit and Compliance
+   - Security Teams, Incident Response Teams, Engineering Management, Regulatory, Governance, Vendor Management, Audit and Compliance
 * business motivation
-** Maintain organizational security posture and regulatory compliance 
-** Ensure vendor compliance with contractual terms and conditions 
-** Ensure compliance with terms and conditions of cyber insurance policies
+   - Maintain organizational security posture and regulatory compliance 
+   - Ensure vendor compliance with contractual terms and conditions 
+   - Ensure compliance with terms and conditions of cyber insurance policies
 * functional objectives
-** Assess security risks of accessory software 
-** Assess licensing risks of accessory software 
-** Conform to regulations requiring SBOMs of suppliers
-** Assess vendor risk based on multiple SBOMs supplied by the same vendor.
+   - Assess security risks of accessory software 
+   - Assess licensing risks of accessory software 
+   - Conform to regulations requiring SBOMs of suppliers
+   - Assess vendor risk based on multiple SBOMs supplied by the same vendor.
 * processes or steps to achieve objectives
-** Request complete inventory of all accessory software packaged with a software capability
-** Confirm that the supplier has delivered SBOMs for each piece of accessory software and all relevant updates and service packs
-** Analyze SBOMs to identify remote access utilities in accessory code for subsequent removal or monitoring
+   - Request complete inventory of all accessory software packaged with a software capability
+   - Confirm that the supplier has delivered SBOMs for each piece of accessory software and all relevant updates and service packs
+   - Analyze SBOMs to identify remote access utilities in accessory code for subsequent removal or monitoring
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Dependency Relationship, Author of
 SBOM Data, Timestamp
 * added or cross-linked data
-** Vulnerability Information Sources, Licenses, and other compliance-relevant databases of designated or precluded software
+   - Vulnerability Information Sources, Licenses, and other compliance-relevant databases of designated or precluded software
 * benefits achieved
-** Supply chain visibility on all packaged components of an installed software product
+   - Supply chain visibility on all packaged components of an installed software product
 
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
