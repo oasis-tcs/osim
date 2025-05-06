@@ -42,10 +42,10 @@ The key attributes of this use case:
    - maintain an accurate SBOM
       + producer - ensure your organization generates and maintains an accurate SBOM for all products
       + consumer - if you rely on software providers, require them to deliver accurate SBOMs with each release, update, or patch
-   -review vulnerability assessment reports
+   - review vulnerability assessment reports
       + analyze vulnerability reports provided by suppliers of third-party software integrated into the product
       + supplement this with results from third-party scanning tools
-   -perform regular vulnerability monitoring
+   - perform regular vulnerability monitoring
       + regularly monitor vulnerability information sources to identify new vulnerabilities relevant to components in the SBOM 
       + monitor cybersecurity signals from information sharing and analysis organizations (ISAOs), threat intelligence feeds, and security advisories to stay informed about vulnerabilities and threat trends
    - map newly identified CVEs to SBOM components
