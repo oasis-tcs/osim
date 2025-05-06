@@ -41,47 +41,47 @@ and use that risk assessment in an evaluation of the target business.
 The key attributes of this use case:
 
 * actors
-** Technical due diligence teams, Risk/Compliance Officer, Legal
+   - Technical due diligence teams, Risk/Compliance Officer, Legal
 * business motivation
-** Ensure that the company targeted for acquisition or investment is free of liabilities from software security, licensing, IP or regulatory compliance issues.
-** Ensure target’s dependence on commercial, Original Equipment Manufacturer (OEM) or other third-party software will be maintained without interruption after acquisition.
-** Determine acceptability of the target software’s maintenance and updating practices.
+   - Ensure that the company targeted for acquisition or investment is free of liabilities from software security, licensing, IP or regulatory compliance issues.
+   - Ensure target’s dependence on commercial, Original Equipment Manufacturer (OEM) or other third-party software will be maintained without interruption after acquisition.
+   - Determine acceptability of the target software’s maintenance and updating practices.
 * functional objectives
-** Identify dependencies on open source, commercial and other third-party software which are critical to continued development and deployment of the target company’s software products
-** Determine potential software product liabilities related to target software’s security, licensing, or commercial/OEM relationships
-** Determine conformance to regulations, legislation or industry standards requesting “software inventory” information
-** Assess adequacy of software maintenance practices
+   - Identify dependencies on open source, commercial and other third-party software which are critical to continued development and deployment of the target company’s software products
+   - Determine potential software product liabilities related to target software’s security, licensing, or commercial/OEM relationships
+   - Determine conformance to regulations, legislation or industry standards requesting “software inventory” information
+   - Assess adequacy of software maintenance practices
 * processes or steps to achieve objectives
-** Critical Dependencies:
-*** Analyze target company’s SBOMs for inclusion of all components including open source, proprietary, commercial, and contracted software
-*** Analyze SBOMs to identify most commonly used open source, commercial and other third-party software in the target software
-*** For each commercial/OEM developer relationship, identify transferability of licenses
-** Potential Liabilities:
-*** Analyze target company’s SBOMs for CVEs
-*** Analyze target software’s security advisories and security release documentation 
-*** Determine if there are incompatible IP licenses in target software based on jurisdiction in the target software
-*** For each commercial/OEM supplier, analyze the SBOMs of their software for unpatched vulnerabilities and their security advisories
-*** For each commercial/OEM supplier, analyze the SBOMs of their software for appropriate licensing
-** Regulatory Compliance:
-*** Analyze target software’s SBOM to identify potential sanctioned or prohibited suppliers
-*** Analyze all commercial/OEM supplier software suppliers for supply chain risk assessments
-*** Many regulations pre-date SBOMs becoming mainstream and instead reference maintaining an inventory of software dependencies. SBOMs provide a method for compliance aligned with the spirit of such regulations.
-** Software Maintenance:
-*** Determine average age of components
-*** Determine quantity of unpatched CVEs
-*** Determine SBOM generation process
-*** Determine frequency of new software versions
+   - Critical Dependencies:
+      - Analyze target company’s SBOMs for inclusion of all components including open source, proprietary, commercial, and contracted software
+      - Analyze SBOMs to identify most commonly used open source, commercial and other third-party software in the target software
+      - For each commercial/OEM developer relationship, identify transferability of licenses
+   - Potential Liabilities:
+      - Analyze target company’s SBOMs for CVEs
+      - Analyze target software’s security advisories and security release documentation 
+      - Determine if there are incompatible IP licenses in target software based on jurisdiction in the target software
+      - For each commercial/OEM supplier, analyze the SBOMs of their software for unpatched vulnerabilities and their security advisories
+      - For each commercial/OEM supplier, analyze the SBOMs of their software for appropriate licensing
+   - Regulatory Compliance:
+      - Analyze target software’s SBOM to identify potential sanctioned or prohibited suppliers
+      - Analyze all commercial/OEM supplier software suppliers for supply chain risk assessments
+      - Many regulations pre-date SBOMs becoming mainstream and instead reference maintaining an inventory of software dependencies. SBOMs provide a method for compliance aligned with the spirit of such regulations.
+   - Software Maintenance:
+      - Determine average age of components
+      - Determine quantity of unpatched CVEs
+      - Determine SBOM generation process
+      - Determine frequency of new software versions
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Dependency Relationship, Author of
 SBOM Data, Timestamp
 * added or cross-linked data
-** SBOM should include all components, proprietary, commercial, contracted, COTS, and not just OSS
-** Cross linked data should include provenance data, component licenses, conformance statements for 3rd party components, and any export/import compliance documentation for 3rd party components
-** Where additional SBOM data is present it should be used as part of an existing process
+   - SBOM should include all components, proprietary, commercial, contracted, COTS, and not just OSS
+   - Cross linked data should include provenance data, component licenses, conformance statements for 3rd party components, and any export/import compliance documentation for 3rd party components
+   - Where additional SBOM data is present it should be used as part of an existing process
 * benefits achieved
-** Reduce the cost of integrating a newly acquired company through transparency of development processes.
-** Focus tech due-diligence efforts on areas with greatest risk to ongoing or future business operations
-** Identify deal breaking or deal modifying risk elements early
+   - Reduce the cost of integrating a newly acquired company through transparency of development processes.
+   - Focus tech due-diligence efforts on areas with greatest risk to ongoing or future business operations
+   - Identify deal breaking or deal modifying risk elements early
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
