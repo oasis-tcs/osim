@@ -46,30 +46,30 @@ and more accurate resolution to security issues.
 The key attributes of this use case:
 
 * actors
-** Teams performing: Incident Response, Engineering/Development, DevSecOps and IT, Security, Legal and Regulatory
+   - Teams performing: Incident Response, Engineering/Development, DevSecOps and IT, Security, Legal and Regulatory
 * business motivation
-** Respond swiftly and intelligently to cybersecurity incidents,
-** Minimize business impacts from the incident,
-** Minimize risks through proactive and effective actions,
-** Improve the mean time to detect and address vulnerabilities,
-** Reduce financial costs associated with incident response, 
-** Conserve resources by streamlining response efforts.
+   - Respond swiftly and intelligently to cybersecurity incidents,
+   - Minimize business impacts from the incident,
+   - Minimize risks through proactive and effective actions,
+   - Improve the mean time to detect and address vulnerabilities,
+   - Reduce financial costs associated with incident response, 
+   - Conserve resources by streamlining response efforts.
 * functional objectives
-** Empower the security incident response team to rapidly identify vulnerable components and the systems impacted by their usage, 
-** Enable software engineers or cyber defenders to take swift and effective actions to remediate the vulnerabilities.
+   - Empower the security incident response team to rapidly identify vulnerable components and the systems impacted by their usage, 
+   - Enable software engineers or cyber defenders to take swift and effective actions to remediate the vulnerabilities.
 * processes or steps to achieve objectives
-** Identify root cause components and versions from SBOMs of the affected system.
-** Use SBOMs associated with the affected system to evaluate incident impact.
-** Compare the intended SBOM of the affected system to the current state of the system.
+   - Identify root cause components and versions from SBOMs of the affected system.
+   - Use SBOMs associated with the affected system to evaluate incident impact.
+   - Compare the intended SBOM of the affected system to the current state of the system.
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Author of SBOM Data, Timestamp
 * added or cross-linked data
-** Multiple SBOM types (design, build, runtime) 
-** Software Attestations 
-** Vulnerability Information Sources
-** Supplier Security Assertions (e.g., VEX) 
+   - Multiple SBOM types (design, build, runtime) 
+   - Software Attestations 
+   - Vulnerability Information Sources
+   - Supplier Security Assertions (e.g., VEX) 
 * benefits achieved
-** Reduction of mean time to detect (MTTD) is directly linked to resiliency of the organization and positively impacts vendor reputation and revenue.
+   - Reduction of mean time to detect (MTTD) is directly linked to resiliency of the organization and positively impacts vendor reputation and revenue.
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
