@@ -30,30 +30,30 @@ of the Producer’s software or its inclusion in a Consumer’s product.
 The key attributes of this use case:
 
 * actors
-** Risk/Compliance Officer, Auditors (internal and external), Legal, Board
+   - Risk/Compliance Officer, Auditors (internal and external), Legal, Board
 * business motivation
-** Meet internal governance processes and practices associated with legal and regulatory requirements within specific jurisdictions, market segments, or vertical sectors
+   - Meet internal governance processes and practices associated with legal and regulatory requirements within specific jurisdictions, market segments, or vertical sectors
 * functional objectives
-** Provide an SBOM meeting specific requirements established by the jurisdiction that a Producer operates in, or provides their products or services in.
-** Assess the risks documented within the Supplier SBOM as they relate to specific regulations and whether those risks present regulatory challenges to the Consumer
+   - Provide an SBOM meeting specific requirements established by the jurisdiction that a Producer operates in, or provides their products or services in.
+   - Assess the risks documented within the Supplier SBOM as they relate to specific regulations and whether those risks present regulatory challenges to the Consumer
 * processes or steps to achieve objectives
-** Identify regulations that specify an SBOM requirement or reference a need for a software inventory
-** Determine the level of SBOM data required (e.g., only direct dependencies)
-** Identify if requisite data fields require supplementation from external data sources (e.g. date the commercial support agreement expires)
-** For SBOMs from direct suppliers, identify if requisite information required for compliance is present, and implement policies for missing information or non-conformant components
-** Determine disclosure requirements, including timeframes and locations for disclosure (e.g. within x days of a new release an SBOM must be uploaded to a designated repository)
-** Based on the requirements of individual contracts and regulations, enrich with supplemental information or tailor the disclosed SBOM to meet the specific requirements of the regulation without excess disclosure
-** Identify SBOM sharing constraints and the processes to ensure they are followed
+   - Identify regulations that specify an SBOM requirement or reference a need for a software inventory
+   - Determine the level of SBOM data required (e.g., only direct dependencies)
+   - Identify if requisite data fields require supplementation from external data sources (e.g. date the commercial support agreement expires)
+   - For SBOMs from direct suppliers, identify if requisite information required for compliance is present, and implement policies for missing information or non-conformant components
+   - Determine disclosure requirements, including timeframes and locations for disclosure (e.g. within x days of a new release an SBOM must be uploaded to a designated repository)
+   - Based on the requirements of individual contracts and regulations, enrich with supplemental information or tailor the disclosed SBOM to meet the specific requirements of the regulation without excess disclosure
+   - Identify SBOM sharing constraints and the processes to ensure they are followed
 * SBOM fields used
-** SBOM should include data elements specified by the regulation, which may not reference NTIA minimum fields. 
-** Non-US based regulatory efforts may not reference NTIA elements.
-** An SBOM can facilitate compliance with these regulations after required fields have been identified through a comprehensive review of the relevant laws and regulations.
+   - SBOM should include data elements specified by the regulation, which may not reference NTIA minimum fields. 
+   - Non-US based regulatory efforts may not reference NTIA elements.
+   - An SBOM can facilitate compliance with these regulations after required fields have been identified through a comprehensive review of the relevant laws and regulations.
 * added or cross-linked data
-** Varies by regulation.
-** To meet varied GRC requirements, Producers may be required to include all components, proprietary, commercial, contracted, COTS, and not just open source
-** Cross linked data available for inclusion in a GRC oriented SBOM may also include ownership and control information, conformance statements for 3rd party components, support statements, incident response process documentation, and any export/import compliance documentation for 3rd party components
+   - Varies by regulation.
+   - To meet varied GRC requirements, Producers may be required to include all components, proprietary, commercial, contracted, COTS, and not just open source
+   - Cross linked data available for inclusion in a GRC oriented SBOM may also include ownership and control information, conformance statements for 3rd party components, support statements, incident response process documentation, and any export/import compliance documentation for 3rd party components
 * benefits achieved
-** Ensure that contractual and regulatory requirements are met by Producer and Consumer of software.
+   - Ensure that contractual and regulatory requirements are met by Producer and Consumer of software.
 
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
