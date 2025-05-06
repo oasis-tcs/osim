@@ -45,36 +45,36 @@ against tampering or unauthorized modifications.
 The key attributes of this use case:
 
 * actors
-** Software Developers, Deployment Engineers, Security Engineers, DevSecOps, Maintenance, Compliance, and Legal
+   - Software Developers, Deployment Engineers, Security Engineers, DevSecOps, Maintenance, Compliance, and Legal
 * business motivation
-** Enable secure software distribution in air-gapped environments.
-** Facilitate controlled patching and deployment without Internet dependency.
-** Reduce costs, streamline operations, and enhance security.
-** Ensure legal and compliance for bundled software like container images or embedded systems.
-** Simplify audits, mitigate risks, and build stakeholder trust.
-** Maintain compliance with security and regulatory requirements.
-** Faster incident response, and stronger resilience. 
-** Improve trust and traceability for mission-critical applications.
+   - Enable secure software distribution in air-gapped environments.
+   - Facilitate controlled patching and deployment without Internet dependency.
+   - Reduce costs, streamline operations, and enhance security.
+   - Ensure legal and compliance for bundled software like container images or embedded systems.
+   - Simplify audits, mitigate risks, and build stakeholder trust.
+   - Maintain compliance with security and regulatory requirements.
+   - Faster incident response, and stronger resilience. 
+   - Improve trust and traceability for mission-critical applications.
 * functional objectives
-** Declare components to be included in a data transfer between systems or networks
-** Track configuration of systems post-transfer between systems and networks
-** Identify security controls that are met prior to transfer as part of government’s or organization’s “Authority to Operate” (ATO) decision.
+   - Declare components to be included in a data transfer between systems or networks
+   - Track configuration of systems post-transfer between systems and networks
+   - Identify security controls that are met prior to transfer as part of government’s or organization’s “Authority to Operate” (ATO) decision.
 * processes or steps to achieve objectives
-** Collect - Using component unique identifiers like PURLs, download components from package repositories, git repositories, and container registries.
-** Process - Complete any validation checks on the downloaded components like antivirus checks, CVE lookup, or signature validation.
-** Bundle - Bundle the downloaded and processed components to be moved across a network gap.
-** Expand - Once the transferred bundle is available on the isolated network, expand and move the components to isolated package repositories or container registries.
+   - Collect - Using component unique identifiers like PURLs, download components from package repositories, git repositories, and container registries.
+   - Process - Complete any validation checks on the downloaded components like antivirus checks, CVE lookup, or signature validation.
+   - Bundle - Bundle the downloaded and processed components to be moved across a network gap.
+   - Expand - Once the transferred bundle is available on the isolated network, expand and move the components to isolated package repositories or container registries.
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Dependency Relationship, Author of
 SBOM Data, Timestamp
 * added or cross-linked data
-** Licenses
-** Component hashes
-** Sanctioned or prohibited supplier lists 
-** Vulnerability Information Sources
+   - Licenses
+   - Component hashes
+   - Sanctioned or prohibited supplier lists 
+   - Vulnerability Information Sources
 * benefits achieved
-** Users who develop or deploy on networks not connected to the public Internet have to certify that all components meet security controls as part of a government’s or organization’s Authority to Operate. SBOMs provide a clear path to understand what was introduced and allow you to verify everything that was included.
+   - Users who develop or deploy on networks not connected to the public Internet have to certify that all components meet security controls as part of a government’s or organization’s Authority to Operate. SBOMs provide a clear path to understand what was introduced and allow you to verify everything that was included.
 
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
