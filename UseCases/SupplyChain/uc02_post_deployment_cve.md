@@ -40,7 +40,7 @@ The key attributes of this use case:
    - assess security and compliance risks of emerging vulnerabilities on deployed software
 * processes or steps to achieve objectives
    - maintain an accurate SBOM
-*   - producer - ensure your organization generates and maintains an accurate SBOM for all products
+      + producer - ensure your organization generates and maintains an accurate SBOM for all products
       + consumer - if you rely on software providers, require them to deliver accurate SBOMs with each release, update, or patch
    -review vulnerability assessment reports
       + analyze vulnerability reports provided by suppliers of third-party software integrated into the product
