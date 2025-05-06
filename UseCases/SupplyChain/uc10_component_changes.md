@@ -35,34 +35,34 @@ and maintain compliance over time.
 The key attributes of this use case:
 
 * actors
-** Engineering (Development, Operations, Security), Engineering Management, Governance, Audit and Compliance
+   - Engineering (Development, Operations, Security), Engineering Management, Governance, Audit and Compliance
 * business motivation
-** Reduce exposure to vulnerabilities, ensure license compliance, compliance to internal policies, and maintain regulatory adherence.
+   - Reduce exposure to vulnerabilities, ensure license compliance, compliance to internal policies, and maintain regulatory adherence.
 * functional objectives
-** Assess security and license risks over time.
-** Assess compliance and risk mitigation progress over time.
+   - Assess security and license risks over time.
+   - Assess compliance and risk mitigation progress over time.
 * processes or steps to achieve objectives
-** Identify changes in software components between builds or versions.
-** Identify if changes in software components have fixed prior security, licensing or supportability issues or introduced new ones. 
-** Identify persistent or recurring security, licensing or supportability issues between builds and versions.
-** Track software composition to correlate new risks with existing software. 
-** Track issues over time for metric based performance tracking, and compliance.
+   - Identify changes in software components between builds or versions.
+   - Identify if changes in software components have fixed prior security, licensing or supportability issues or introduced new ones. 
+   - Identify persistent or recurring security, licensing or supportability issues between builds and versions.
+   - Track software composition to correlate new risks with existing software. 
+   - Track issues over time for metric based performance tracking, and compliance.
 * SBOM fields used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Other Unique Identifiers, Dependency Relationship, Author of
 SBOM Data, Timestamp
 * added or cross-linked data
-** EOL 
-** Licenses
-** Vulnerability Information Sources 
-** Inventory systems that include runtime data
+   - EOL 
+   - Licenses
+   - Vulnerability Information Sources 
+   - Inventory systems that include runtime data
 * benefits achieved
-** Provides engineering with the ability to track progress on fixing vulnerabilities, addressing license concerns, and assessing supportability.
-** Provides management with the ability to track progress in mitigating risks across builds and versions.
-** Provides engineering management with insight into allocation of resources to address changes in risk.
-** Provides audit and compliance personnel with the ability to pinpoint compliance findings and track progress towards compliance for a given software project/product.
-** Provides Consumers with what vulnerabilities have been fixed between versions.
-** Provides Consumers with information to update risks to their organization from new software versions and update vendor risk scores
+   - Provides engineering with the ability to track progress on fixing vulnerabilities, addressing license concerns, and assessing supportability.
+   - Provides management with the ability to track progress in mitigating risks across builds and versions.
+   - Provides engineering management with insight into allocation of resources to address changes in risk.
+   - Provides audit and compliance personnel with the ability to pinpoint compliance findings and track progress towards compliance for a given software project/product.
+   - Provides Consumers with what vulnerabilities have been fixed between versions.
+   - Provides Consumers with information to update risks to their organization from new software versions and update vendor risk scores
 
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
