@@ -47,26 +47,26 @@ allocation of resources for self-maintenance.
 The key attributes of this use case:
 
 * actors
-** Security/Compliance/Risk management, Engineering/Development Teams, Program Managers, Open Source Program Office (OSPO), Procurement Office (for commercial components)
+   - Security/Compliance/Risk management, Engineering/Development Teams, Program Managers, Open Source Program Office (OSPO), Procurement Office (for commercial components)
 * Business Motivation
-** Plan for deprecation of use and Risk Mitigation
+   - Plan for deprecation of use and Risk Mitigation
 * Functional Objectives
-** Alert when a software component is reaching End Of Life (EOL) early enough for products and services to upgrade or replace the component before the event.
-** Alert when an open source component is not actively maintained, early enough to either update the component or participate in the active maintenance of a component, either via upstream contributions or by forking and/or backporting.
+   - Alert when a software component is reaching End Of Life (EOL) early enough for products and services to upgrade or replace the component before the event.
+   - Alert when an open source component is not actively maintained, early enough to either update the component or participate in the active maintenance of a component, either via upstream contributions or by forking and/or backporting.
 * Processes or Steps to Achieve Objectives
-** Set EOL dates for specific components based on communication from suppliers, release cycles, or general observations.
-** Plan for EOL events within product or service release cycles.process
-** Plan for issues that may arise from upgrades
-** Determine thresholds for active maintenance of open source components
+   - Set EOL dates for specific components based on communication from suppliers, release cycles, or general observations.
+   - Plan for EOL events within product or service release cycles.process
+   - Plan for issues that may arise from upgrades
+   - Determine thresholds for active maintenance of open source components
 * SBOM Fields Used
-** Supplier, Component Name, Version of the Component,
+   - Supplier, Component Name, Version of the Component,
 Dependency Relationship, Timestamp
 * Added or Cross-linked Data
-** Product EOL status data
-** Vulnerability Information Sources
+   - Product EOL status data
+   - Vulnerability Information Sources
 * Benefits Achieved
-** Reduce unexpected downtime due to software upgrade
-** Increase resilience of software products
+   - Reduce unexpected downtime due to software upgrade
+   - Increase resilience of software products
 
 
 

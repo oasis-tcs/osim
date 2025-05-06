@@ -30,35 +30,35 @@ ensuring that deployed software remains secure, compliant, and resilient against
 The key attributes of this use case:
 
 * actors
-** risk/compliance officer, regulatory, engineering, security teams, product security teams (PSIRT), consumer security teams (CSIRT)
+   - risk/compliance officer, regulatory, engineering, security teams, product security teams (PSIRT), consumer security teams (CSIRT)
 * business motivation
-** maintain secure products in the market, 
-** maintain regulatory compliance, 
-** avoid costly/embarrassing incidents
+   - maintain secure products in the market, 
+   - maintain regulatory compliance, 
+   - avoid costly/embarrassing incidents
 * functional objectives
-** discover how new CVEs impact software components in deployed software
-** assess security and compliance risks of emerging vulnerabilities on deployed software
+   - discover how new CVEs impact software components in deployed software
+   - assess security and compliance risks of emerging vulnerabilities on deployed software
 * processes or steps to achieve objectives
-** maintain an accurate SBOM
-*** producer - ensure your organization generates and maintains an accurate SBOM for all products
-*** consumer - if you rely on software providers, require them to deliver accurate SBOMs with each release, update, or patch
-** review vulnerability assessment reports
-*** analyze vulnerability reports provided by suppliers of third-party software integrated into the product
-*** supplement this with results from third-party scanning tools
-** perform regular vulnerability monitoring
-*** regularly monitor vulnerability information sources to identify new vulnerabilities relevant to components in the SBOM 
-*** monitor cybersecurity signals from information sharing and analysis organizations (ISAOs), threat intelligence feeds, and security advisories to stay informed about vulnerabilities and threat trends
-** map newly identified CVEs to SBOM components
-** assess discovered vulnerabilities against the acceptance criteria for the product
-** if required, make decisions related to containment, updates/patches, compensating controls, and reporting or recall decisions
+   - maintain an accurate SBOM
+*   - producer - ensure your organization generates and maintains an accurate SBOM for all products
+      + consumer - if you rely on software providers, require them to deliver accurate SBOMs with each release, update, or patch
+   -review vulnerability assessment reports
+      + analyze vulnerability reports provided by suppliers of third-party software integrated into the product
+      + supplement this with results from third-party scanning tools
+   -perform regular vulnerability monitoring
+      + regularly monitor vulnerability information sources to identify new vulnerabilities relevant to components in the SBOM 
+      + monitor cybersecurity signals from information sharing and analysis organizations (ISAOs), threat intelligence feeds, and security advisories to stay informed about vulnerabilities and threat trends
+   - map newly identified CVEs to SBOM components
+   - assess discovered vulnerabilities against the acceptance criteria for the product
+   - if required, make decisions related to containment, updates/patches, compensating controls, and reporting or recall decisions
 * SBOM fields used
-** supplier, component name, version of the component, other unique identifiers, dependency relationship
+   - supplier, component name, version of the component, other unique identifiers, dependency relationship
 * added or cross-linked data
-** vulnerability information sources
-** supplier security assertions (e.g., VEX) 
-** inventory systems that include runtime data
+   - vulnerability information sources
+   - supplier security assertions (e.g., VEX) 
+   - inventory systems that include runtime data
 * benefits achieved
-** software producer and consumer maintain the security and compliance of deployed software products that may be impacted by new CVEs posted in the NVD.
-** producer and consumer supporting functions can take appropriate actions to contain, mitigate and report new vulnerabilities before exploitation.
+   - software producer and consumer maintain the security and compliance of deployed software products that may be impacted by new CVEs posted in the NVD.
+   - producer and consumer supporting functions can take appropriate actions to contain, mitigate and report new vulnerabilities before exploitation.
 
 The text of this use case was adapted from [Reference 1](./README.md#references).
