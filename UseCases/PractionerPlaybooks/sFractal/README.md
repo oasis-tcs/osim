@@ -36,7 +36,7 @@ But all come down to deriving component information.
 For details, see:
 [Use Case 1.1 Extraction of Component Information](./uc01.01-extract_component.md)
 
-### 1.2 Extraction of Licensing Information
+### 1.2 Extraction of Licensing Information.
 This use case is derived from 
 [Supply Chain Use Case 3 - Licensing](../../SupplyChain/uc03_licensing.md).
 Note this is the extraction of the licensing data from:
@@ -115,7 +115,29 @@ It is derived info from other factors such as completeness, quality, provenance,
 
 [Use Case 1.9 Extraction of Trust Information](./uc01.09-extract_trust.md)
 
-### 1.10 Extraction of Metadata
+### 1.10 Extraction of Other Metadata
+should probably be a lower number. no clue how to order these.
+
+
+This use case is derived from 
+[Supply Chain Use Case 3 - EoL](../../SupplyChain/uc04_eol.md).
+Note this is the extraction of the end of life data from:
+- an SPDX SBOM data file
+- a CycloneDX SBOM data file
+- an OpenEoX data file
+- a CSAF data file
+- from other data sources (e.g. github repo, company info, other tools).
+
+Using the EoL information is in other use cases, mostly 
+[Category 2 - Deciding based on Supply Chain Information](README.md#2-deciding-based-on-supply-chain-information). e.g.:
+- a software developer, seeing a open source library was beyond end of life, deciding not to use a library 
+- a purchasing agent purchasing a newer version since a product was beyond end of service
+- a SOC team increasing the logging and threat hunting wrt a device that was beyond end of security updates
+
+For more info see
+[Use Case 1.10 Extraction of End of Life (EoL) Information](./un01.10-extract_eol.md)
+
+### 1.11 Extraction of Other Metadata
 At moment this is catchall and placeholder. 
 Hopefully it will disappear as other sections get added ahead of it.
 One example not covered in 1-9 is what CISA Working Group called 'type' (bad choice of word even though Duncan was original one who used it that way circa 2017),
