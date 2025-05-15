@@ -37,11 +37,27 @@ For details, see:
 [Use Case 1.1 Extraction of Component Information](./uc01.01-extract_component.md)
 
 ### 1.2 Extraction of Licensing Information
-blah overview
+This use case is derived from 
+[Supply Chain Use Case 3 - Licensing](../../SupplyChain/uc03_licensing.md).
+Note this is the extraction of the licensing data from:
+- an SPDX SBOM data file
+- a CycloneDX SBOM data file
+- from other data sources (e.g. github repo, company info, other tools).
 
-reference ISO standard as the information extracted (ie don't make up our own)
-ISO references https://spdx.org/licenses/ so skip right to it?
+Using the licensing information is in other use cases, mostly 
+[Category 2 - Deciding based on Supply Chain Information](README.md#2-deciding-based-on-supply-chain-information). e.g.:
+- a software developer, seeing a copy-left licence, deciding not to use a library 
+- a customer deciding not to buy a product because of a 'no military' license 
+- a Mergers & Acqusition Risk Assessment Team using licensing data as part of [Supply Use Case 8 - Investment Risk](../../SupplyChain/uc08_investment_risk.md) 
+- a Corporate Risk Officer using licensing data as part of [Supply Use Case 11 - GRC](../../SupplyChain/uc11_grc.md)
 
+Note in implementing the information model for this use case that there is an ISO standard on the licenses
+used by both SPDX and CycloneDX. 
+The standard references 
+https://spdx.org/licenses/ so we should use it to derive our licensing information model.
+Ie we shouldn't make up our own list.
+
+For more details, see
 [Use Case 1.2 Extraction of Licensing Information](./uc01.02-extract_licensing.md)
 
 ### 1.3 Extraction of Vulnerability Information
