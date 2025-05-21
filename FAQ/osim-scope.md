@@ -8,9 +8,16 @@ The OASIS [OSIM page](https://www.oasis-open.org/tc-osim/) says:
 > the inefficiencies which come from the increase of disparate implementations.
 
 An [Information Model](info-model) (IM) defines the essential content of documents and messages
-used in computing, independently of how that content is represented for computing, communication or storage.
-An IM is a declarative specification that defines desired results: validity and equivalence of data
-entities, without regard to formatting or execution.
+used in computing, independently of how that content is represented for processing, communication or storage.
+The abstract modeling process has several benefits:
+* Conceptual design can start with just named entities and relationships with no additional detail
+* An IM is a directed acyclic graph (DAG) (dependency graph) with uniform node structure, enabling
+straightforward use of mature entity relationship (ER) diagram applications:
+  * [GraphViz](https://graphviz.org/Gallery/directed/) data structures
+  * [PlantUML](https://plantuml.com/ie-diagram)
+  * [search ...](https://www.google.com/search?q=d3+entity+relationship+diagram)
+* Entities defined in one data format can be imported and reused in other formats
+
 
 
 Information models are a means to understand and document the essential information content 
