@@ -10,8 +10,8 @@ An information modeling language is a formal syntax that allows users to capture
 and constraints.  The basic unit of a data or information model is called a "resource", "entity",
 or "type". For physical resources such as people, organizations or buildings, the resource is a
 highly simplified model of reality, omitting most details to focus on specific aspects for
-clarity and usability. For data resources such as documents or messages, the resource *is* reality
-and the model is the definition of its content.
+clarity and usability. For data resources such as documents or messages (including data used to
+model physical resources), the resource *is* reality and the model is the definition of its content.
 
 In concrete data models, type definitions specify both the content and the form of each resource
 instance and validation is performed against formatted (lexical) values. In abstract information
