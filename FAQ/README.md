@@ -5,6 +5,7 @@
 * [**Q: Who uses an SBOM and for what?**](./who.md)
 * [**Q: Won’t SBOMs be a “roadmap to the attacker”?**](./roadmap.md)
 * [**Q: What is meant by 'information model'?**](info-model.md)
+* [**Q: What is the scope of OSIM's modeling activities?**](osim-scope.md)
 * [**Q: What is JADN?**](./jadn.md)
 * [**Q: What is meant by SBOM flavors?**](./flavors.md)
 * [**Q: What is meant by supplychain profiles?**](./profiles.md)

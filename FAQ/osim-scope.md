@@ -1,4 +1,4 @@
-## **Q: What distinguishes Information Modeling from other data modeling activities?**
+## **Q: What is the scope of OSIM's modeling activities?**
 **A:**
 The OASIS [OSIM page](https://www.oasis-open.org/tc-osim/) says:
 
@@ -7,7 +7,7 @@ The OASIS [OSIM page](https://www.oasis-open.org/tc-osim/) says:
 > The goal of the OSIM TC is to bring clarity to supply chain partners and eliminate
 > the inefficiencies which come from the increase of disparate implementations.
 
-An [Information Model](info-model.md) (IM) defines the essential content of documents and messages
+An [Information Model](info-model) (IM) defines the essential content of documents and messages
 used in computing, independently of how that content is represented for computing, communication or storage.
 An IM is a declarative specification that defines desired results: validity and equivalence of data
 entities, without regard to formatting or execution.
