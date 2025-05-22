@@ -1,6 +1,6 @@
 ## **Q: What is the scope of OSIM's modeling activities?**
 **A:**
-The OASIS [OSIM page](https://www.oasis-open.org/tc-osim/) says:
+The OASIS [OSIM](https://www.oasis-open.org/tc-osim/) page says:
 
 > The OSIM TC aims to standardize and promote information models for supply chains,
 > addressing the growing threat of cybersecurity breaches.
@@ -16,8 +16,8 @@ reuse of entity relationship (ER) diagram and other graph theory tooling
 * Entities defined by one community in one data format can be reused by other communities in other
 formats, facilitated by structuring them as loosely-coupled building blocks
 
-OSIM's goals of standardizing and promoting reusability of supply chain data requires both
-documenting the information modeling process and demonstrating it by building libraries of
-information components from existing projects and standards, identifying opportunities for
-harmonization, and promoting the process with originating organizations.
+OSIM's goals of standardizing and promoting reusability of supply chain data requires documenting
+the information modeling process and demonstrating it by building libraries of information components
+from existing projects and standards, identifying opportunities for harmonization of similar
+components, and promoting the process in collaboration with originating organizations.
 

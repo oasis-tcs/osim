@@ -19,4 +19,4 @@ models, type definitions specify the essential content of each instance, and val
 performed against information (logical) values regardless of lexical form. Information modeling
 ensures that all representations of the same logical value are equivalent, and that data
 can be converted from any representation to any other without loss of information. An information
-model itself is also a logical value that can be represented in multiple equivalent formats.
+model itself is also a logical value that can be represented in multiple equivalent data formats.
