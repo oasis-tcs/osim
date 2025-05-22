@@ -9,10 +9,11 @@ The OASIS [OSIM](https://www.oasis-open.org/tc-osim/) page says:
 
 An [Information Model](info-model) (IM) defines the essential content of documents and messages
 used in computing, independently of how that content is represented for processing, communication
-or storage. Abstract modeling has several benefits:
+or storage. Abstract information modeling has several benefits:
 * An IM is a directed acyclic graph (DAG) with uniform node structure, enabling straightforward
-reuse of entity relationship (ER) diagram and other graph theory tooling
-* Conceptual design can start with just named entities and relationships with no additional detail
+dependency checking and leveraging tooling for entity relationship (ER) and other graph diagrams
+* Conceptual design can start with just named entities and relationships without having to define
+additional detail
 * Entities defined by one community in one data format can be reused by other communities in other
 formats, facilitated by structuring them as loosely-coupled building blocks
 
