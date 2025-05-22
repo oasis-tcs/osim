@@ -17,6 +17,7 @@ In concrete data models, type definitions specify both the content and the form 
 instance, and validation is performed against formatted (lexical) values. In abstract information
 models, type definitions specify the essential content of each instance, and validation is
 performed against information (logical) values regardless of lexical form. Information modeling
-ensures that all representations of the same logical value are equivalent, and that data
-can be converted from any representation to any other without loss of information. An information
-model itself is also a logical value that can be represented in multiple equivalent data formats.
+ensures that all representations of the same logical value are equivalent, and that data can be
+converted from any representation to any other without loss of information. Unlike ASN.1, a JADN
+information model is a logical value that can be represented in multiple equivalent data formats
+and serialized in the same format as the data it defines.
