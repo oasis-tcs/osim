@@ -41,21 +41,19 @@ business motivation, objectives, steps to achieve the objectives, SBOM elements 
 other supplementary data, and benefits achieved.
 
 The use cases are:
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
-* link to be provided once use case agreed to 
+* [Use Case 01 - Pre-deployment CVE vulnerabilities](./uc01_Pre-deployment_CVE_vulnerabilities.md) 
+* [Use Case 02 - Post-deployment CVE vulnerabilities](./uc02_post_deployment_cve.md)
+* [Use Case 03 - Open source licensing risks](./uc03_licensing.md)
+* [Use Case 04 - End of Life (EOL) and non-maintained component alerting](./uc04_eol.md)
+* [Use Case 05 - Pre-purchase risk assessment](./uc05_prepurchase_risk.md)
+* [Use Case 06 - Component usage across an organization](./uc06_component_useage.md)
+* [Use Case 07 - Incident response](./uc07_Incident_response.md)
+* [Use Case 08 - M&A and investment risk assessment](./uc08_investment_risk.md)
+* [Use Case 09 - Verification of accessory software](./uc09_verify_acc_sw.md)
+* [Use Case 10 - Differences in components between builds or versions](./uc10_component_changes.md)
+* [Use Case 11 - Conformance with disparate Governance, Regulatory, and Compliance (GRC) specifications](./uc11_grc.md)
+* [Use Case 12 - Operational Technology](./uc12_OT.md)
+* [Use Case 13 - Field servicing of software-enabled devices](./uc13_field_srv.md)
 
 ## References
 Much of the text in this document was based on previous work.
