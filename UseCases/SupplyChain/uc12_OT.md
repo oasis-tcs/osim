@@ -1,4 +1,4 @@
-# Use Case: 
+# Use Case: Operational Technology
 
 The key attributes of this use case: Integrity and threat management for Operational Technology (OT) and isolated networks
 
